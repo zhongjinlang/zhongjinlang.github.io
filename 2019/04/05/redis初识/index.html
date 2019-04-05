@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="redis初识 redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。  redis的特性 多种数据结构    其中还扩展数据结构有 bitmaps：位图 ，（布隆过滤器可使用位图来实现） hyperloglog：超小内存唯一值计数（12k） geo：地理信息位置   速度快   redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（5000">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/04/04/hello-world/index.html">
+<meta property="og:title" content="redis初识">
+<meta property="og:url" content="http://yoursite.com/2019/04/05/redis初识/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="redis初识 redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。  redis的特性 多种数据结构    其中还扩展数据结构有 bitmaps：位图 ，（布隆过滤器可使用位图来实现） hyperloglog：超小内存唯一值计数（12k） geo：地理信息位置   速度快   redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（5000">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-04T07:41:28.062Z">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg">
+<meta property="og:updated_time" content="2019-04-05T14:51:27.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="redis初识">
+<meta name="twitter:description" content="redis初识 redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。  redis的特性 多种数据结构    其中还扩展数据结构有 bitmaps：位图 ，（布隆过滤器可使用位图来实现） hyperloglog：超小内存唯一值计数（12k） geo：地理信息位置   速度快   redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（5000">
+<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/04/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/05/redis初识/">
 
 
 
 
 
-  <title>Hello World | Hexo</title>
+  <title>redis初识 | Hexo</title>
   
 
 
@@ -232,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/redis初识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -249,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">redis初识</h1>
         
 
         <div class="post-meta">
@@ -261,8 +263,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-04T15:41:28+08:00">
-                2019-04-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-05T22:50:33+08:00">
+                2019-04-05
               </time>
             
 
@@ -299,15 +301,73 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="redis初识"><a href="#redis初识" class="headerlink" title="redis初识"></a>redis初识</h1><blockquote>
+<p>redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。</p>
+</blockquote>
+<h2 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h2><ul>
+<li>多种数据结构<br><img src="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg" alt></li>
+</ul>
+<hr>
+<blockquote>
+<p>其中还扩展数据结构有</p>
+<p>bitmaps：位图 ，（布隆过滤器可使用位图来实现）</p>
+<p>hyperloglog：超小内存唯一值计数（12k）</p>
+<p>geo：地理信息位置</p>
+</blockquote>
+<ul>
+<li>速度快</li>
+</ul>
+<blockquote>
+<p>redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（50000 line），单线程</p>
+</blockquote>
+<ul>
+<li>持久化</li>
+<li>功能丰富</li>
+<li>主从复制</li>
+<li>高可用、分布式</li>
+</ul>
+<h2 id="redis使用场景"><a href="#redis使用场景" class="headerlink" title="redis使用场景"></a>redis使用场景</h2><ul>
+<li><p>缓存系统（抗并发，例如存储秒杀商品数据）</p>
+<blockquote>
+<p>先从cache中获取数据，如果有返回数据，没有则从数据库中取数据并加入到缓存中</p>
+</blockquote>
+</li>
+<li><p>计数器（例如库存+1 或-1）</p>
+</li>
+<li><p>消息队列系统</p>
+</li>
+<li><p>排行榜</p>
+</li>
+<li><p>社交网络</p>
+</li>
+<li><p>实时系统</p>
+</li>
+</ul>
+<h2 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h2><blockquote>
+<p><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">http://download.redis.io/releases/</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span>到redis目录编译，会产生redis.conf、src等文件</span></span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装到指定目录产生bin文件</span></span><br><span class="line">make install PREFIX=/install/redis</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>bin目录下6个可执行文件</p>
+<blockquote>
+<p>redis-server：redis服务器 </p>
+<p>redis-cli：redis命令行客户端</p>
+<p>redis-benchmark：基准测试</p>
+<p>redis-check-aof：持久化aof文件修复工具</p>
+<p>redis-check-dump：持久化rdb文件修复工具</p>
+<p>redis-sentinel：sentinel服务器（2.8version）</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>三种启动redis方式</p>
+<blockquote>
+<p>redis-serve（默认配置） </p>
+<p>redis-serve – port 6380（动态参数启动，默认端口是6379）</p>
+<p>redis-serve &amp;confipath（参与配置文件启动）</p>
+</blockquote>
+</li>
+</ul>
 
       
     </div>
@@ -332,14 +392,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/04/04/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/05/redis初识/" rel="prev" title="redis初识">
-                redis初识 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/05/redisAPI/" rel="prev" title="redisAPI">
+                redisAPI <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -454,7 +518,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redis初识"><span class="nav-number">1.</span> <span class="nav-text">redis初识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis的特性"><span class="nav-number">1.1.</span> <span class="nav-text">redis的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis使用场景"><span class="nav-number">1.2.</span> <span class="nav-text">redis使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis的安装"><span class="nav-number">1.3.</span> <span class="nav-text">redis的安装</span></a></li></ol></li></ol></div>
             
 
           </div>

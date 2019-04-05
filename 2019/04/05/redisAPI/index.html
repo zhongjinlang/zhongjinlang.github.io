@@ -79,13 +79,23 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="redis api的使用与理解##通用命令  keys[patten]（查看所有的key）  dbsiz（查看所有key的大小）  exists key（判断一个key是否存在） del key [key ..] （删除key） expice key seconds（为key设置过期时间） type key（查看key类型）  内部编码架构  单线程架构   当我们在操作redis时，时刻要明白r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redisAPI">
+<meta property="og:url" content="http://yoursite.com/2019/04/05/redisAPI/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="redis api的使用与理解##通用命令  keys[patten]（查看所有的key）  dbsiz（查看所有key的大小）  exists key（判断一个key是否存在） del key [key ..] （删除key） expice key seconds（为key设置过期时间） type key（查看key类型）  内部编码架构  单线程架构   当我们在操作redis时，时刻要明白r">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-code.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sing.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-hash.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-list.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-set.jpg">
+<meta property="og:updated_time" content="2019-04-05T14:51:51.979Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="redisAPI">
+<meta name="twitter:description" content="redis api的使用与理解##通用命令  keys[patten]（查看所有的key）  dbsiz（查看所有key的大小）  exists key（判断一个key是否存在） del key [key ..] （删除key） expice key seconds（为key设置过期时间） type key（查看key类型）  内部编码架构  单线程架构   当我们在操作redis时，时刻要明白r">
+<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-code.jpg">
 
 
 
@@ -115,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/05/redisAPI/">
 
 
 
 
 
-  <title>Hexo</title>
+  <title>redisAPI | Hexo</title>
   
 
 
@@ -140,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,161 +223,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/瑞士军刀redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/05/瑞士军刀redis/" itemprop="url">瑞士军刀redis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-05T22:51:03+08:00">
-                2019-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="瑞士军刀redis"><a href="#瑞士军刀redis" class="headerlink" title="瑞士军刀redis"></a>瑞士军刀redis</h1><h2 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h2><blockquote>
-<p>许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。</p>
-</blockquote>
-<blockquote>
-<p>首先我们需要先了解client和serve的生命周期</p>
-</blockquote>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-server.jpg" alt></p>
-<hr>
-<blockquote>
-<p>慢查询发生在第三阶段</p>
-<p>客户端超时不一定慢查询，但慢查询是客户端超时的一个可能因素</p>
-</blockquote>
-<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><blockquote>
-<p>多数情况下，我们会通过请求-响应的机制来操作redis。当要执行多个命令时，由于redis是单线程的，那么下一次请求必须等待上一次请求完成之后才可继续执行。而pipeline模式，客户端可一次性将命令打包发送，</p>
-<p>无需等待服务端返回。这样就减少了网络往返时间。</p>
-</blockquote>
-<blockquote>
-<p>使用传统方式</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">        jedis.hset(<span class="string">"hashKey:"</span> + i, <span class="string">"field"</span> + i, <span class="string">"value"</span> + i); <span class="comment">// hashkey1 -&gt; field:1 : value:1</span></span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(<span class="string">"花费时间为: "</span> + (end - start)); <span class="comment">//2983</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>使用pipeline</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Pipeline pipeline = jedis.pipelined();</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">        pipeline.hset(<span class="string">"hashKey: "</span> + i, <span class="string">"field"</span> + i, <span class="string">"value"</span> + i); <span class="comment">// hashkey1 -&gt; field:1 : value:1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(<span class="string">"花费时间为: "</span> + (end - start)); <span class="comment">// 38</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h2><blockquote>
-<p>位图：基于最小的单位bit进行存储，非常省空间、二进制数据存储，计算快</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 取出位图指定索引的值</span></span><br><span class="line">getbit element 0</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>使用场景：独立用户统计（一亿用户，五千万独立）</p>
-</blockquote>
-<p>set存储: 内存量200mb</p>
-<p>bitmap存储：内存量12.5mb</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -398,9 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/05/redisAPI/" itemprop="url">redisAPI</a></h1>
+          <h1 class="post-title" itemprop="name headline">redisAPI</h1>
         
 
         <div class="post-meta">
@@ -450,9 +305,7 @@
       
 
       
-        
-          
-            <h1 id="redis-api的使用与理解"><a href="#redis-api的使用与理解" class="headerlink" title="redis api的使用与理解"></a>redis api的使用与理解</h1><p>##通用命令</p>
+        <h1 id="redis-api的使用与理解"><a href="#redis-api的使用与理解" class="headerlink" title="redis api的使用与理解"></a>redis api的使用与理解</h1><p>##通用命令</p>
 <ul>
 <li><p>keys[patten]（查看所有的key）</p>
 </li>
@@ -585,8 +438,6 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 向集合key添加元素（如果元素存在添加失败）</span></span><br><span class="line">sadd key element</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除集合中某个元素</span></span><br><span class="line">srem key element</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 计算集合size</span></span><br><span class="line">scard key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断元素是否在在集合中存在</span></span><br><span class="line">sismember key element</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从集合中挑选一个元素（不删除）</span></span><br><span class="line">srandmember key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从集合中弹出一个元素(删除)</span></span><br><span class="line">spop key </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取出集合中所有元素</span></span><br><span class="line">smembers key</span><br></pre></td></tr></table></figure>
 
-          
-        
       
     </div>
     
@@ -603,198 +454,32 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/redis初识/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/05/redis初识/" itemprop="url">redis初识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-05T22:50:33+08:00">
-                2019-04-05
-              </time>
+              <a href="/2019/04/05/redis初识/" rel="next" title="redis初识">
+                <i class="fa fa-chevron-left"></i> redis初识
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
+              <a href="/2019/04/05/瑞士军刀redis/" rel="prev" title="瑞士军刀redis">
+                瑞士军刀redis <i class="fa fa-chevron-right"></i>
+              </a>
             
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="redis初识"><a href="#redis初识" class="headerlink" title="redis初识"></a>redis初识</h1><blockquote>
-<p>redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。</p>
-</blockquote>
-<h2 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h2><ul>
-<li>多种数据结构<br><img src="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg" alt></li>
-</ul>
-<hr>
-<blockquote>
-<p>其中还扩展数据结构有</p>
-<p>bitmaps：位图 ，（布隆过滤器可使用位图来实现）</p>
-<p>hyperloglog：超小内存唯一值计数（12k）</p>
-<p>geo：地理信息位置</p>
-</blockquote>
-<ul>
-<li>速度快</li>
-</ul>
-<blockquote>
-<p>redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（50000 line），单线程</p>
-</blockquote>
-<ul>
-<li>持久化</li>
-<li>功能丰富</li>
-<li>主从复制</li>
-<li>高可用、分布式</li>
-</ul>
-<h2 id="redis使用场景"><a href="#redis使用场景" class="headerlink" title="redis使用场景"></a>redis使用场景</h2><ul>
-<li><p>缓存系统（抗并发，例如存储秒杀商品数据）</p>
-<blockquote>
-<p>先从cache中获取数据，如果有返回数据，没有则从数据库中取数据并加入到缓存中</p>
-</blockquote>
-</li>
-<li><p>计数器（例如库存+1 或-1）</p>
-</li>
-<li><p>消息队列系统</p>
-</li>
-<li><p>排行榜</p>
-</li>
-<li><p>社交网络</p>
-</li>
-<li><p>实时系统</p>
-</li>
-</ul>
-<h2 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h2><blockquote>
-<p><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">http://download.redis.io/releases/</a></p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span>到redis目录编译，会产生redis.conf、src等文件</span></span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装到指定目录产生bin文件</span></span><br><span class="line">make install PREFIX=/install/redis</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>bin目录下6个可执行文件</p>
-<blockquote>
-<p>redis-server：redis服务器 </p>
-<p>redis-cli：redis命令行客户端</p>
-<p>redis-benchmark：基准测试</p>
-<p>redis-check-aof：持久化aof文件修复工具</p>
-<p>redis-check-dump：持久化rdb文件修复工具</p>
-<p>redis-sentinel：sentinel服务器（2.8version）</p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li><p>三种启动redis方式</p>
-<blockquote>
-<p>redis-serve（默认配置） </p>
-<p>redis-serve – port 6380（动态参数启动，默认端口是6379）</p>
-<p>redis-serve &amp;confipath（参与配置文件启动）</p>
-</blockquote>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -804,138 +489,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/04/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-04T15:41:28+08:00">
-                2019-04-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -943,6 +501,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -963,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1006,6 +577,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redis-api的使用与理解"><span class="nav-number">1.</span> <span class="nav-text">redis api的使用与理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内部编码架构"><span class="nav-number">1.1.</span> <span class="nav-text">内部编码架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程架构"><span class="nav-number">1.2.</span> <span class="nav-text">单线程架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-number">1.3.</span> <span class="nav-text">string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash"><span class="nav-number">1.4.</span> <span class="nav-text">hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list"><span class="nav-number">1.5.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-number">1.6.</span> <span class="nav-text">set</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1146,6 +733,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
