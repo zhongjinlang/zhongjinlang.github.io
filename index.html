@@ -300,17 +300,16 @@
       
         
           
-            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><h2 id="持久化的作用"><a href="#持久化的作用" class="headerlink" title="持久化的作用"></a>持久化的作用</h2><blockquote>
+            <h1 id="持久化的作用"><a href="#持久化的作用" class="headerlink" title="持久化的作用"></a>持久化的作用</h1><blockquote>
 <p>redis的所有数据存储到内存中，如果服务器进程退出，那么数据将丢失。为了解决这个问题 <strong>Redis</strong> 提供了两种<strong>持久化</strong>的方案，将内存中的数据保存到磁盘中，避免数据的丢失</p>
 </blockquote>
-<h2 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h2><blockquote>
+<h1 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h1><blockquote>
 <p>该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令</p>
 <p>文件策略：如果存在老的RDB文件，会进行替换</p>
 <p>优点：RBD作为一个备份文件容易恢复，性能好，通过子进程fork生成rdb，用于备份 </p>
 <p>缺点：容易造成数据丢失，如果fork花费时间大，那么将会阻塞redis服务、耗时耗性能</p>
 </blockquote>
-<p>###触发机制</p>
-<blockquote>
+<h2 id="触发机制"><a href="#触发机制" class="headerlink" title="触发机制"></a>触发机制</h2><blockquote>
 <p>save命令（同步 ） — 可能会产生阻塞</p>
 </blockquote>
 <blockquote>
@@ -326,18 +325,17 @@
 <blockquote>
 <p>不容忽略的方式：主从复制、debug reload、shutdown可能会触发</p>
 </blockquote>
-<h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><blockquote>
+<h1 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h1><blockquote>
 <p>RDB快照方式并不是很可靠，如果服务器宕机，那么最新的数据就会丢失。而AOF文件提供一种更为可靠的的持久化方式。当进行set操作时，会追加到AOF文件中。当redis重启之后，AOF中的命令会被重新执行一次，重建数据</p>
 </blockquote>
-<p>###AOF的三种策略</p>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg" alt></p>
+<h2 id="AOF的三种策略"><a href="#AOF的三种策略" class="headerlink" title="AOF的三种策略"></a>AOF的三种策略</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg" alt></p>
 <hr>
 <blockquote>
 <p>always：每条命令都会持久化一次（执行写操作时，先进入缓冲区后写入到硬盘）</p>
 <p>everysec：每秒持久化一次</p>
 <p>no：缓冲区的刷新策略根据OS决定</p>
 </blockquote>
-<h3 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h3><blockquote>
+<h2 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h2><blockquote>
 <p>由于每条命令都会追加到AOF文件中，随着时间的推移，AOF文件必然逐渐变大。AOF重写解决了这一问题</p>
 <p>例 ：命令优化、过期数据</p>
 </blockquote>
@@ -353,7 +351,7 @@
 </ul>
 <p>在/redis.conf配置文件有APPEND ONLY MODE节点</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 要完成aof功能开启为yes</span></span><br><span class="line">appendonly no</span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件名</span></span><br><span class="line">appendfilename "appendonly.aof"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 三种同步策略</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> appendfsync always</span></span><br><span class="line">appendfsync everysec -- 每秒写入（默认）</span><br><span class="line"><span class="meta">#</span><span class="bash"> appendfsync no</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 写入aof文件，不等待磁盘同步（安全，但可能阻塞）</span></span><br><span class="line">no-appendfsync-on-rewrite no</span><br></pre></td></tr></table></figure>
-<h2 id="RDB和AOF的抉择"><a href="#RDB和AOF的抉择" class="headerlink" title="RDB和AOF的抉择"></a>RDB和AOF的抉择</h2><blockquote>
+<h1 id="RDB和AOF的抉择"><a href="#RDB和AOF的抉择" class="headerlink" title="RDB和AOF的抉择"></a>RDB和AOF的抉择</h1><blockquote>
 <p>比较 </p>
 </blockquote>
 <p><img src="http://poporz7f8.bkt.clouddn.com/redis-rdb-aof.jpg" alt></p>
@@ -376,7 +374,7 @@
 <li>everysec策略</li>
 <li>分片</li>
 </ul>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h3><blockquote>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h2><blockquote>
 <p>当进行 RDB的<strong>bgsave</strong>操作和AOF的<strong>bgrewriteaof</strong>会产生子线程进行持久化的相关操作，如果fork操作执行慢，此时会将redis主线程阻塞。 </p>
 </blockquote>
 <ul>
@@ -393,7 +391,7 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="进程外开销"><a href="#进程外开销" class="headerlink" title="进程外开销"></a>进程外开销</h3><blockquote>
+<h2 id="进程外开销"><a href="#进程外开销" class="headerlink" title="进程外开销"></a>进程外开销</h2><blockquote>
 <p>bgsave和bgrewriteaof是将内存中的数据写入到硬盘，此时会集中消耗CPU、rork内存开销、硬盘</p>
 </blockquote>
 <ul>
@@ -407,7 +405,7 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="AOF追加阻塞"><a href="#AOF追加阻塞" class="headerlink" title="AOF追加阻塞"></a>AOF追加阻塞</h3><blockquote>
+<h2 id="AOF追加阻塞"><a href="#AOF追加阻塞" class="headerlink" title="AOF追加阻塞"></a>AOF追加阻塞</h2><blockquote>
 <p>如果我们使用了AOF的每秒刷盘策略，如果fork执行大于2秒，那么主线程阻塞</p>
 </blockquote>
 <ul>
@@ -537,7 +535,7 @@
       
         
           
-            <h1 id="瑞士军刀redis"><a href="#瑞士军刀redis" class="headerlink" title="瑞士军刀redis"></a>瑞士军刀redis</h1><h2 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h2><blockquote>
+            <h1 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h1><blockquote>
 <p>许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。</p>
 </blockquote>
 <blockquote>
@@ -549,7 +547,7 @@
 <p>慢查询发生在第三阶段</p>
 <p>客户端超时不一定慢查询，但慢查询是客户端超时的一个可能因素</p>
 </blockquote>
-<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><blockquote>
+<h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h1><blockquote>
 <p>多数情况下，我们会通过请求-响应的机制来操作redis。当要执行多个命令时，由于redis是单线程的，那么下一次请求必须等待上一次请求完成之后才可继续执行。而pipeline模式，客户端可一次性将命令打包发送，</p>
 <p>无需等待服务端返回。这样就减少了网络往返时间。</p>
 </blockquote>
@@ -561,7 +559,7 @@
 <p>使用pipeline</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Pipeline pipeline = jedis.pipelined();</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">        pipeline.hset(<span class="string">"hashKey: "</span> + i, <span class="string">"field"</span> + i, <span class="string">"value"</span> + i); <span class="comment">// hashkey1 -&gt; field:1 : value:1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(<span class="string">"花费时间为: "</span> + (end - start)); <span class="comment">// 38</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h2><blockquote>
+<h1 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h1><blockquote>
 <p>位图：基于最小的单位bit进行存储，非常省空间、二进制数据存储，计算快</p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 取出位图指定索引的值</span></span><br><span class="line">getbit element 0</span><br></pre></td></tr></table></figure>
@@ -689,7 +687,7 @@
       
         
           
-            <h1 id="redis-api的使用与理解"><a href="#redis-api的使用与理解" class="headerlink" title="redis api的使用与理解"></a>redis api的使用与理解</h1><h2 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h2><ul>
+            <h1 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h1><ul>
 <li>keys[patten]（查看所有的key）</li>
 <li>dbsiz（查看所有key的大小）</li>
 <li>exists key（判断一个key是否存在）</li>
@@ -697,9 +695,9 @@
 <li>expice key seconds（为key设置过期时间）</li>
 <li>type key（查看key类型）</li>
 </ul>
-<h2 id="内部编码架构"><a href="#内部编码架构" class="headerlink" title="内部编码架构"></a>内部编码架构</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-code.jpg" alt></p>
+<h1 id="内部编码架构"><a href="#内部编码架构" class="headerlink" title="内部编码架构"></a>内部编码架构</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-code.jpg" alt></p>
 <hr>
-<h2 id="单线程架构"><a href="#单线程架构" class="headerlink" title="单线程架构"></a>单线程架构</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-sing.jpg" alt></p>
+<h1 id="单线程架构"><a href="#单线程架构" class="headerlink" title="单线程架构"></a>单线程架构</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-sing.jpg" alt></p>
 <hr>
 <blockquote>
 <p><strong>当我们在操作redis时，时刻要明白redis在一个瞬间只会执行一条命令，不会执行两条命令</strong></p>
@@ -713,7 +711,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><blockquote>
+<h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><blockquote>
 <p>string的value可存储普通字符串、数值、二进制、JSON。</p>
 </blockquote>
 <blockquote>
@@ -754,7 +752,7 @@
 <li>缓存视频的基本信息（数据源在mysql）</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 从redis中取数据，存在数据直接返回，则不需要访问mysql</span><br><span class="line"><span class="number">2</span>. 若不存在，访问mysql，获取到数据，加入到redis缓存</span><br><span class="line"><span class="number">3</span>. 当下此访问此接口时，会从redis中访问</span><br></pre></td></tr></table></figure>
-<h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><blockquote>
+<h1 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h1><blockquote>
 <p>hash键值结构：</p>
 </blockquote>
 <p><img src="http://poporz7f8.bkt.clouddn.com/redis-hash.jpg" alt></p>
@@ -781,7 +779,7 @@
 <ul>
 <li>和string 的使用场景类似、数据缓存等</li>
 </ul>
-<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><blockquote>
+<h1 id="list"><a href="#list" class="headerlink" title="list"></a>list</h1><blockquote>
 <p>list 队列结构：有序、可重复、左右两边插入弹出</p>
 </blockquote>
 <p><img src="http://poporz7f8.bkt.clouddn.com/redis-list.jpg" alt></p>
@@ -809,7 +807,7 @@
 <li>用户抢购进入排队状态（加入队列）</li>
 <li>你关注的人更新文博（LPUSH可看到最新状态、lrange范围查询）</li>
 </ul>
-<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><blockquote>
+<h1 id="set"><a href="#set" class="headerlink" title="set"></a>set</h1><blockquote>
 <p>集合特点：无序、无重复、可进行集合间操作（交集、并集）</p>
 </blockquote>
 <p><img src="http://poporz7f8.bkt.clouddn.com/redis-set.jpg" alt></p>
@@ -937,10 +935,10 @@
       
         
           
-            <h1 id="redis初识"><a href="#redis初识" class="headerlink" title="redis初识"></a>redis初识</h1><blockquote>
+            <h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><blockquote>
 <p>redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。</p>
 </blockquote>
-<h2 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h2><ul>
+<h1 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h1><ul>
 <li>多种数据结构<br><img src="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg" alt></li>
 </ul>
 <hr>
@@ -962,7 +960,7 @@
 <li>主从复制</li>
 <li>高可用、分布式</li>
 </ul>
-<h2 id="redis使用场景"><a href="#redis使用场景" class="headerlink" title="redis使用场景"></a>redis使用场景</h2><ul>
+<h1 id="redis使用场景"><a href="#redis使用场景" class="headerlink" title="redis使用场景"></a>redis使用场景</h1><ul>
 <li><p>缓存系统</p>
 <blockquote>
 <p>先从cache中获取数据，如果有返回数据，没有则从数据库中取数据并加入到缓存中</p>
@@ -979,7 +977,7 @@
 <li><p>实时系统</p>
 </li>
 </ul>
-<h2 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h2><blockquote>
+<h1 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h1><blockquote>
 <p><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">http://download.redis.io/releases/</a></p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span>到redis目录编译，会产生redis.conf、src等文件</span></span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装到指定目录产生bin文件</span></span><br><span class="line">make install PREFIX=/install/redis</span><br></pre></td></tr></table></figure>
