@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="慢查询 许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。   首先我们需要先了解client和serve的生命周期     慢查询发生在第三阶段 客户端超时不一定慢查询，但慢查询是客户端">
+<meta name="description" content="慢查询许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。  首先我们需要先了解client和serve的生命周期     慢查询发生在第三阶段   客户端超时不一定慢查询，但慢查询是客户端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="瑞士军刀redis">
 <meta property="og:url" content="http://yoursite.com/2019/04/05/瑞士军刀redis/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="慢查询 许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。   首先我们需要先了解client和serve的生命周期     慢查询发生在第三阶段 客户端超时不一定慢查询，但慢查询是客户端">
+<meta property="og:description" content="慢查询许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。  首先我们需要先了解client和serve的生命周期     慢查询发生在第三阶段   客户端超时不一定慢查询，但慢查询是客户端">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-server.jpg">
-<meta property="og:updated_time" content="2019-04-05T17:04:18.336Z">
+<meta property="og:updated_time" content="2019-04-05T17:36:07.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="瑞士军刀redis">
-<meta name="twitter:description" content="慢查询 许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。   首先我们需要先了解client和serve的生命周期     慢查询发生在第三阶段 客户端超时不一定慢查询，但慢查询是客户端">
+<meta name="twitter:description" content="慢查询许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。  首先我们需要先了解client和serve的生命周期     慢查询发生在第三阶段   客户端超时不一定慢查询，但慢查询是客户端">
 <meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-server.jpg">
 
 
@@ -301,39 +301,41 @@
       
 
       
-        <h1 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h1><blockquote>
-<p>许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。</p>
-</blockquote>
-<blockquote>
-<p>首先我们需要先了解client和serve的生命周期</p>
-</blockquote>
+        <h1 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h1><p>许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执行前后计算每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间、耗时、命令的详细信息）记录下来，Redis也提供了类似的功能。</p>
+<ul>
+<li>首先我们需要先了解client和serve的生命周期</li>
+</ul>
 <p><img src="http://poporz7f8.bkt.clouddn.com/redis-server.jpg" alt></p>
 <hr>
 <blockquote>
 <p>慢查询发生在第三阶段</p>
+</blockquote>
+<blockquote>
 <p>客户端超时不一定慢查询，但慢查询是客户端超时的一个可能因素</p>
 </blockquote>
-<h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h1><blockquote>
-<p>多数情况下，我们会通过请求-响应的机制来操作redis。当要执行多个命令时，由于redis是单线程的，那么下一次请求必须等待上一次请求完成之后才可继续执行。而pipeline模式，客户端可一次性将命令打包发送，</p>
+<h1 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h1><p>多数情况下，我们会通过请求-响应的机制来操作redis。当要执行多个命令时，由于redis是单线程的，那么下一次请求必须等待上一次请求完成之后才可继续执行。而pipeline模式，客户端可一次性将命令打包发送，</p>
+<blockquote>
 <p>无需等待服务端返回。这样就减少了网络往返时间。</p>
 </blockquote>
-<blockquote>
-<p>使用传统方式</p>
-</blockquote>
+<ul>
+<li>使用传统方式</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">        jedis.hset(<span class="string">"hashKey:"</span> + i, <span class="string">"field"</span> + i, <span class="string">"value"</span> + i); <span class="comment">// hashkey1 -&gt; field:1 : value:1</span></span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(<span class="string">"花费时间为: "</span> + (end - start)); <span class="comment">//2983</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>使用pipeline</p>
-</blockquote>
+<ul>
+<li>使用pipeline</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Pipeline pipeline = jedis.pipelined();</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">        pipeline.hset(<span class="string">"hashKey: "</span> + i, <span class="string">"field"</span> + i, <span class="string">"value"</span> + i); <span class="comment">// hashkey1 -&gt; field:1 : value:1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(<span class="string">"花费时间为: "</span> + (end - start)); <span class="comment">// 38</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h1><blockquote>
-<p>位图：基于最小的单位bit进行存储，非常省空间、二进制数据存储，计算快</p>
-</blockquote>
+<h1 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h1><p>位图：基于最小的单位bit进行存储，非常省空间、二进制数据存储，计算快</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 取出位图指定索引的值</span></span><br><span class="line">getbit element 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用场景：独立用户统计（一亿用户，五千万独立）</li>
+</ul>
 <blockquote>
-<p>使用场景：独立用户统计（一亿用户，五千万独立）</p>
-</blockquote>
 <p>set存储: 内存量200mb</p>
+</blockquote>
+<blockquote>
 <p>bitmap存储：内存量12.5mb</p>
+</blockquote>
 
       
     </div>
