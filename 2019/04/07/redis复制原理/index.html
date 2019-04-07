@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="es,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -81,18 +81,17 @@
 
 
 
-<meta name="description" content="log对大规模日志数据进行采集、追踪、分析及处理 目前主流的分布式日志框架有：  Logstash ELK(ElasticsSearch, Logstash, Kibana)：一套强大的日志收集系统，由于Logstash消耗资源过大，官方推荐使用filebeat取代  Flume：由Apache基金会提供的一个分布式、高可靠、高可用的服务  filebeat用于日志的收集、elasticsearc">
-<meta name="keywords" content="es">
+<meta name="description" content="主从复制单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性 复制配置slaveof命令12345# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt; slaveof 192.168.211.134:6379 OK# 取消复制（不希望成为从）redis-6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="elasticsearch+filebeat+kibana日志收集">
-<meta property="og:url" content="http://yoursite.com/2019/04/06/elasticsearch+filebeat+kibana日志收集/index.html">
+<meta property="og:title" content="redis复制原理">
+<meta property="og:url" content="http://yoursite.com/2019/04/07/redis复制原理/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="log对大规模日志数据进行采集、追踪、分析及处理 目前主流的分布式日志框架有：  Logstash ELK(ElasticsSearch, Logstash, Kibana)：一套强大的日志收集系统，由于Logstash消耗资源过大，官方推荐使用filebeat取代  Flume：由Apache基金会提供的一个分布式、高可靠、高可用的服务  filebeat用于日志的收集、elasticsearc">
+<meta property="og:description" content="主从复制单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性 复制配置slaveof命令12345# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt; slaveof 192.168.211.134:6379 OK# 取消复制（不希望成为从）redis-6">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-06T15:59:04.044Z">
+<meta property="og:updated_time" content="2019-04-07T03:36:21.760Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="elasticsearch+filebeat+kibana日志收集">
-<meta name="twitter:description" content="log对大规模日志数据进行采集、追踪、分析及处理 目前主流的分布式日志框架有：  Logstash ELK(ElasticsSearch, Logstash, Kibana)：一套强大的日志收集系统，由于Logstash消耗资源过大，官方推荐使用filebeat取代  Flume：由Apache基金会提供的一个分布式、高可靠、高可用的服务  filebeat用于日志的收集、elasticsearc">
+<meta name="twitter:title" content="redis复制原理">
+<meta name="twitter:description" content="主从复制单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性 复制配置slaveof命令12345# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt; slaveof 192.168.211.134:6379 OK# 取消复制（不希望成为从）redis-6">
 
 
 
@@ -122,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/06/elasticsearch+filebeat+kibana日志收集/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/07/redis复制原理/">
 
 
 
 
 
-  <title>elasticsearch+filebeat+kibana日志收集 | 胖虎的博客</title>
+  <title>redis复制原理 | 胖虎的博客</title>
   
 
 
@@ -307,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/elasticsearch+filebeat+kibana日志收集/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/redis复制原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -324,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">elasticsearch+filebeat+kibana日志收集</h1>
+          <h1 class="post-title" itemprop="name headline">redis复制原理</h1>
         
 
         <div class="post-meta">
@@ -336,8 +335,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-06T21:18:14+08:00">
-                2019-04-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-07T09:45:28+08:00">
+                2019-04-07
               </time>
             
 
@@ -355,8 +354,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/06/elasticsearch+filebeat+kibana日志收集/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/06/elasticsearch+filebeat+kibana日志收集/" itemprop="commentCount"></span>
+                <a href="/2019/04/07/redis复制原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/07/redis复制原理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -383,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  560
+                  464
                 </span>
               
 
@@ -399,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -420,54 +419,25 @@
       
 
       
-        <h1 id="log"><a href="#log" class="headerlink" title="log"></a>log</h1><p>对大规模日志数据进行采集、追踪、分析及处理</p>
-<p>目前主流的分布式日志框架有：</p>
-<ul>
-<li><p>Logstash ELK(ElasticsSearch, Logstash, Kibana)：一套强大的日志收集系统，由于Logstash消耗资源过大，官方推荐使用filebeat取代</p>
+        <h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><p>单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈</p>
+<p>主节点master负责<strong>写数据</strong>，从节点slave负责<strong>读数据</strong>，主节点定期把数据同步到从节点保证数据的一致性</p>
+<h2 id="复制配置"><a href="#复制配置" class="headerlink" title="复制配置"></a>复制配置</h2><h3 id="slaveof命令"><a href="#slaveof命令" class="headerlink" title="slaveof命令"></a>slaveof命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 6380节点（从）复制6379节点（主）</span><br><span class="line">redis-6380 &gt; slaveof 192.168.211.134:6379 OK</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 取消复制（不希望成为从）</span><br><span class="line">redis-6380 &gt; slaveof no one OK</span><br></pre></td></tr></table></figure>
+<h3 id="主从复制实验"><a href="#主从复制实验" class="headerlink" title="主从复制实验"></a>主从复制实验</h3><ul>
+<li>我们通过配置文件的方式实现 6379作为主节点、6380为从节点</li>
+<li><p>其中有两个中要的配置slaveof ip port、slave-read-only yes（期望从节点只作读操作）目的是达到主从复制数据的一致性效果。保证主节写操作，而从节点只作为读操作</p>
 </li>
-<li><p>Flume：由Apache基金会提供的一个分布式、高可靠、高可用的服务</p>
-</li>
-<li><p>filebeat用于日志的收集、elasticsearch用于存储日志、kibana实现数据的展示</p>
-</li>
-<li><p>download: <a href="https://www.elastic.co/cn/downloads/past-releases" target="_blank" rel="noopener">https://www.elastic.co/cn/downloads/past-releases</a></p>
+<li><p>cp redis.conf两份分别命名为 redis-6379.conf、redis-6380.conf</p>
 </li>
 </ul>
-<h1 id="elasticsearch-install"><a href="#elasticsearch-install" class="headerlink" title="elasticsearch install"></a>elasticsearch install</h1><ul>
-<li><p>es启动不能使用root，因此需要创建一个用户组</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd es</span><br><span class="line">useradd es -g es</span><br><span class="line">passwd es</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>切换root进入es目录为es文件给予权限</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R es:es es es-5.6.16</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改/conf/elasticsearch.yml</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Network </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定ip</span></span><br><span class="line">network.host: ip  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认http端口</span></span><br><span class="line">http.port: 9200</span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认tcp端口</span></span><br><span class="line">transport.tcp.port: 9300</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改jvm内存大小 /conf/jvm.options</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xms1g</span><br><span class="line">-Xms1g</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>由于es启动需要开启大量线程，需要修改系统文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vi /etc/security/limits.conf</span></span><br><span class="line">* soft nofile 65536</span><br><span class="line">* hard nofile 131072</span><br><span class="line">* soft nproc 2048</span><br><span class="line">* hard nproc 4096</span><br><span class="line">* soft memlock unlimited</span><br><span class="line">* hard memlock unlimited</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> /etc/security/limits.d</span></span><br><span class="line">vi 20-nproc.conf</span><br><span class="line">root       soft    nproc     2048</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> vi /etc/sysctl.conf</span></span><br><span class="line">vm.max_map_count=655360</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<h4 id="redis-6379-conf"><a href="#redis-6379-conf" class="headerlink" title="redis-6379.conf"></a>redis-6379.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 开启守护者进程</span><br><span class="line">daemonize yes </span><br><span class="line"><span class="meta">#</span>进程id</span><br><span class="line">pidfile /var/run/redis-6379.pid </span><br><span class="line"><span class="meta">#</span> 主节点密码</span><br><span class="line">masterauth &lt;master-password&gt;</span><br><span class="line"><span class="meta">#</span> 当前节点端口</span><br><span class="line">port 6379</span><br><span class="line"><span class="meta">#</span> 日志文件</span><br><span class="line">logfile "6379.log"</span><br><span class="line"><span class="meta">#</span> rdb文件</span><br><span class="line">dbfilename dump-6379.rdb</span><br><span class="line"><span class="meta">#</span> 设置主从关系</span><br><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line"><span class="meta">#</span> 只读，主节点不关心</span><br><span class="line">slave-read-only yes</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>su es &gt; ./elasticsearch 如果启动不了设置防火墙</p>
+<p>开启服务并连接客户端<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis-6379.conf</span><br><span class="line">redis-cli</span><br><span class="line"><span class="meta">#</span> 查看分片信息</span><br><span class="line">127.0.0.1:6379&gt; info replication </span><br><span class="line">role:master # 主节点</span><br><span class="line">connected_slaves:0 # 所连接的从节点个数</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<h1 id="filebeat"><a href="#filebeat" class="headerlink" title="filebeat"></a>filebeat</h1><p>Filebeat是一个轻量型日志采集器，在你的服务器上安装客户端后，filebeat会监控日志目录或者指定的日志文件，追踪读取这些文件（追踪文件的变化，不停的读），并且转发这些信息到elasticsearch或者logstarsh中存放</p>
-<ul>
-<li>安装完之后编辑核心配置文件filebeat.yml</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 指定被探测的日志文件, 可添加多个该配置</span></span><br><span class="line">paths:</span><br><span class="line">    - /install/logs/*.log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置多行合并</span></span><br><span class="line">multiline.pattern: ^\[</span><br><span class="line">multiline.negate: true</span><br><span class="line">multiline.match: after    </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定es的位置，将日志收集到es存储</span></span><br><span class="line">output.elasticsearch:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Array of hosts to connect to.</span></span><br><span class="line">  hosts: ["192.168.211.134:9200"]</span><br></pre></td></tr></table></figure>
+<h4 id="redis-6380-conf"><a href="#redis-6380-conf" class="headerlink" title="redis-6380.conf"></a>redis-6380.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">daemonize yes # 开启守护者进程</span><br><span class="line">pidfile /var/run/redis-6380.pid #进程id</span><br><span class="line">port 6380</span><br><span class="line">logfile "6380.log"</span><br><span class="line">dbfilename dump-6380.rdb # rdb文件</span><br><span class="line">slaveof 192.168.211.134 6379 # 成为6379的从节点</span><br><span class="line"><span class="meta">#</span> 从节点只作为读操作</span><br><span class="line">slave-read-only yes</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>./filebeat 启动</p>
+<p>开启服务并连接客户端<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis-6379.conf</span><br><span class="line">redis-cli -p 6380</span><br><span class="line">127.0.0.1:6379&gt; info replication # 查看分片信息</span><br><span class="line">role:slave # 已成为从节点</span><br><span class="line">master_host:192.169.211.134 # 主节点地址</span><br><span class="line">master_port:6379 # 主节点端口</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<blockquote>
-<p>日志收集测试 : 当配置的探测日志文件发生变化时，filebeat会将数据发送给ES进行存储</p>
-</blockquote>
-<h1 id="kibana"><a href="#kibana" class="headerlink" title="kibana"></a>kibana</h1><p>kibana可取代elastic-head，提供了更为专业的可视化界面、日志分析系统，它是ES的成员之一</p>
-<ul>
-<li>安装完之后配置kibana.yml核心配置文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认端口</span></span><br><span class="line">server.port: 5601</span><br><span class="line"><span class="meta">#</span><span class="bash"> 绑定ip</span></span><br><span class="line">server.host: "192.168.211.134"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定es的地址</span></span><br><span class="line">elasticsearch.url: "http://192.168.211.134:9200"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动</span></span><br><span class="line">cd bin &gt; ./kibana</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><h1 id="全量复制"><a href="#全量复制" class="headerlink" title="全量复制"></a>全量复制</h1><h1 id="故障处理"><a href="#故障处理" class="headerlink" title="故障处理"></a>故障处理</h1>
       
     </div>
     
@@ -482,12 +452,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/es/" rel="tag"># es</a>
-          
-        </div>
-      
 
       
       
@@ -497,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/06/redis的持久化/" rel="next" title="redis的持久化">
-                <i class="fa fa-chevron-left"></i> redis的持久化
+              <a href="/2019/04/06/ELK日志收集/" rel="next" title="elasticsearch+filebeat+kibana日志收集">
+                <i class="fa fa-chevron-left"></i> elasticsearch+filebeat+kibana日志收集
               </a>
             
           </div>
@@ -596,7 +560,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -604,15 +568,6 @@
 
             
 
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">标签</span>
-                
-              </div>
             
 
           </nav>
@@ -659,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">1.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#elasticsearch-install"><span class="nav-number">2.</span> <span class="nav-text">elasticsearch install</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#filebeat"><span class="nav-number">3.</span> <span class="nav-text">filebeat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kibana"><span class="nav-number">4.</span> <span class="nav-text">kibana</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主从复制"><span class="nav-number">1.</span> <span class="nav-text">主从复制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复制配置"><span class="nav-number">1.1.</span> <span class="nav-text">复制配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#slaveof命令"><span class="nav-number">1.1.1.</span> <span class="nav-text">slaveof命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从复制实验"><span class="nav-number">1.1.2.</span> <span class="nav-text">主从复制实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-6379-conf"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">redis-6379.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-6380-conf"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">redis-6380.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全量复制"><span class="nav-number">2.</span> <span class="nav-text">全量复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#故障处理"><span class="nav-number">3.</span> <span class="nav-text">故障处理</span></a></li></ol></div>
             
 
           </div>
@@ -694,7 +649,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">3.6k</span>
+    <span title="Site words total count">4k</span>
   
 </div>
 
@@ -866,9 +821,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/06/elasticsearch+filebeat+kibana日志收集/';
-          this.page.identifier = '2019/04/06/elasticsearch+filebeat+kibana日志收集/';
-          this.page.title = 'elasticsearch+filebeat+kibana日志收集';
+          this.page.url = 'http://yoursite.com/2019/04/07/redis复制原理/';
+          this.page.identifier = '2019/04/07/redis复制原理/';
+          this.page.title = 'redis复制原理';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
