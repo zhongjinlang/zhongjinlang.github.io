@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  464
+                  1.7k
                 </span>
               
 
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  6
                 </span>
               
             </div>
@@ -418,9 +418,14 @@
       
         
           
-          主从复制单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈
+          主从复制
+单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈
 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性
-复制配置slaveof命令12345# 6380节点（从）复制6379节点（主）redis-6380 &gt; sl
+
+主从复制的作用：数据副（高可用分布式基础）、读写分离提高性能
+
+两种实现方式命令slaveof和配置文件的方式
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1621,7 +1626,7 @@ geo：地理信息位
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4k</span>
+    <span title="Site words total count">5.3k</span>
   
 </div>
 
