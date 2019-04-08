@@ -81,17 +81,20 @@
 
 
 
-<meta name="description" content="胖虎是个码农">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta name="description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis Sentinel">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/redis-Sentinel/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="胖虎是个码农">
+<meta property="og:description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-06T15:36:05.115Z">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg">
+<meta property="og:updated_time" content="2019-04-08T08:31:45.905Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="胖虎是个码农">
+<meta name="twitter:title" content="redis Sentinel">
+<meta name="twitter:description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
+<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/08/redis-Sentinel/">
 
 
 
 
 
-  <title>categories | 胖虎的博客</title>
+  <title>redis Sentinel | 胖虎的博客</title>
   
 
 
@@ -294,33 +297,187 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/redis-Sentinel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="胖虎">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="胖虎的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">categories</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">redis Sentinel</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T16:28:05+08:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/08/redis-Sentinel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/08/redis-Sentinel/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  229
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1m
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="主从复制问题"><a href="#主从复制问题" class="headerlink" title="主从复制问题"></a>主从复制问题</h1><p>当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的</p>
+<h2 id="master故障"><a href="#master故障" class="headerlink" title="master故障"></a>master故障</h2><p>如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与master的连接，此时客户端只可进行读的操作<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg" alt></p>
+<h2 id="master宕机处理"><a href="#master宕机处理" class="headerlink" title="master宕机处理"></a>master宕机处理</h2><p>首先我们要保证有写数据，可以将一台slave成为master，另外一台成为从节点<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg" alt></p>
+<p>上述问题并没有解决自动故障转移问题，自动让slave成为master，让其他slave同步master</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/07/redis复制原理/" rel="next" title="redis复制原理">
+                <i class="fa fa-chevron-left"></i> redis复制原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -365,8 +522,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -433,6 +599,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主从复制问题"><span class="nav-number">1.</span> <span class="nav-text">主从复制问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#master故障"><span class="nav-number">1.1.</span> <span class="nav-text">master故障</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#master宕机处理"><span class="nav-number">1.2.</span> <span class="nav-text">master宕机处理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -634,9 +816,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/categories/index.html';
-          this.page.identifier = 'categories/index.html';
-          this.page.title = 'categories';
+          this.page.url = 'http://yoursite.com/2019/04/08/redis-Sentinel/';
+          this.page.identifier = '2019/04/08/redis-Sentinel/';
+          this.page.title = 'redis Sentinel';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
