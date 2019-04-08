@@ -83,16 +83,16 @@
 
 <meta name="description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis sentinel">
+<meta property="og:title" content="redis Sentinel">
 <meta property="og:url" content="http://yoursite.com/2019/04/08/redis-sentinel/index.html">
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg">
-<meta property="og:updated_time" content="2019-04-08T08:45:53.313Z">
+<meta property="og:updated_time" content="2019-04-08T08:51:08.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis sentinel">
+<meta name="twitter:title" content="redis Sentinel">
 <meta name="twitter:description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
 <meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
 
@@ -130,7 +130,7 @@
 
 
 
-  <title>redis sentinel | 胖虎的博客</title>
+  <title>redis Sentinel | 胖虎的博客</title>
   
 
 
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis sentinel</h1>
+          <h1 class="post-title" itemprop="name headline">redis Sentinel</h1>
         
 
         <div class="post-meta">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  235
+                  423
                 </span>
               
 
@@ -426,7 +426,16 @@
 <h2 id="master故障"><a href="#master故障" class="headerlink" title="master故障"></a>master故障</h2><p>如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与master的连接，此时客户端只可进行读的操作<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg" alt></p>
 <h2 id="master宕机处理"><a href="#master宕机处理" class="headerlink" title="master宕机处理"></a>master宕机处理</h2><p>首先我们要保证有写数据，可以将一台slave成为master，另外一台成为从节点<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg" alt></p>
 <p>上述问题并没有解决自动故障转移问题，自动让slave成为master，让其他slave同步master</p>
-<h1 id="redis-sentinel架构说明"><a href="#redis-sentinel架构说明" class="headerlink" title="redis sentinel架构说明"></a>redis sentinel架构说明</h1>
+<h1 id="redis-sentinel架构说明"><a href="#redis-sentinel架构说明" class="headerlink" title="redis sentinel架构说明"></a>redis sentinel架构说明</h1><p>Redis-Sentinel是Redis官方推荐的高可用性(HA)解决方案, Redis-sentinel本身也是一个独立运行的进程，它能监控多个master-slave集群，发现master宕机后能进行自动切换。它的主要功能有如下几点</p>
+<ul>
+<li><p>不时地监控redis是否按照预期良好地运行</p>
+</li>
+<li><p>如果发现某个redis节点运行出现状况，能够通知另外一个进程(例如它的客户端)</p>
+</li>
+<li><p>能够进行自动切换。当一个master节点不可用时，能够选举出master的多个slave(如果有超过一个slave的话)中的一个来作为新的master,其它的slave节点会将它所追随的master的地址改为被提升为master的slave的新地址</p>
+</li>
+</ul>
+
       
     </div>
     
@@ -644,7 +653,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">5.7k</span>
+    <span title="Site words total count">5.9k</span>
   
 </div>
 
@@ -818,7 +827,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2019/04/08/redis-sentinel/';
           this.page.identifier = '2019/04/08/redis-sentinel/';
-          this.page.title = 'redis sentinel';
+          this.page.title = 'redis Sentinel';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
