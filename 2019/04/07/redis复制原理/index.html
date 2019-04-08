@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis6379log.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis6380log.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-slavecopy.jpg">
-<meta property="og:updated_time" content="2019-04-08T08:29:49.019Z">
+<meta property="og:updated_time" content="2019-04-08T10:19:35.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis复制原理">
 <meta name="twitter:description" content="主从复制 单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性  主从复制的作用：数据副本（高可用分布式基础）、读写分离提高性能  两种实现方式命令slaveof和配置文件的方式 slaveof1234# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt;">
@@ -441,7 +441,7 @@
 <li><p>cp redis.conf两份分别命名为 redis-6379.conf、redis-6380.conf</p>
 </li>
 </ul>
-<h3 id="redis-6379-conf"><a href="#redis-6379-conf" class="headerlink" title="redis-6379.conf"></a>redis-6379.conf</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 开启守护者进程</span></span><br><span class="line">daemonize yes </span><br><span class="line"><span class="meta">#</span><span class="bash">进程id</span></span><br><span class="line">pidfile /var/run/redis-6379.pid </span><br><span class="line"><span class="meta">#</span><span class="bash"> 主节点密码</span></span><br><span class="line">masterauth &lt;master-password&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当前节点端口</span></span><br><span class="line">port 6379</span><br><span class="line"><span class="meta">#</span><span class="bash"> 日志文件</span></span><br><span class="line">logfile "6379.log"</span><br><span class="line"><span class="meta">#</span><span class="bash"> rdb文件</span></span><br><span class="line">dbfilename dump-6379.rdb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置主从关系</span></span><br><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只读，主节点不关心</span></span><br><span class="line">slave-read-only yes</span><br></pre></td></tr></table></figure>
+<h3 id="redis-6379-conf"><a href="#redis-6379-conf" class="headerlink" title="redis-6379.conf"></a>redis-6379.conf</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 后台启动</span></span><br><span class="line">daemonize yes </span><br><span class="line"><span class="meta">#</span><span class="bash">进程id</span></span><br><span class="line">pidfile /var/run/redis-6379.pid </span><br><span class="line"><span class="meta">#</span><span class="bash"> 主节点密码</span></span><br><span class="line">masterauth &lt;master-password&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当前节点端口</span></span><br><span class="line">port 6379</span><br><span class="line"><span class="meta">#</span><span class="bash"> 日志文件</span></span><br><span class="line">logfile "6379.log"</span><br><span class="line"><span class="meta">#</span><span class="bash"> rdb文件</span></span><br><span class="line">dbfilename dump-6379.rdb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置主从关系</span></span><br><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只读，主节点不关心</span></span><br><span class="line">slave-read-only yes</span><br></pre></td></tr></table></figure>
 <ul>
 <li>开启服务并连接客户端<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis-6379.conf</span><br><span class="line"></span><br><span class="line">redis-cli</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看分片信息</span></span><br><span class="line">127.0.0.1:6379&gt; info replication </span><br><span class="line">role:master # 主节点</span><br><span class="line">connected_slaves:0 # 所连接的从节点个数</span><br></pre></td></tr></table></figure>
 </li>
@@ -566,6 +566,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/04/08/redis-sentinel/" rel="prev" title="redis sentinel">
+                redis sentinel <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -655,7 +659,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -750,7 +754,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">5.5k</span>
+    <span title="Site words total count">7.9k</span>
   
 </div>
 
