@@ -83,16 +83,16 @@
 
 <meta name="description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis Sentinel">
-<meta property="og:url" content="http://yoursite.com/2019/04/08/redis-Sentinel/index.html">
+<meta property="og:title" content="redis sentinel">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/redis-sentinel/index.html">
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg">
-<meta property="og:updated_time" content="2019-04-08T08:31:45.905Z">
+<meta property="og:updated_time" content="2019-04-08T08:39:12.323Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis Sentinel">
+<meta name="twitter:title" content="redis sentinel">
 <meta name="twitter:description" content="主从复制问题当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与mast">
 <meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/08/redis-Sentinel/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/08/redis-sentinel/">
 
 
 
 
 
-  <title>redis Sentinel | 胖虎的博客</title>
+  <title>redis sentinel | 胖虎的博客</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/redis-Sentinel/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/redis-sentinel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis Sentinel</h1>
+          <h1 class="post-title" itemprop="name headline">redis sentinel</h1>
         
 
         <div class="post-meta">
@@ -357,8 +357,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/08/redis-Sentinel/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/08/redis-Sentinel/" itemprop="commentCount"></span>
+                <a href="/2019/04/08/redis-sentinel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/08/redis-sentinel/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  229
+                  235
                 </span>
               
 
@@ -426,7 +426,7 @@
 <h2 id="master故障"><a href="#master故障" class="headerlink" title="master故障"></a>master故障</h2><p>如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与master的连接，此时客户端只可进行读的操作<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg" alt></p>
 <h2 id="master宕机处理"><a href="#master宕机处理" class="headerlink" title="master宕机处理"></a>master宕机处理</h2><p>首先我们要保证有写数据，可以将一台slave成为master，另外一台成为从节点<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg" alt></p>
 <p>上述问题并没有解决自动故障转移问题，自动让slave成为master，让其他slave同步master</p>
-
+<h1 id="redis-sentinel架构说明"><a href="#redis-sentinel架构说明" class="headerlink" title="redis sentinel架构说明"></a>redis sentinel架构说明</h1>
       
     </div>
     
@@ -609,7 +609,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主从复制问题"><span class="nav-number">1.</span> <span class="nav-text">主从复制问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#master故障"><span class="nav-number">1.1.</span> <span class="nav-text">master故障</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#master宕机处理"><span class="nav-number">1.2.</span> <span class="nav-text">master宕机处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主从复制问题"><span class="nav-number">1.</span> <span class="nav-text">主从复制问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#master故障"><span class="nav-number">1.1.</span> <span class="nav-text">master故障</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#master宕机处理"><span class="nav-number">1.2.</span> <span class="nav-text">master宕机处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis-sentinel架构说明"><span class="nav-number">2.</span> <span class="nav-text">redis sentinel架构说明</span></a></li></ol></div>
             
 
           </div>
@@ -816,9 +816,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/08/redis-Sentinel/';
-          this.page.identifier = '2019/04/08/redis-Sentinel/';
-          this.page.title = 'redis Sentinel';
+          this.page.url = 'http://yoursite.com/2019/04/08/redis-sentinel/';
+          this.page.identifier = '2019/04/08/redis-sentinel/';
+          this.page.title = 'redis sentinel';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
