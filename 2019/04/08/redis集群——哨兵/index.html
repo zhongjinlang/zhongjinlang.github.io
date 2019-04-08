@@ -83,8 +83,8 @@
 
 <meta name="description" content="主从复制问题引入当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与ma">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis集群——sentinel">
-<meta property="og:url" content="http://yoursite.com/2019/04/08/redis集群——sentinel/index.html">
+<meta property="og:title" content="redis集群——哨兵">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/redis集群——哨兵/index.html">
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="主从复制问题引入当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与ma">
 <meta property="og:locale" content="zh-Hans">
@@ -94,9 +94,9 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-client.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_1.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_2.jpg">
-<meta property="og:updated_time" content="2019-04-08T15:23:24.741Z">
+<meta property="og:updated_time" content="2019-04-08T15:24:25.853Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis集群——sentinel">
+<meta name="twitter:title" content="redis集群——哨兵">
 <meta name="twitter:description" content="主从复制问题引入当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与ma">
 <meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/08/redis集群——sentinel/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/08/redis集群——哨兵/">
 
 
 
 
 
-  <title>redis集群——sentinel | 胖虎的博客</title>
+  <title>redis集群——哨兵 | 胖虎的博客</title>
   
 
 
@@ -313,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/redis集群——sentinel/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/redis集群——哨兵/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -330,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis集群——sentinel</h1>
+          <h1 class="post-title" itemprop="name headline">redis集群——哨兵</h1>
         
 
         <div class="post-meta">
@@ -361,8 +361,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/08/redis集群——sentinel/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/08/redis集群——sentinel/" itemprop="commentCount"></span>
+                <a href="/2019/04/08/redis集群——哨兵/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/08/redis集群——哨兵/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -929,9 +929,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/08/redis集群——sentinel/';
-          this.page.identifier = '2019/04/08/redis集群——sentinel/';
-          this.page.title = 'redis集群——sentinel';
+          this.page.url = 'http://yoursite.com/2019/04/08/redis集群——哨兵/';
+          this.page.identifier = '2019/04/08/redis集群——哨兵/';
+          this.page.title = 'redis集群——哨兵';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
