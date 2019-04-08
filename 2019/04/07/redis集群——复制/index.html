@@ -83,8 +83,8 @@
 
 <meta name="description" content="主从复制 单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性  主从复制的作用：数据副本（高可用分布式基础）、读写分离提高性能  两种实现方式命令slaveof和配置文件的方式 slaveof1234# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis复制原理">
-<meta property="og:url" content="http://yoursite.com/2019/04/07/redis复制原理/index.html">
+<meta property="og:title" content="redis集群——复制">
+<meta property="og:url" content="http://yoursite.com/2019/04/07/redis集群——复制/index.html">
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="主从复制 单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性  主从复制的作用：数据副本（高可用分布式基础）、读写分离提高性能  两种实现方式命令slaveof和配置文件的方式 slaveof1234# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt;">
 <meta property="og:locale" content="zh-Hans">
@@ -93,9 +93,9 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis6379log.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis6380log.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-slavecopy.jpg">
-<meta property="og:updated_time" content="2019-04-08T10:19:35.221Z">
+<meta property="og:updated_time" content="2019-04-08T15:23:08.455Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis复制原理">
+<meta name="twitter:title" content="redis集群——复制">
 <meta name="twitter:description" content="主从复制 单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性  主从复制的作用：数据副本（高可用分布式基础）、读写分离提高性能  两种实现方式命令slaveof和配置文件的方式 slaveof1234# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt;">
 <meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-master-slave.jpg">
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/07/redis复制原理/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/07/redis集群——复制/">
 
 
 
 
 
-  <title>redis复制原理 | 胖虎的博客</title>
+  <title>redis集群——复制 | 胖虎的博客</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/redis复制原理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/redis集群——复制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis复制原理</h1>
+          <h1 class="post-title" itemprop="name headline">redis集群——复制</h1>
         
 
         <div class="post-meta">
@@ -360,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/07/redis复制原理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/07/redis复制原理/" itemprop="commentCount"></span>
+                <a href="/2019/04/07/redis集群——复制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/07/redis集群——复制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -566,8 +566,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/08/redis-sentinel/" rel="prev" title="redis sentinel">
-                redis sentinel <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/08/redis集群——sentinel/" rel="prev" title="redis集群——sentinel">
+                redis集群——sentinel <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -926,9 +926,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/07/redis复制原理/';
-          this.page.identifier = '2019/04/07/redis复制原理/';
-          this.page.title = 'redis复制原理';
+          this.page.url = 'http://yoursite.com/2019/04/07/redis集群——复制/';
+          this.page.identifier = '2019/04/07/redis集群——复制/';
+          this.page.title = 'redis集群——复制';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
