@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="redis,">
 
 
 
@@ -82,6 +82,7 @@
 
 
 <meta name="description" content="主从复制问题引入当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与ma">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis集群——哨兵">
 <meta property="og:url" content="http://yoursite.com/2019/04/08/redis集群——哨兵/index.html">
@@ -94,7 +95,7 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-client.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_1.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_2.jpg">
-<meta property="og:updated_time" content="2019-04-08T15:34:24.469Z">
+<meta property="og:updated_time" content="2019-04-09T09:51:48.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis集群——哨兵">
 <meta name="twitter:description" content="主从复制问题引入当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与ma">
@@ -353,6 +354,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -554,6 +577,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
 
       
       
@@ -668,6 +697,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
             
 
             

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="redis,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -81,20 +81,16 @@
 
 
 
-<meta name="description" content="引入redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。 redis的特性 多种数据结构    其中还扩展数据结构有   bitmaps：位图 ，（布隆过滤器可使用位图来实现）   hyperloglog：超小内存唯一值计数（12k   geo：地理信息位置   速度快   redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（50000">
-<meta name="keywords" content="redis">
-<meta property="og:type" content="article">
-<meta property="og:title" content="redis初识">
-<meta property="og:url" content="http://yoursite.com/2019/04/05/redis初识/index.html">
+<meta name="description" content="胖虎是个码农">
+<meta property="og:type" content="website">
+<meta property="og:title" content="胖虎的博客">
+<meta property="og:url" content="http://yoursite.com/categories/redis/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="引入redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。 redis的特性 多种数据结构    其中还扩展数据结构有   bitmaps：位图 ，（布隆过滤器可使用位图来实现）   hyperloglog：超小内存唯一值计数（12k   geo：地理信息位置   速度快   redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（50000">
+<meta property="og:description" content="胖虎是个码农">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg">
-<meta property="og:updated_time" content="2019-04-09T09:47:47.760Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis初识">
-<meta name="twitter:description" content="引入redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。 redis的特性 多种数据结构    其中还扩展数据结构有   bitmaps：位图 ，（布隆过滤器可使用位图来实现）   hyperloglog：超小内存唯一值计数（12k   geo：地理信息位置   速度快   redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（50000">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg">
+<meta name="twitter:title" content="胖虎的博客">
+<meta name="twitter:description" content="胖虎是个码农">
 
 
 
@@ -124,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/05/redis初识/">
+  <link rel="canonical" href="http://yoursite.com/categories/redis/">
 
 
 
 
 
-  <title>redis初识 | 胖虎的博客</title>
+  <title>分类: redis | 胖虎的博客</title>
   
 
 
@@ -149,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
     <a href="https://your-url" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -295,281 +291,53 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block category">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>redis<small>分类</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/redis初识/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="胖虎">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="胖虎的博客">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2019/04/08/redis集群——哨兵/" itemprop="url">
+              
+                <span itemprop="name">redis集群——哨兵</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">redis初识</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-05T22:50:33+08:00">
-                2019-04-05
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-04-08T16:59:57+08:00" content="2019-04-08">
+          04-08
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/04/05/redis初识/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/05/redis初识/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  357
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1m
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><p>redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。</p>
-<h1 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h1><ul>
-<li>多种数据结构<br><img src="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg" alt></li>
-</ul>
-<hr>
-<blockquote>
-<p>其中还扩展数据结构有</p>
-</blockquote>
-<blockquote>
-<p>bitmaps：位图 ，（布隆过滤器可使用位图来实现）</p>
-</blockquote>
-<blockquote>
-<p>hyperloglog：超小内存唯一值计数（12k</p>
-</blockquote>
-<blockquote>
-<p>geo：地理信息位置</p>
-</blockquote>
-<ul>
-<li>速度快</li>
-</ul>
-<blockquote>
-<p>redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（50000 line），单线程</p>
-</blockquote>
-<ul>
-<li>持久化</li>
-<li>功能丰富</li>
-<li>主从复制</li>
-<li>高可用、分布式</li>
-</ul>
-<h1 id="redis使用场景"><a href="#redis使用场景" class="headerlink" title="redis使用场景"></a>redis使用场景</h1><ul>
-<li><p>缓存系统</p>
-<blockquote>
-<p>先从cache中获取数据，如果有返回数据，没有则从数据库中取数据并加入到缓存中</p>
-</blockquote>
-</li>
-<li><p>计数器</p>
-</li>
-<li><p>消息队列系统</p>
-</li>
-<li><p>排行榜</p>
-</li>
-<li><p>社交网络</p>
-</li>
-<li><p>实时系统</p>
-</li>
-</ul>
-<h1 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h1><blockquote>
-<p><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">http://download.redis.io/releases/</a></p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span>到redis目录编译，会产生redis.conf、src等文件</span></span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装到指定目录产生bin文件</span></span><br><span class="line">make install PREFIX=/install/redis</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>bin目录下6个可执行文件</p>
-<blockquote>
-<p>redis-server：redis服务器 </p>
-</blockquote>
-<blockquote>
-<p>redis-cli：redis命令行客户端</p>
-</blockquote>
-<blockquote>
-<p>redis-benchmark：基准测试</p>
-</blockquote>
-<blockquote>
-<p>redis-check-aof：持久化aof文件修复工具</p>
-</blockquote>
-<blockquote>
-<p>redis-check-dump：持久化rdb文件修复工具</p>
-</blockquote>
-<blockquote>
-<p>redis-sentinel：sentinel服务器（2.8version）</p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li><p>三种启动redis方式</p>
-<blockquote>
-<p>redis-serve（默认配置） </p>
-</blockquote>
-<blockquote>
-<p>redis-serve – port 6380（动态参数启动，默认端口是6379）</p>
-</blockquote>
-<blockquote>
-<p>redis-serve &amp;confipath（参与配置文件启动）</p>
-</blockquote>
-</li>
-</ul>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/redis/" rel="tag"># redis</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/04/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/05/redis-api/" rel="prev" title="redis api">
-                redis api <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -577,20 +345,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -613,17 +367,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -708,22 +453,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis的特性"><span class="nav-number">2.</span> <span class="nav-text">redis的特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis使用场景"><span class="nav-number">3.</span> <span class="nav-text">redis使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis的安装"><span class="nav-number">4.</span> <span class="nav-text">redis的安装</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -901,10 +630,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -922,18 +647,6 @@
       <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
     
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/05/redis初识/';
-          this.page.identifier = '2019/04/05/redis初识/';
-          this.page.title = 'redis初识';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
     
 
   
