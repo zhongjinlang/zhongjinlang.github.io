@@ -85,7 +85,7 @@
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redisCluster">
-<meta property="og:url" content="http://yoursite.com/2019/04/09/redisCluster/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/redisCluster/index.html">
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
 <meta property="og:locale" content="zh-Hans">
@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg">
-<meta property="og:updated_time" content="2019-04-11T15:40:51.633Z">
+<meta property="og:updated_time" content="2019-04-11T16:03:31.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redisCluster">
 <meta name="twitter:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
@@ -133,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/09/redisCluster/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/11/redisCluster/">
 
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/redisCluster/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/redisCluster/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T21:37:51+08:00">
-                2019-04-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T21:37:51+08:00">
+                2019-04-11
               </time>
             
 
@@ -388,8 +388,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/09/redisCluster/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/09/redisCluster/" itemprop="commentCount"></span>
+                <a href="/2019/04/11/redisCluster/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/11/redisCluster/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -432,7 +432,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8m
+                  9m
                 </span>
               
             </div>
@@ -556,7 +556,7 @@
 <p>cluster replicate node-id<br>完成 7000-&gt;7003、7001-&gt;7004、7002-&gt;7005</p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost cluster]# redis-cli -p 7003 cluster replicate 0ed9079a0d32b7e926a96d6a03d431c1228deffb</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7004 cluster replicate b4c274d2501d4d105c8b7acf7787a66287a7406a</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7005 cluster replicate 8465de32a8e17d23134d8ae8d62f2c78c9e40ef2</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster nodes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以发现7005-7004都成为了salve</span></span><br><span class="line">9c736c0733323151ee5aeaa8444cf177ab9b312b 192.168.211.134:7005 slave 8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 0 1554833875305 5 connected</span><br><span class="line">97ba85211fa2d68ebff5ae4848eb4a52a899be5a 192.168.211.134:7003 slave 9c736c0733323151ee5aeaa8444cf177ab9b312b 0 1554833874286 5 connected</span><br><span class="line">89d495be82b618256b5c79a56f6894658db4cfa8 192.168.211.134:7004 slave b4c274d2501d4d105c8b7acf7787a66287a7406a 0 1554833871215 3 connected</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3个主节点</span></span><br><span class="line">0ed9079a0d32b7e926a96d6a03d431c1228deffb 192.168.211.134:7000 myself,master - 0 0 1 connected</span><br><span class="line">b4c274d2501d4d105c8b7acf7787a66287a7406a 192.168.211.134:7001 master - 0 1554833873263 0 connected</span><br><span class="line">8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 192.168.211.134:7002 master - 0 1554833876331 2 connected</span><br></pre></td></tr></table></figure>
-<h1 id="Ruby搭建集群"><a href="#Ruby搭建集群" class="headerlink" title="Ruby搭建集群"></a>Ruby搭建集群</h1><p>实验操作如上述命令搭建一至，3主3从<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在install目录创建rediscluster进行搭建，分别创建6个文件</span></span><br><span class="line">mkdir redis-1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装一个单机版redis,<span class="built_in">cd</span>到redis目录，并将编译生成的bin目录分别放置redis-1中</span></span><br><span class="line">make install PREFIX=/install/rediscluste/redis-1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装一个单机版redis，将核心配置文件分别拷贝到bin目录下</span></span><br><span class="line">[root@localhost redis-3.0.0]# cp redis.conf /install/rediscluster/redis-1/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别修改redis.conf，端口从7001~7006：</span></span><br><span class="line">daemonize</span><br><span class="line">cluster-enabled yes</span><br><span class="line">port 7001</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别启动</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> /install/rediscluster/redis-1/bin</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> ./redis-server redis.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看启动状态</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> [root@localhost /]<span class="comment"># ps -ef | grep redis</span></span></span><br><span class="line">root      17648      1  0 23:27 ?        00:00:00 redis-server *:7002 [cluster]</span><br><span class="line">root      17652      1  0 23:27 ?        00:00:00 redis-server *:7003 [cluster]</span><br><span class="line">root      17660      1  0 23:27 ?        00:00:00 redis-server *:7004 [cluster]</span><br><span class="line">root      17671      1  0 23:27 ?        00:00:00 redis-server *:7005 [cluster]</span><br><span class="line">root      17682      1  0 23:28 ?        00:00:00 redis-server *:7006 [cluster]</span><br><span class="line">root      17792      1  0 23:32 ?        00:00:00 redis-server *:7001 [cluster]</span><br></pre></td></tr></table></figure></p>
+<h1 id="Ruby搭建集群"><a href="#Ruby搭建集群" class="headerlink" title="Ruby搭建集群"></a>Ruby搭建集群</h1><p>实验操作如上述命令搭建一至，3主3从<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在install目录创建rediscluster进行搭建，分别创建6个文件</span></span><br><span class="line">mkdir redis-1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装一个单机版redis,<span class="built_in">cd</span>到redis目录，并将编译生成的bin目录分别放置redis-1中</span></span><br><span class="line">make install PREFIX=/install/rediscluste/redis-1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装一个单机版redis，将核心配置文件分别拷贝到bin目录下</span></span><br><span class="line">[root@localhost redis-3.0.0]# cp redis.conf /install/rediscluster/redis-1/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别修改redis.conf，端口从7001~7006：</span></span><br><span class="line">daemonize</span><br><span class="line">cluster-enabled yes</span><br><span class="line">port 7001</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别启动</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> /install/rediscluster/redis-1/bin</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> ./redis-server redis.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看启动状态</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> [root@localhost /]<span class="comment"># ps -ef | grep redis</span></span></span><br><span class="line">root      17648      1  0 23:27 ?        00:00:00 redis-server *:7002 [cluster]</span><br><span class="line">root      17652      1  0 23:27 ?        00:00:00 redis-server *:7003 [cluster]</span><br><span class="line">root      17660      1  0 23:27 ?        00:00:00 redis-server *:7004 [cluster]</span><br><span class="line">root      17671      1  0 23:27 ?        00:00:00 redis-server *:7005 [cluster]</span><br><span class="line">root      17682      1  0 23:28 ?        00:00:00 redis-server *:7006 [cluster]</span><br><span class="line">root      17792      1  0 23:32 ?        00:00:00 redis-server *:7001 [cluster]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span>到redis src 执行如下代码 </span></span><br><span class="line">./redis-trib.rb create --replicas 1 </span><br><span class="line">192.168.211.134:7001 192.168.211.134:7002 192.168.211.134:7003</span><br><span class="line">192.168.211.134:7004 192.168.211.134:7005 192.168.211.134:7006</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -799,7 +799,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9.8k</span>
+    <span title="Site words total count">9.9k</span>
   
 </div>
 
@@ -971,8 +971,8 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/09/redisCluster/';
-          this.page.identifier = '2019/04/09/redisCluster/';
+          this.page.url = 'http://yoursite.com/2019/04/11/redisCluster/';
+          this.page.identifier = '2019/04/11/redisCluster/';
           this.page.title = 'redisCluster';
         };
         var d = document, s = d.createElement('script');
