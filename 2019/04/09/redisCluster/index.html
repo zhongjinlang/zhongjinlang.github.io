@@ -81,21 +81,29 @@
 
 
 
-<meta name="description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB 该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令   文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子">
+<meta name="description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis的持久化">
-<meta property="og:url" content="http://yoursite.com/2019/04/06/redis的持久化/index.html">
+<meta property="og:title" content="redisCluster">
+<meta property="og:url" content="http://yoursite.com/2019/04/09/redisCluster/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB 该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令   文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子">
+<meta property="og:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-rdb-aof.jpg">
-<meta property="og:updated_time" content="2019-04-09T16:05:00.720Z">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sxufenbu.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-hashfenbu.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fenquduibi.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiedianquyu.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-yizhixhash.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-xunicao.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg">
+<meta property="og:updated_time" content="2019-04-11T15:40:51.633Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis的持久化">
-<meta name="twitter:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB 该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令   文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg">
+<meta name="twitter:title" content="redisCluster">
+<meta name="twitter:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
+<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg">
 
 
 
@@ -125,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/06/redis的持久化/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/09/redisCluster/">
 
 
 
 
 
-  <title>redis的持久化 | 胖虎的博客</title>
+  <title>redisCluster | 胖虎的博客</title>
   
 
 
@@ -310,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/redis的持久化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/redisCluster/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -327,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis的持久化</h1>
+          <h1 class="post-title" itemprop="name headline">redisCluster</h1>
         
 
         <div class="post-meta">
@@ -339,8 +347,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-06T00:55:05+08:00">
-                2019-04-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T21:37:51+08:00">
+                2019-04-09
               </time>
             
 
@@ -380,8 +388,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/06/redis的持久化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/06/redis的持久化/" itemprop="commentCount"></span>
+                <a href="/2019/04/09/redisCluster/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/09/redisCluster/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -408,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  2k
                 </span>
               
 
@@ -424,7 +432,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4m
+                  8m
                 </span>
               
             </div>
@@ -445,128 +453,110 @@
       
 
       
-        <h1 id="持久化的作用"><a href="#持久化的作用" class="headerlink" title="持久化的作用"></a>持久化的作用</h1><p>redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 <strong>Redis</strong> 提供了两种<strong>持久化</strong>的方案，将内存中的数据保存到磁盘中，避免数据的丢失</p>
-<h1 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h1><blockquote>
-<p>该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令</p>
-</blockquote>
+        <h1 id="sentinel问题引入"><a href="#sentinel问题引入" class="headerlink" title="sentinel问题引入"></a>sentinel问题引入</h1><p>上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量等瓶颈时，可采用cluster架构达到均衡负载的目的。</p>
+<h2 id="sentinel和cluster"><a href="#sentinel和cluster" class="headerlink" title="sentinel和cluster"></a>sentinel和cluster</h2><p>sentinel与cluster是两个独立的功能，从特性来看sentinel可视为集群的子集，当不需要数据分片或已在客户端分片的场景下，sentinel足够使用了。如果需要进行水平扩容，那么cluster是一个很好的选择</p>
+<h1 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h1><p>集群首要解决把整个数据集按照分区规则映射到多个节点的问题，即把数据集划分到多个节点上，每个节点负责整个数据的一个子集<br><img src="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg" alt></p>
+<h2 id="顺序分区-哈希分区"><a href="#顺序分区-哈希分区" class="headerlink" title="顺序分区 | 哈希分区"></a>顺序分区 | 哈希分区</h2><ul>
+<li><p>顺序分区保证每个节点的数据均衡<br><img src="http://poporz7f8.bkt.clouddn.com/redis-sxufenbu.jpg" alt></p>
+</li>
+<li><p>哈希分区 对每一个数字进行哈希函数，按照节点取余(实现之一)<br><img src="http://poporz7f8.bkt.clouddn.com/redis-hashfenbu.jpg" alt></p>
+</li>
+</ul>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-fenquduibi.jpg" alt></p>
+<h1 id="哈希分区探究"><a href="#哈希分区探究" class="headerlink" title="哈希分区探究"></a>哈希分区探究</h1><p>redis-cluster采用哈希分区的方式进行数据分布，为此我们将进一步分析</p>
+<h2 id="节点取余分区"><a href="#节点取余分区" class="headerlink" title="节点取余分区"></a>节点取余分区</h2><p>对每一个key对3（节点个数）取余，如果余数为0则分布到第一个节点，余数为2则分布到第二个节点，余数为3则分布到第三个节点<br><img src="http://poporz7f8.bkt.clouddn.com/redis-jiedianquyu.jpg" alt></p>
 <ul>
-<li>文件策略：如果存在老的RDB文件，会进行替换</li>
-<li>优点：RBD作为一个备份文件容易恢复，性能好，通过子进程fork生成rdb，用于备份</li>
-<li>缺点：容易造成数据丢失，如果fork花费时间大，那么将会阻塞redis服务、耗时耗性能</li>
+<li>客户端分片: 哈希 + 取余</li>
+<li>节点伸缩： 节点变化，数据迁移量巨大</li>
 </ul>
-<h2 id="触发机制"><a href="#触发机制" class="headerlink" title="触发机制"></a>触发机制</h2><ul>
-<li>save命令（同步 ） — 可能会产生阻塞</li>
-<li>bgsave命令（异步）— <strong>创建一个子进程fork() </strong>生成rdb文件（阻塞发生在<br>fork），创建完毕返回给主进程bgsave successfully</li>
-<li>自动 — 根据save配置自动生成，例如如果在60秒内改变了1w条数据则生成rdb、300-10、900-1满足任一个条件（底层使用fork）</li>
+<h2 id="一致性哈希分区"><a href="#一致性哈希分区" class="headerlink" title="一致性哈希分区"></a>一致性哈希分区</h2><p>解决了节点取余的缺点<br>token表示一个数据范围，为每一个节点分配一个token，每一个节点负责一部分token数据。当对key进行hash计算后按照顺时针的规则寻找离它最近的节点</p>
+<p><img src="http://poporz7f8.bkt.clouddn.com/redis-yizhixhash.jpg" alt></p>
+<ul>
+<li>客户端分片: 哈希 + 取余(优化取余)</li>
+<li>节点伸缩： 只影响临近节点，但还是有数据迁移</li>
 </ul>
-<p>在redis.conf中节点为SNAPSHOTTING中有如下配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br><span class="line"><span class="meta">#</span><span class="bash"> bgsave发生错误是否停止写入</span></span><br><span class="line">stop-writes-on-bgsave-error yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> rdb是否采用压缩格式</span></span><br><span class="line">rdbcompression yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> rbd校验</span></span><br><span class="line">rdbchecksum yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认rbd文件名，在/bin目录</span></span><br><span class="line">dbfilename dump.rdb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 日志等文件存储位置</span></span><br><span class="line">dir ./</span><br></pre></td></tr></table></figure>
-<p>推荐配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 不采用自动生成</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> rbd文件名称采用+端口形式区分</span></span><br><span class="line">dbfilename dump-$&#123;port&#125;.rdb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 建议指定容量较大硬盘位置</span></span><br><span class="line">dir /bigdiskpath</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 其他默认</span></span><br></pre></td></tr></table></figure>
+<h2 id="虚拟槽分区"><a href="#虚拟槽分区" class="headerlink" title="虚拟槽分区"></a>虚拟槽分区</h2><p>Redis Cluster中有一个16384长度的槽的概念, 每个槽映射一个数据子集, 按照一定的hash计算对16383取余, 如果它落在某个槽的范围内，那么就证明这个槽必须所管理的数据，它是由服务端管理接节点槽之间的关系<br><img src="http://poporz7f8.bkt.clouddn.com/redis-xunicao.jpg" alt></p>
+<p>节点取余分区和一致性哈希分区当节点伸缩时，都会进行数据的迁移，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力</p>
+<h1 id="redisCluster架构"><a href="#redisCluster架构" class="headerlink" title="redisCluster架构"></a>redisCluster架构</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg" alt></p>
+<p>服务端有多个节点，<strong>每个节点都负责读写，节点之间是彼此通信的</strong>。如果节点A覆盖0－5460、节点B覆盖5461－10922、节点C覆盖10923－16383。 如果存入一个值，按照redis cluster哈希槽的算法： CRC16(‘key’)384 = 6782。 那么就会把这个key 的存储分配到 B 上了。同样，当我连接(A,B,C)任何一个节点想获取’key’这个key时，也会这样的算法，然后内部跳转到B节点上获取数据</p>
+<h2 id="基本的安装架构"><a href="#基本的安装架构" class="headerlink" title="基本的安装架构"></a>基本的安装架构</h2><ul>
+<li><p>节点</p>
 <blockquote>
-<p>不容忽略的方式：主从复制、debug reload、shutdown可能会触发</p>
+<p>每个节点负责读写</p>
 </blockquote>
-<h1 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h1><p>RDB快照方式并不是很可靠，如果服务器宕机，那么最新的数据就会丢失。而AOF文件提供一种更为可靠的的持久化方式。当进行set操作时，会追加到AOF文件中。当redis重启之后，AOF中的命令会被重新执行一次，重建数据</p>
-<h2 id="AOF的三种策略"><a href="#AOF的三种策略" class="headerlink" title="AOF的三种策略"></a>AOF的三种策略</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg" alt></p>
-<ul>
-<li>always：每条命令都会持久化一次（执行写操作时，先进入缓冲区后写入到硬盘）</li>
-<li>everysec：每秒持久化一次</li>
-<li>no：缓冲区的刷新策略根据OS决定</li>
-</ul>
-<h2 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h2><p>由于每条命令都会追加到AOF文件中，随着时间的推移，AOF文件必然逐渐变大。AOF重写解决了这一问题</p>
-<ul>
-<li>例 ：命令优化、过期数据</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set hello one</span><br><span class="line">set hello two</span><br><span class="line">set hello three</span><br></pre></td></tr></table></figure>
-<p>当连续执行上诉命令最终的结果为three，而AOF并不会写入三次命令，而只会追加有效的命令set hello three</p>
-<ul>
-<li><p>AOF重写实现的两种方式</p>
+</li>
+<li><p>meet</p>
 <blockquote>
-<p>bgrewriteaof命令：（类似RDB的bgsave）开启子线程完成AOF重写</p>
+<p>完成节点之间通信工作 A meet C; A meet B; B &gt; C</p>
 </blockquote>
+</li>
+<li><p>指派槽</p>
 <blockquote>
-<p>AOF重写配置</p>
+<p>只有给节点指派了槽才可以进行读写</p>
+</blockquote>
+</li>
+<li><p>复制</p>
+<blockquote>
+<p>为了达到高可用，有主从复制概念</p>
 </blockquote>
 </li>
 </ul>
-<p>在/redis.conf配置文件有APPEND ONLY MODE节点</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 要完成aof功能开启为yes</span></span><br><span class="line">appendonly no</span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件名</span></span><br><span class="line">appendfilename "appendonly.aof"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 三种同步策略</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> appendfsync always</span></span><br><span class="line">appendfsync everysec -- 每秒写入（默认）</span><br><span class="line"><span class="meta">#</span><span class="bash"> appendfsync no</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 写入aof文件，不等待磁盘同步（安全，但可能阻塞）</span></span><br><span class="line">no-appendfsync-on-rewrite no</span><br></pre></td></tr></table></figure>
-<h1 id="RDB和AOF的抉择"><a href="#RDB和AOF的抉择" class="headerlink" title="RDB和AOF的抉择"></a>RDB和AOF的抉择</h1><blockquote>
-<p>比较 </p>
-</blockquote>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-rdb-aof.jpg" alt></p>
 <blockquote>
-<p>RDB最佳策略</p>
+<p>rediscluster特性：复制、高可用、分片</p>
 </blockquote>
+<h1 id="原生命令安装"><a href="#原生命令安装" class="headerlink" title="原生命令安装"></a>原生命令安装</h1><blockquote>
+<p><strong>环境</strong></p>
 <ul>
-<li>“关闭”rdb</li>
-<li>集中管理，指定时间内进行大量的数据备份</li>
-<li>从节点开启</li>
-<li>分片</li>
+<li>3主3从</li>
 </ul>
-<blockquote>
-<p>AOF最佳策略</p>
 </blockquote>
+<pre><code>&gt; 192.168.211.134:7000(主)
+
+&gt; 192.168.211.134:7001(主)
+
+&gt; 192.168.211.134:7002(主)
+
+&gt; 192.168.211.134:7003(从)
+
+&gt; 192.168.211.134:7004(从)
+
+&gt; 192.168.211.134:7005(从)
+</code></pre><h2 id="redis-7000-70005-conf"><a href="#redis-7000-70005-conf" class="headerlink" title="redis-[7000-70005].conf"></a>redis-[7000-70005].conf</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">port 7000</span><br><span class="line">daemonize yes</span><br><span class="line">dir ./</span><br><span class="line">logfile "7000.log"</span><br><span class="line">dbfilename "dump-7000.rdb"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启cluster</span></span><br><span class="line">cluster-enabled yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> cluster配置文件</span></span><br><span class="line">cluster-config-file nodes-7000.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有一个master宕机，没有故障恢复，整个集群不可用（默认<span class="literal">true</span>）</span></span><br><span class="line">cluster-require-full-coverage no</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其他配置文件只需修改端口即可</p>
+</blockquote>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost cluster]# redis-server redis-7000.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7001.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7002.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7003.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7004.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7005.conf</span><br><span class="line">[root@localhost cluster]# ps -ef | grep redis</span><br><span class="line">root      57254      1  0 01:44 ?        00:00:00 redis-server *:7000 [cluster]</span><br><span class="line">root      57258      1  0 01:44 ?        00:00:00 redis-server *:7001 [cluster]</span><br><span class="line">root      57262      1  0 01:44 ?        00:00:00 redis-server *:7002 [cluster]</span><br><span class="line">root      57266      1  0 01:44 ?        00:00:00 redis-server *:7003 [cluster]</span><br><span class="line">root      57270      1  0 01:44 ?        00:00:00 redis-server *:7004 [cluster]</span><br><span class="line">root      57274      1  0 01:44 ?        00:00:00 redis-server *:7005 [cluster]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试连接</span></span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000</span><br><span class="line">127.0.0.1:7000&gt; set hello world</span><br><span class="line">(error) CLUSTERDOWN The cluster is down</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我们可发现当set值时，错误表示当前集群是一个下线状态，因为在集群模式下，只有成功分配了槽且16383都进行了完整的分配，才可进行对外提供服务</p>
+</blockquote>
+<h2 id="meet"><a href="#meet" class="headerlink" title="meet"></a>meet</h2><blockquote>
+<p>port meet port<br>完成节点之间的通信</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7001</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7002</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7003</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7004</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7005</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster nodes</span><br><span class="line">9c736c0733323151ee5aeaa8444cf177ab9b312b 192.168.211.134:7005 master - 0 1554832945389 5 connected</span><br><span class="line">97ba85211fa2d68ebff5ae4848eb4a52a899be5a 192.168.211.134:7003 master - 0 1554832943331 4 connected</span><br><span class="line">0ed9079a0d32b7e926a96d6a03d431c1228deffb 192.168.211.134:7000 myself,master - 0 0 1 connected</span><br><span class="line">89d495be82b618256b5c79a56f6894658db4cfa8 192.168.211.134:7004 master - 0 1554832942315 3 connected</span><br><span class="line">b4c274d2501d4d105c8b7acf7787a66287a7406a 192.168.211.134:7001 master - 0 1554832941298 0 connected</span><br><span class="line">8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 192.168.211.134:7002 master - 0 1554832944358 2 connected</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时6个节点已经达成相互通信!</p>
+</blockquote>
+<h2 id="分配槽点"><a href="#分配槽点" class="headerlink" title="分配槽点"></a>分配槽点</h2><p>redis总共有16384个槽点，并且只有主节点需要分配槽点，这里我们使用的是三主三从，因此将槽点均分为三等分:0–5460，5461–10922，10923–16383</p>
 <ul>
-<li>“开启” ： 缓存和存储</li>
-<li>AOF重写集中管理</li>
-<li>everysec策略</li>
-<li>分片</li>
-</ul>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h2><p>当进行 RDB的<strong>bgsave</strong>操作和AOF的<strong>bgrewriteaof</strong>会产生子线程进行持久化的相关操作，如果fork操作执行慢，此时会将redis主线程阻塞。 </p>
-<ul>
-<li>查看fork持久化的时间</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">latest_fork_usec</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>改善</p>
-<blockquote>
-<p>物理机或支持fork操作的虚拟化技术</p>
-</blockquote>
-<blockquote>
-<p>控制redis实例最大可用内存：maxmemory</p>
-</blockquote>
-<blockquote>
-<p>合理配置Linux内存分配策略：vm.overcommit_memory=1（默认0）</p>
-</blockquote>
-<blockquote>
-<p>放宽AOF重写自动触发机制，不必全量复制</p>
-</blockquote>
+<li><p>首先我们编写一个sh脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">start=$1</span><br><span class="line">end=$2</span><br><span class="line">port=$3</span><br><span class="line"></span><br><span class="line">for slot in `seq $&#123;start&#125; $&#123;end&#125;`</span><br><span class="line">do</span><br><span class="line">        echo "slot:$&#123;slot&#125;"</span><br><span class="line">        redis-cli -h 192.168.211.134 -p $&#123;port&#125; cluster addslots $&#123;slot&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分别为7000、7001、7002三个从节点分配槽节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh add_slots.sh 0 5460 7000</span><br><span class="line">sh add_slots.sh 5461 10922 7001</span><br><span class="line">sh add_slots.sh 10923 16383 7002</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看槽信息<br><img src="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg" alt></p>
 </li>
 </ul>
-<h2 id="进程外开销"><a href="#进程外开销" class="headerlink" title="进程外开销"></a>进程外开销</h2><blockquote>
-<p>bgsave和bgrewriteaof是将内存中的数据写入到硬盘，此时会集中消耗CPU、rork内存开销、硬盘</p>
-</blockquote>
+<p><img src="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg" alt></p>
 <ul>
-<li><p>优化</p>
-<blockquote>
-<p>不做CPU绑定，不和CPU密集部署，单机部署不要大量的AOF和RDB持久化的过程</p>
-</blockquote>
-<blockquote>
-<p>echo never &gt; 追加配置文件</p>
-</blockquote>
-<blockquote>
-<p>不要和高硬盘负载服务部署在一起：存储服务、消息队列等</p>
-</blockquote>
-<blockquote>
-<p>配置no-appendfsync-on-rewrite yes </p>
-</blockquote>
-<blockquote>
-<p>ssd介质</p>
-</blockquote>
+<li>设置值<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c -p 7000</span><br><span class="line">127.0.0.1:7000&gt; set hello world</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="AOF追加阻塞"><a href="#AOF追加阻塞" class="headerlink" title="AOF追加阻塞"></a>AOF追加阻塞</h2><p>如果我们使用了AOF的每秒刷盘策略，如果fork执行大于2秒，那么主线程阻塞</p>
-<ul>
-<li><p>阻塞定位</p>
-<blockquote>
-<p>redis日志</p>
+<h2 id="主从关系分配"><a href="#主从关系分配" class="headerlink" title="主从关系分配"></a>主从关系分配</h2><blockquote>
+<p>cluster replicate node-id<br>完成 7000-&gt;7003、7001-&gt;7004、7002-&gt;7005</p>
 </blockquote>
-<blockquote>
-<p>info persistence收集记录</p>
-</blockquote>
-</li>
-</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost cluster]# redis-cli -p 7003 cluster replicate 0ed9079a0d32b7e926a96d6a03d431c1228deffb</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7004 cluster replicate b4c274d2501d4d105c8b7acf7787a66287a7406a</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7005 cluster replicate 8465de32a8e17d23134d8ae8d62f2c78c9e40ef2</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster nodes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以发现7005-7004都成为了salve</span></span><br><span class="line">9c736c0733323151ee5aeaa8444cf177ab9b312b 192.168.211.134:7005 slave 8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 0 1554833875305 5 connected</span><br><span class="line">97ba85211fa2d68ebff5ae4848eb4a52a899be5a 192.168.211.134:7003 slave 9c736c0733323151ee5aeaa8444cf177ab9b312b 0 1554833874286 5 connected</span><br><span class="line">89d495be82b618256b5c79a56f6894658db4cfa8 192.168.211.134:7004 slave b4c274d2501d4d105c8b7acf7787a66287a7406a 0 1554833871215 3 connected</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3个主节点</span></span><br><span class="line">0ed9079a0d32b7e926a96d6a03d431c1228deffb 192.168.211.134:7000 myself,master - 0 0 1 connected</span><br><span class="line">b4c274d2501d4d105c8b7acf7787a66287a7406a 192.168.211.134:7001 master - 0 1554833873263 0 connected</span><br><span class="line">8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 192.168.211.134:7002 master - 0 1554833876331 2 connected</span><br></pre></td></tr></table></figure>
+<h1 id="Ruby搭建集群"><a href="#Ruby搭建集群" class="headerlink" title="Ruby搭建集群"></a>Ruby搭建集群</h1><p>实验操作如上述命令搭建一至，3主3从<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在install目录创建rediscluster进行搭建，分别创建6个文件</span></span><br><span class="line">mkdir redis-1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装一个单机版redis,<span class="built_in">cd</span>到redis目录，并将编译生成的bin目录分别放置redis-1中</span></span><br><span class="line">make install PREFIX=/install/rediscluste/redis-1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装一个单机版redis，将核心配置文件分别拷贝到bin目录下</span></span><br><span class="line">[root@localhost redis-3.0.0]# cp redis.conf /install/rediscluster/redis-1/bin/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别修改redis.conf，端口从7001~7006：</span></span><br><span class="line">daemonize</span><br><span class="line">cluster-enabled yes</span><br><span class="line">port 7001</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别启动</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> /install/rediscluster/redis-1/bin</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> ./redis-server redis.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看启动状态</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> [root@localhost /]<span class="comment"># ps -ef | grep redis</span></span></span><br><span class="line">root      17648      1  0 23:27 ?        00:00:00 redis-server *:7002 [cluster]</span><br><span class="line">root      17652      1  0 23:27 ?        00:00:00 redis-server *:7003 [cluster]</span><br><span class="line">root      17660      1  0 23:27 ?        00:00:00 redis-server *:7004 [cluster]</span><br><span class="line">root      17671      1  0 23:27 ?        00:00:00 redis-server *:7005 [cluster]</span><br><span class="line">root      17682      1  0 23:28 ?        00:00:00 redis-server *:7006 [cluster]</span><br><span class="line">root      17792      1  0 23:32 ?        00:00:00 redis-server *:7001 [cluster]</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -597,8 +587,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/05/瑞士军刀redis/" rel="next" title="瑞士军刀redis">
-                <i class="fa fa-chevron-left"></i> 瑞士军刀redis
+              <a href="/2019/04/08/redis集群——哨兵/" rel="next" title="redis集群——哨兵">
+                <i class="fa fa-chevron-left"></i> redis集群——哨兵
               </a>
             
           </div>
@@ -606,10 +596,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/06/ELK日志收集/" rel="prev" title="elasticsearch+filebeat+kibana日志收集">
-                elasticsearch+filebeat+kibana日志收集 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -778,7 +764,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久化的作用"><span class="nav-number">1.</span> <span class="nav-text">持久化的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RDB"><span class="nav-number">2.</span> <span class="nav-text">RDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#触发机制"><span class="nav-number">2.1.</span> <span class="nav-text">触发机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOF"><span class="nav-number">3.</span> <span class="nav-text">AOF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF的三种策略"><span class="nav-number">3.1.</span> <span class="nav-text">AOF的三种策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF重写"><span class="nav-number">3.2.</span> <span class="nav-text">AOF重写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RDB和AOF的抉择"><span class="nav-number">4.</span> <span class="nav-text">RDB和AOF的抉择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">5.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fork"><span class="nav-number">5.1.</span> <span class="nav-text">fork</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程外开销"><span class="nav-number">5.2.</span> <span class="nav-text">进程外开销</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF追加阻塞"><span class="nav-number">5.3.</span> <span class="nav-text">AOF追加阻塞</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sentinel问题引入"><span class="nav-number">1.</span> <span class="nav-text">sentinel问题引入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sentinel和cluster"><span class="nav-number">1.1.</span> <span class="nav-text">sentinel和cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据分布"><span class="nav-number">2.</span> <span class="nav-text">数据分布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序分区-哈希分区"><span class="nav-number">2.1.</span> <span class="nav-text">顺序分区 | 哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比"><span class="nav-number">2.2.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希分区探究"><span class="nav-number">3.</span> <span class="nav-text">哈希分区探究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点取余分区"><span class="nav-number">3.1.</span> <span class="nav-text">节点取余分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性哈希分区"><span class="nav-number">3.2.</span> <span class="nav-text">一致性哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟槽分区"><span class="nav-number">3.3.</span> <span class="nav-text">虚拟槽分区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redisCluster架构"><span class="nav-number">4.</span> <span class="nav-text">redisCluster架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的安装架构"><span class="nav-number">4.1.</span> <span class="nav-text">基本的安装架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原生命令安装"><span class="nav-number">5.</span> <span class="nav-text">原生命令安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-7000-70005-conf"><span class="nav-number">5.1.</span> <span class="nav-text">redis-[7000-70005].conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">5.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meet"><span class="nav-number">5.3.</span> <span class="nav-text">meet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配槽点"><span class="nav-number">5.4.</span> <span class="nav-text">分配槽点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从关系分配"><span class="nav-number">5.5.</span> <span class="nav-text">主从关系分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ruby搭建集群"><span class="nav-number">6.</span> <span class="nav-text">Ruby搭建集群</span></a></li></ol></div>
             
 
           </div>
@@ -985,9 +971,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/06/redis的持久化/';
-          this.page.identifier = '2019/04/06/redis的持久化/';
-          this.page.title = 'redis的持久化';
+          this.page.url = 'http://yoursite.com/2019/04/09/redisCluster/';
+          this.page.identifier = '2019/04/09/redisCluster/';
+          this.page.title = 'redisCluster';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
