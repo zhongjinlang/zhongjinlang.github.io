@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-ruby-cluster.jpg">
-<meta property="og:updated_time" content="2019-04-12T07:04:58.206Z">
+<meta property="og:updated_time" content="2019-04-12T08:30:26.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redisCluster">
 <meta name="twitter:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
@@ -480,26 +480,14 @@
 <p>节点取余分区和一致性哈希分区当节点伸缩时，都会进行数据的迁移，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力</p>
 <h1 id="redisCluster架构"><a href="#redisCluster架构" class="headerlink" title="redisCluster架构"></a>redisCluster架构</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg" alt></p>
 <p>服务端有多个节点，<strong>每个节点都负责读写，节点之间是彼此通信的</strong>。如果节点A覆盖0－5460、节点B覆盖5461－10922、节点C覆盖10923－16383。 如果存入一个值，按照redis cluster哈希槽的算法： CRC16(‘key’)384 = 6782。 那么就会把这个key 的存储分配到 B 上了。同样，当我连接(A,B,C)任何一个节点想获取’key’这个key时，也会这样的算法，然后内部跳转到B节点上获取数据</p>
-<h2 id="基本的安装架构"><a href="#基本的安装架构" class="headerlink" title="基本的安装架构"></a>基本的安装架构</h2><ul>
-<li><p>节点</p>
-<blockquote>
-<p>每个节点负责读写</p>
-</blockquote>
+<h2 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h2><ul>
+<li><p>节点: 每个节点负责读写</p>
 </li>
-<li><p>meet</p>
-<blockquote>
-<p>完成节点之间通信工作 A meet C; A meet B; B &gt; C</p>
-</blockquote>
+<li><p>meet: 完成节点之间通信工作 A meet C; A meet B; B &gt; C</p>
 </li>
-<li><p>指派槽</p>
-<blockquote>
-<p>只有给节点指派了槽才可以进行读写</p>
-</blockquote>
+<li><p>指派槽: 只有给节点指派了槽才可以进行读写</p>
 </li>
-<li><p>复制</p>
-<blockquote>
-<p>为了达到高可用，有主从复制概念</p>
-</blockquote>
+<li><p>复制: 为了达到高可用，有主从复制概念</p>
 </li>
 </ul>
 <blockquote>
@@ -602,6 +590,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/04/12/redis集群伸缩/" rel="prev" title="redis集群伸缩">
+                redis集群伸缩 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -691,7 +683,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -769,7 +761,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sentinel问题引入"><span class="nav-number">1.</span> <span class="nav-text">sentinel问题引入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sentinel和cluster"><span class="nav-number">1.1.</span> <span class="nav-text">sentinel和cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据分布"><span class="nav-number">2.</span> <span class="nav-text">数据分布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序分区-哈希分区"><span class="nav-number">2.1.</span> <span class="nav-text">顺序分区 | 哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比"><span class="nav-number">2.2.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希分区探究"><span class="nav-number">3.</span> <span class="nav-text">哈希分区探究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点取余分区"><span class="nav-number">3.1.</span> <span class="nav-text">节点取余分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性哈希分区"><span class="nav-number">3.2.</span> <span class="nav-text">一致性哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟槽分区"><span class="nav-number">3.3.</span> <span class="nav-text">虚拟槽分区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redisCluster架构"><span class="nav-number">4.</span> <span class="nav-text">redisCluster架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的安装架构"><span class="nav-number">4.1.</span> <span class="nav-text">基本的安装架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原生命令安装"><span class="nav-number">5.</span> <span class="nav-text">原生命令安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-7000-70005-conf"><span class="nav-number">5.1.</span> <span class="nav-text">redis-[7000-70005].conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">5.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meet"><span class="nav-number">5.3.</span> <span class="nav-text">meet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配槽点"><span class="nav-number">5.4.</span> <span class="nav-text">分配槽点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从关系分配"><span class="nav-number">5.5.</span> <span class="nav-text">主从关系分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ruby搭建集群"><span class="nav-number">6.</span> <span class="nav-text">Ruby搭建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动6个节点"><span class="nav-number">6.1.</span> <span class="nav-text">启动6个节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ruby环境"><span class="nav-number">6.2.</span> <span class="nav-text">安装ruby环境</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sentinel问题引入"><span class="nav-number">1.</span> <span class="nav-text">sentinel问题引入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sentinel和cluster"><span class="nav-number">1.1.</span> <span class="nav-text">sentinel和cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据分布"><span class="nav-number">2.</span> <span class="nav-text">数据分布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序分区-哈希分区"><span class="nav-number">2.1.</span> <span class="nav-text">顺序分区 | 哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比"><span class="nav-number">2.2.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希分区探究"><span class="nav-number">3.</span> <span class="nav-text">哈希分区探究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点取余分区"><span class="nav-number">3.1.</span> <span class="nav-text">节点取余分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性哈希分区"><span class="nav-number">3.2.</span> <span class="nav-text">一致性哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟槽分区"><span class="nav-number">3.3.</span> <span class="nav-text">虚拟槽分区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redisCluster架构"><span class="nav-number">4.</span> <span class="nav-text">redisCluster架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本架构"><span class="nav-number">4.1.</span> <span class="nav-text">基本架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原生命令安装"><span class="nav-number">5.</span> <span class="nav-text">原生命令安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-7000-70005-conf"><span class="nav-number">5.1.</span> <span class="nav-text">redis-[7000-70005].conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">5.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meet"><span class="nav-number">5.3.</span> <span class="nav-text">meet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配槽点"><span class="nav-number">5.4.</span> <span class="nav-text">分配槽点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从关系分配"><span class="nav-number">5.5.</span> <span class="nav-text">主从关系分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ruby搭建集群"><span class="nav-number">6.</span> <span class="nav-text">Ruby搭建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动6个节点"><span class="nav-number">6.1.</span> <span class="nav-text">启动6个节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ruby环境"><span class="nav-number">6.2.</span> <span class="nav-text">安装ruby环境</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -804,7 +796,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9.9k</span>
+    <span title="Site words total count">10.5k</span>
   
 </div>
 
