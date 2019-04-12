@@ -89,10 +89,10 @@
 <meta property="og:description" content="引入上一篇章中，我们分析了节点取余和一致性哈希，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C 指派槽: 只有给节点指派了槽才可以进行读写 复制: 为了">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-shensuo.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiedianxinxi.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-qianyicaojihua.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-caoqianyiliuche.jpg">
-<meta property="og:updated_time" content="2019-04-12T09:19:06.734Z">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiedianxinxi.jpg">
+<meta property="og:updated_time" content="2019-04-12T09:46:51.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis集群伸缩">
 <meta name="twitter:description" content="引入上一篇章中，我们分析了节点取余和一致性哈希，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C 指派槽: 只有给节点指派了槽才可以进行读写 复制: 为了">
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  612
+                  743
                 </span>
               
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2m
+                  3m
                 </span>
               
             </div>
@@ -442,16 +442,7 @@
 <li>配置和其他节点统一</li>
 <li>启动后是孤儿节点</li>
 </ul>
-<blockquote>
-<p>此时的集群状态</p>
-</blockquote>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-jiedianxinxi.jpg" alt></p>
-<ul>
-<li>加入7006(主)和7007(从)节点，从7000、7001、7002迁移槽数据给7006<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动7006和7007(拷贝文件和修改配置文件不在阐述)</span></span><br><span class="line">root      52263      1  0 05:10 ?        00:00:00 redis-server *:7006 [cluster]</span><br><span class="line">root      52272      1  1 05:10 ?        00:00:00 redis-server *:7007 [cluster]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时为孤立状态</span></span><br><span class="line">[root@zhongjinlang redis]# redis-cli -p 7006</span><br><span class="line">127.0.0.1:7006&gt; cluster nodes</span><br><span class="line">d65a5d7b0dcc09542761ac746ab4058fd002a5a4 :7006 myself,master - 0 0 0 connected</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加入集群</span></span><br><span class="line">[root@zhongjinlang redis]# redis-cli -p 7000</span><br><span class="line">127.0.0.1:7000&gt; cluster meet 192.168.211.136 7006</span><br><span class="line">127.0.0.1:7000&gt; cluster meet 192.168.211.136 7007</span><br><span class="line">127.0.0.1:7000&gt; cluster nodes</span><br><span class="line">0936d215f3adc8aad93f935ba5ea72c7d6cc7bd0 192.168.211.136:7007 master - 0 1555017424796 7 connected</span><br><span class="line">d65a5d7b0dcc09542761ac746ab4058fd002a5a4 192.168.211.136:7006 master - 0 1555017423368 0 connected</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
 <h2 id="加入集群（meet）"><a href="#加入集群（meet）" class="headerlink" title="加入集群（meet）"></a>加入集群（meet）</h2><p>将两个孤儿节点加入到集群中，(可通过cluster-meet完成，不推荐)，推荐使用redis-trib.rb加入集群，它会检测你加入的节点是否为孤儿节点，是才可进行加入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="迁移槽和数据"><a href="#迁移槽和数据" class="headerlink" title="迁移槽和数据"></a>迁移槽和数据</h2><blockquote>
 <p>把其他节点负责的槽均匀的迁移到新节点，让它工作起来</p>
 </blockquote>
@@ -467,13 +458,12 @@
 <li>对源节点循环遍历槽，获取count个槽的key：cluster getkeysinslot {slot} {count}</li>
 <li>在源节点执行：migrate {targetIp} {targetPort} key 0 {timeout}</li>
 <li>重复执行步骤3-4直到槽下所有的键数据迁移到目标节点</li>
-<li>通知槽分配个目标节点：cluster setslot {slot} node {targetNodeId} </li>
+<li>通知槽分配个目标节点：cluster setslot {slot} node {targetNodeId}</li>
 </ol>
-<ul>
-<li>添加从节点<br></li>
-</ul>
-<pre><code class="shell">
-</code></pre>
+<h1 id="加入集群实战"><a href="#加入集群实战" class="headerlink" title="加入集群实战"></a>加入集群实战</h1><blockquote>
+<p>此时的集群状态<br><img src="http://poporz7f8.bkt.clouddn.com/redis-jiedianxinxi.jpg" alt></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动7006和7007(拷贝文件和修改配置文件不在阐述)</span></span><br><span class="line">root      52263      1  0 05:10 ?        00:00:00 redis-server *:7006 [cluster]</span><br><span class="line">root      52272      1  1 05:10 ?        00:00:00 redis-server *:7007 [cluster]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时为孤立状态</span></span><br><span class="line">[root@zhongjinlang redis]# redis-cli -p 7006</span><br><span class="line">127.0.0.1:7006&gt; cluster nodes</span><br><span class="line">d65a5d7b0dcc09542761ac746ab4058fd002a5a4 :7006 myself,master - 0 0 0 connected</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加入集群</span></span><br><span class="line">[root@zhongjinlang redis]# redis-cli -p 7000</span><br><span class="line">127.0.0.1:7000&gt; cluster meet 192.168.211.136 7006</span><br><span class="line">127.0.0.1:7000&gt; cluster meet 192.168.211.136 7007</span><br><span class="line">127.0.0.1:7000&gt; cluster nodes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时已经加入了集群</span></span><br><span class="line">0936d215f3adc8aad93f935ba5ea72c7d6cc7bd0 192.168.211.136:7007 master - 0 1555017424796 7 connected</span><br><span class="line">d65a5d7b0dcc09542761ac746ab4058fd002a5a4 192.168.211.136:7006 master - 0 1555017423368 0 connected</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 7007（从）复制 7006（主）配置</span></span><br><span class="line">[root@zhongjinlang redis]# redis-cli -p 7007 cluster replicate d65a5d7b0dcc09542761ac746ab4058fd002a5a4</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 为7006主节点分配槽，在/usr/<span class="built_in">local</span>/bin</span></span><br><span class="line">[root@zhongjinlang bin]# redis-trib reshard 192.168.211.136:7000</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示输入</span></span><br><span class="line">How many slots do you want to move (from 1 to 16384)? 4096</span><br><span class="line">What is the receiving node ID? d65a5d7b0dcc09542761ac746ab4058fd002a5a4</span><br><span class="line">Please enter all the source node IDs.</span><br><span class="line">  Type 'all' to use all the nodes as source nodes for the hash slots.</span><br><span class="line">  Type 'done' once you entered all the source nodes IDs.</span><br><span class="line">Source node #1:all</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看槽信息</span></span><br><span class="line">[root@zhongjinlang bin]# redis-cli -p 7006 cluster nodes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可发现槽有三份数据</span></span><br><span class="line">d65a5d7b0dcc09542761ac746ab4058fd002a5a4 192.168.211.136:7006 myself,master - 0 0 8 connected 0-1364 5461-6826 10923-12287</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -675,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群伸缩原理"><span class="nav-number">2.</span> <span class="nav-text">集群伸缩原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群扩容"><span class="nav-number">3.</span> <span class="nav-text">集群扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备新的节点"><span class="nav-number">3.1.</span> <span class="nav-text">准备新的节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加入集群（meet）"><span class="nav-number">3.2.</span> <span class="nav-text">加入集群（meet）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移槽和数据"><span class="nav-number">3.3.</span> <span class="nav-text">迁移槽和数据</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群伸缩原理"><span class="nav-number">2.</span> <span class="nav-text">集群伸缩原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群扩容"><span class="nav-number">3.</span> <span class="nav-text">集群扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备新的节点"><span class="nav-number">3.1.</span> <span class="nav-text">准备新的节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加入集群（meet）"><span class="nav-number">3.2.</span> <span class="nav-text">加入集群（meet）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移槽和数据"><span class="nav-number">3.3.</span> <span class="nav-text">迁移槽和数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加入集群实战"><span class="nav-number">4.</span> <span class="nav-text">加入集群实战</span></a></li></ol></div>
             
 
           </div>
@@ -710,7 +700,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">10.5k</span>
+    <span title="Site words total count">10.7k</span>
   
 </div>
 
