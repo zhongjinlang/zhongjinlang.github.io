@@ -81,12 +81,12 @@
 
 
 
-<meta name="description" content="引入上一篇章中，我们分析了节点取余和一致性哈希，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C 指派槽: 只有给">
+<meta name="description" content="引入上一篇章中，我们分析了节点取余和一致性哈希产生数据迁移的问题，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis集群伸缩(待更新...)">
+<meta property="og:title" content="redis集群伸缩">
 <meta property="og:url" content="http://yoursite.com/2019/04/12/redis集群伸缩/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="引入上一篇章中，我们分析了节点取余和一致性哈希，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C 指派槽: 只有给">
+<meta property="og:description" content="引入上一篇章中，我们分析了节点取余和一致性哈希产生数据迁移的问题，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-shensuo.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-qianyicaojihua.jpg">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiedianxinxi.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-shousuojiqun.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-move-send.jpg">
-<meta property="og:updated_time" content="2019-04-12T13:12:51.633Z">
+<meta property="og:updated_time" content="2019-04-13T06:01:36.410Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis集群伸缩(待更新...)">
-<meta name="twitter:description" content="引入上一篇章中，我们分析了节点取余和一致性哈希，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C 指派槽: 只有给">
+<meta name="twitter:title" content="redis集群伸缩">
+<meta name="twitter:description" content="引入上一篇章中，我们分析了节点取余和一致性哈希产生数据迁移的问题，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C">
 <meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-shensuo.jpg">
 
 
@@ -134,7 +134,7 @@
 
 
 
-  <title>redis集群伸缩(待更新...) | 胖虎的博客</title>
+  <title>redis集群伸缩 | 胖虎的博客</title>
   
 
 
@@ -330,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis集群伸缩(待更新...)</h1>
+          <h1 class="post-title" itemprop="name headline">redis集群伸缩</h1>
         
 
         <div class="post-meta">
@@ -426,7 +426,7 @@
       
 
       
-        <h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><p>上一篇章中，我们分析了节点取余和一致性哈希，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力</p>
+        <h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><p>上一篇章中，我们分析了节点取余和一致性哈希产生数据迁移的问题，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力</p>
 <h1 id="集群伸缩原理"><a href="#集群伸缩原理" class="headerlink" title="集群伸缩原理"></a>集群伸缩原理</h1><p>它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：</p>
 <ul>
 <li>节点: 每个节点负责读写</li>
@@ -733,7 +733,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">11.4k</span>
+    <span title="Site words total count">11.5k</span>
   
 </div>
 
@@ -907,7 +907,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2019/04/12/redis集群伸缩/';
           this.page.identifier = '2019/04/12/redis集群伸缩/';
-          this.page.title = 'redis集群伸缩(待更新...)';
+          this.page.title = 'redis集群伸缩';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
