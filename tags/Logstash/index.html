@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="redis,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -81,26 +81,16 @@
 
 
 
-<meta name="description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
-<meta name="keywords" content="redis">
-<meta property="og:type" content="article">
-<meta property="og:title" content="rediscluster高可用">
-<meta property="og:url" content="http://yoursite.com/2019/04/15/rediscluster高可用/index.html">
+<meta name="description" content="胖虎是个码农">
+<meta property="og:type" content="website">
+<meta property="og:title" content="胖虎的博客">
+<meta property="og:url" content="http://yoursite.com/tags/Logstash/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
+<meta property="og:description" content="胖虎是个码农">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/keguanxiaxianmoshi.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest01.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest02.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest03.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest04.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest05.jpg">
-<meta property="og:updated_time" content="2019-04-15T08:59:23.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="rediscluster高可用">
-<meta name="twitter:description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg">
+<meta name="twitter:title" content="胖虎的博客">
+<meta name="twitter:description" content="胖虎是个码农">
 
 
 
@@ -130,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/15/rediscluster高可用/">
+  <link rel="canonical" href="http://yoursite.com/tags/Logstash/">
 
 
 
 
 
-  <title>rediscluster高可用 | 胖虎的博客</title>
+  <title>标签: Logstash | 胖虎的博客</title>
   
 
 
@@ -155,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
     <a href="https://your-url" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,260 +291,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>Logstash<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/rediscluster高可用/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="胖虎">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="胖虎的博客">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2019/04/06/ELK日志收集/" itemprop="url">
+              
+                <span itemprop="name">elasticsearch+filebeat+kibana日志收集</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">rediscluster高可用</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-15T15:49:51+08:00">
-                2019-04-15
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-04-06T21:18:14+08:00" content="2019-04-06">
+          04-06
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/04/15/rediscluster高可用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/15/rediscluster高可用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  831
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3m
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h1><p>rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程</p>
-<h2 id="故障发现"><a href="#故障发现" class="headerlink" title="故障发现"></a>故障发现</h2><p>依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel</p>
-<h2 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h2><p>定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知<br><br>流程：<br><img src="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg" alt></p>
-<blockquote>
-<p>当某个节点断开连接之后，超过node-timeout超时时间，那么标记为pfaill</p>
-</blockquote>
-<h2 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h2><p>定义： 持有半数以上的槽的节点都标记某个节点时，就认为那个节点不可用<br><br>流程：<br><img src="http://poporz7f8.bkt.clouddn.com/keguanxiaxianmoshi.jpg" alt></p>
-<blockquote>
-<p>记录每个节点的状态，如果状态不可用，会将信息添加到故障列表中，列表用于维护故障列表，后再尝试客观下线。之后通知集群内所有节点标记故障节点为客观下线，通知故障节点的从节点准备执行转移</p>
-</blockquote>
-<h2 id="故障恢复"><a href="#故障恢复" class="headerlink" title="故障恢复"></a>故障恢复</h2><p>客观下线通知从节点，从节点接收到消息开始准备进行故障的恢复，从而保证集群的高可用，实现流程有：</p>
-<ul>
-<li>资格检查<br>检查哪些从节点可能成为主节点的资格条件：</li>
-</ul>
-<ol>
-<li>每个从节点检查与故障主节点的断线时间</li>
-<li>超过cluster-node-timeout(15) * cluster-slave-validity-factory(10)取消资格</li>
-</ol>
-<ul>
-<li><p>选举<br>具备更大的偏移量（更接近主节点）成为主节点的可能性更大，选举的时间更小且投票个数更高，收集3张选票大于N/2+1，那么执行替换主节点工作</p>
-</li>
-<li><p>替换主节点</p>
-</li>
-</ul>
-<ol>
-<li>当前节点取消从节点复制，变为主节点（slaveof one one）</li>
-<li>执行clusterDelSlot撤销故障主节点负责的槽，并执行clusterAddSlot把这些槽分配给自己</li>
-<li>集群广播消息，表明已经替换了故障从节点</li>
-</ol>
-<h1 id="故障转移实验"><a href="#故障转移实验" class="headerlink" title="故障转移实验"></a>故障转移实验</h1><p><strong>环境</strong>: springboot + 3主3从节点<br><br><strong>目的</strong>: 不断的从节点中set值, 中途将其中一个master kill观察情况</p>
-<h2 id="maven依赖和配置"><a href="#maven依赖和配置" class="headerlink" title="maven依赖和配置"></a>maven依赖和配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.lettuce<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lettuce-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>TODO: spring-boot-starter-data-redis内部使用的不是jedis实现的连接池，经过之前的测试，如果使用lettuce-core这个连接池没有达到故障转移的效果, 所以这次实验使用jedis内部的连接池完成</p>
-<p><strong>application.yml</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    cluster:</span></span><br><span class="line"><span class="attr">      nodes:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7001</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7002</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7003</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7004</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7005</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7006</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootRedisApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(SpringbootRedisApplicationTests.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 不断的set值</span></span><br><span class="line">                <span class="keyword">int</span> index = <span class="keyword">new</span> Random().nextInt(<span class="number">10000</span>);</span><br><span class="line">                String key = <span class="string">"k-"</span> + index;</span><br><span class="line">                String value = <span class="string">"v-"</span> + index;</span><br><span class="line">                redisTemplate.boundValueOps(key).set(value);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 输出日志</span></span><br><span class="line">                logger.info(<span class="string">"&#123;&#125; value is &#123;&#125;"</span>, key, redisTemplate.boundValueOps(key).get());              </span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                logger.error(e.getMessage(), e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>此时节点状态：<br><img src="http://poporz7f8.bkt.clouddn.com/clustertest01.jpg" alt><br><img src="http://poporz7f8.bkt.clouddn.com/clustertest02.jpg" alt></p>
-</li>
-<li><p>开始不断的set值，在进行kill主节点，观察日志输出：<br><img src="http://poporz7f8.bkt.clouddn.com/clustertest03.jpg" alt></p>
-</li>
-</ul>
-<p><img src="http://poporz7f8.bkt.clouddn.com/clustertest04.jpg" alt></p>
-<p><img src="http://poporz7f8.bkt.clouddn.com/clustertest05.jpg" alt></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/redis/" rel="tag"># redis</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/14/springboot原理/" rel="next" title="springboot原理">
-                <i class="fa fa-chevron-left"></i> springboot原理
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/15/rediscluster常见运维问题/" rel="prev" title="rediscluster常见运维问题">
-                rediscluster常见运维问题 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -562,20 +344,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -598,17 +366,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -693,22 +452,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#故障转移"><span class="nav-number">1.</span> <span class="nav-text">故障转移</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#故障发现"><span class="nav-number">1.1.</span> <span class="nav-text">故障发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主观下线"><span class="nav-number">1.2.</span> <span class="nav-text">主观下线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客观下线"><span class="nav-number">1.3.</span> <span class="nav-text">客观下线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障恢复"><span class="nav-number">1.4.</span> <span class="nav-text">故障恢复</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#故障转移实验"><span class="nav-number">2.</span> <span class="nav-text">故障转移实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven依赖和配置"><span class="nav-number">2.1.</span> <span class="nav-text">maven依赖和配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试类"><span class="nav-number">2.2.</span> <span class="nav-text">测试类</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -886,10 +629,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -907,18 +646,6 @@
       <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
     
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/15/rediscluster高可用/';
-          this.page.identifier = '2019/04/15/rediscluster高可用/';
-          this.page.title = 'rediscluster高可用';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
     
 
   
