@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="redis,">
 
 
 
@@ -82,6 +82,7 @@
 
 
 <meta name="description" content="引入上一篇章中，我们分析了节点取余和一致性哈希产生数据迁移的问题，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis集群伸缩">
 <meta property="og:url" content="http://yoursite.com/2019/04/12/redis集群伸缩/index.html">
@@ -94,7 +95,7 @@
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiedianxinxi.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-shousuojiqun.jpg">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-move-send.jpg">
-<meta property="og:updated_time" content="2019-04-14T14:44:15.035Z">
+<meta property="og:updated_time" content="2019-04-15T08:59:30.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis集群伸缩">
 <meta name="twitter:description" content="引入上一篇章中，我们分析了节点取余和一致性哈希产生数据迁移的问题，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力 集群伸缩原理它的原理其实就是rediscluster的基本架构（在rediscluster文章所讲述）：  节点: 每个节点负责读写 meet: 完成节点之间通信工作 A meet C; A meet B; B &amp;gt; C">
@@ -353,6 +354,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -503,6 +526,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
 
       
       
@@ -615,7 +644,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -728,7 +757,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">12.1k</span>
+    <span title="Site words total count">14.3k</span>
   
 </div>
 

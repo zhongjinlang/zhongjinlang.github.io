@@ -81,34 +81,26 @@
 
 
 
-<meta name="description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
+<meta name="description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redisCluster">
-<meta property="og:url" content="http://yoursite.com/2019/04/11/redisCluster/index.html">
+<meta property="og:title" content="rediscluster高可用">
+<meta property="og:url" content="http://yoursite.com/2019/04/15/rediscluster高可用/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
+<meta property="og:description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sxufenbu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-hashfenbu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fenquduibi.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiedianquyu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-yizhixhash.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-xunicao.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-trib.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/ztai.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-ruby-cluster.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiqungeshu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/cluster-nodes.jpg">
-<meta property="og:updated_time" content="2019-04-14T13:18:38.384Z">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/keguanxiaxianmoshi.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest01.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest02.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest03.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest04.jpg">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest05.jpg">
+<meta property="og:updated_time" content="2019-04-15T08:59:23.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redisCluster">
-<meta name="twitter:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg">
+<meta name="twitter:title" content="rediscluster高可用">
+<meta name="twitter:description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
+<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg">
 
 
 
@@ -138,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/11/redisCluster/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/15/rediscluster高可用/">
 
 
 
 
 
-  <title>redisCluster | 胖虎的博客</title>
+  <title>rediscluster高可用 | 胖虎的博客</title>
   
 
 
@@ -323,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/redisCluster/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/rediscluster高可用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -340,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redisCluster</h1>
+          <h1 class="post-title" itemprop="name headline">rediscluster高可用</h1>
         
 
         <div class="post-meta">
@@ -352,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T21:37:51+08:00">
-                2019-04-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-15T15:49:51+08:00">
+                2019-04-15
               </time>
             
 
@@ -393,8 +385,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/11/redisCluster/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/11/redisCluster/" itemprop="commentCount"></span>
+                <a href="/2019/04/15/rediscluster高可用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/15/rediscluster高可用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -421,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  831
                 </span>
               
 
@@ -437,7 +429,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8m
+                  3m
                 </span>
               
             </div>
@@ -458,115 +450,48 @@
       
 
       
-        <h1 id="sentinel问题引入"><a href="#sentinel问题引入" class="headerlink" title="sentinel问题引入"></a>sentinel问题引入</h1><p>上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量等瓶颈时，可采用cluster架构达到均衡负载的目的。</p>
-<h2 id="sentinel和cluster"><a href="#sentinel和cluster" class="headerlink" title="sentinel和cluster"></a>sentinel和cluster</h2><p>sentinel与cluster是两个独立的功能，从特性来看sentinel可视为集群的子集，当不需要数据分片或已在客户端分片的场景下，sentinel足够使用了。如果需要进行水平扩容，那么cluster是一个很好的选择</p>
-<h1 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h1><p>集群首要解决把整个数据集按照分区规则映射到多个节点的问题，即把数据集划分到多个节点上，每个节点负责整个数据的一个子集<br><img src="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg" alt></p>
-<h2 id="顺序分区-哈希分区"><a href="#顺序分区-哈希分区" class="headerlink" title="顺序分区 | 哈希分区"></a>顺序分区 | 哈希分区</h2><ul>
-<li><p>顺序分区保证每个节点的数据均衡<br><img src="http://poporz7f8.bkt.clouddn.com/redis-sxufenbu.jpg" alt></p>
-</li>
-<li><p>哈希分区 对每一个数字进行哈希函数，按照节点取余(实现之一)<br><img src="http://poporz7f8.bkt.clouddn.com/redis-hashfenbu.jpg" alt></p>
-</li>
-</ul>
-<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-fenquduibi.jpg" alt></p>
-<h1 id="哈希分区探究"><a href="#哈希分区探究" class="headerlink" title="哈希分区探究"></a>哈希分区探究</h1><p>redis-cluster采用哈希分区的方式进行数据分布，为此我们将进一步分析</p>
-<h2 id="节点取余分区"><a href="#节点取余分区" class="headerlink" title="节点取余分区"></a>节点取余分区</h2><p>对每一个key对3（节点个数）取余，如果余数为0则分布到第一个节点，余数为2则分布到第二个节点，余数为3则分布到第三个节点<br><img src="http://poporz7f8.bkt.clouddn.com/redis-jiedianquyu.jpg" alt></p>
-<ul>
-<li>客户端分片: 哈希 + 取余</li>
-<li>节点伸缩： 节点变化，数据迁移量巨大</li>
-</ul>
-<h2 id="一致性哈希分区"><a href="#一致性哈希分区" class="headerlink" title="一致性哈希分区"></a>一致性哈希分区</h2><p>解决了节点取余的缺点<br>token表示一个数据范围，为每一个节点分配一个token，每一个节点负责一部分token数据。当对key进行hash计算后按照顺时针的规则寻找离它最近的节点</p>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-yizhixhash.jpg" alt></p>
-<ul>
-<li>客户端分片: 哈希 + 取余(优化取余)</li>
-<li>节点伸缩： 只影响临近节点，但还是有数据迁移</li>
-</ul>
-<h2 id="虚拟槽分区"><a href="#虚拟槽分区" class="headerlink" title="虚拟槽分区"></a>虚拟槽分区</h2><p>Redis Cluster中有一个16384长度的槽的概念, 每个槽映射一个数据子集, 按照一定的hash计算对16383取余, 如果它落在某个槽的范围内，那么就证明这个槽必须所管理的数据，它是由服务端管理接节点槽之间的关系<br><img src="http://poporz7f8.bkt.clouddn.com/redis-xunicao.jpg" alt></p>
-<p>节点取余分区和一致性哈希分区当节点伸缩时，都会进行数据的迁移，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力</p>
-<h1 id="redisCluster架构"><a href="#redisCluster架构" class="headerlink" title="redisCluster架构"></a>redisCluster架构</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg" alt></p>
-<p>服务端有多个节点，<strong>每个节点都负责读写，节点之间是彼此通信的</strong>。如果节点A覆盖0－5460、节点B覆盖5461－10922、节点C覆盖10923－16383。 如果存入一个值，按照redis cluster哈希槽的算法： CRC16(‘key’)384 = 6782。 那么就会把这个key 的存储分配到 B 上了。同样，当我连接(A,B,C)任何一个节点想获取’key’这个key时，也会这样的算法，然后内部跳转到B节点上获取数据</p>
-<h2 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h2><ul>
-<li><p>节点: 每个节点负责读写</p>
-</li>
-<li><p>meet: 完成节点之间通信工作 A meet C; A meet B; B &gt; C</p>
-</li>
-<li><p>指派槽: 只有给节点指派了槽才可以进行读写</p>
-</li>
-<li><p>复制: 为了达到高可用，有主从复制概念</p>
-</li>
-</ul>
+        <h1 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h1><p>rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程</p>
+<h2 id="故障发现"><a href="#故障发现" class="headerlink" title="故障发现"></a>故障发现</h2><p>依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel</p>
+<h2 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h2><p>定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知<br><br>流程：<br><img src="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg" alt></p>
 <blockquote>
-<p>rediscluster特性：复制、高可用、分片</p>
+<p>当某个节点断开连接之后，超过node-timeout超时时间，那么标记为pfaill</p>
 </blockquote>
-<h1 id="原生命令安装"><a href="#原生命令安装" class="headerlink" title="原生命令安装"></a>原生命令安装</h1><blockquote>
-<p><strong>环境</strong></p>
-<ul>
-<li>3主3从</li>
-</ul>
-</blockquote>
-<pre><code>&gt; 192.168.211.134:7000(主)
-
-&gt; 192.168.211.134:7001(主)
-
-&gt; 192.168.211.134:7002(主)
-
-&gt; 192.168.211.134:7003(从)
-
-&gt; 192.168.211.134:7004(从)
-
-&gt; 192.168.211.134:7005(从)
-</code></pre><h2 id="redis-7000-70005-conf"><a href="#redis-7000-70005-conf" class="headerlink" title="redis-[7000-70005].conf"></a>redis-[7000-70005].conf</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">port 7000</span><br><span class="line">daemonize yes</span><br><span class="line">dir ./</span><br><span class="line">logfile "7000.log"</span><br><span class="line">dbfilename "dump-7000.rdb"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启cluster</span></span><br><span class="line">cluster-enabled yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> cluster配置文件</span></span><br><span class="line">cluster-config-file nodes-7000.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有一个master宕机，没有故障恢复，整个集群不可用（默认<span class="literal">true</span>）</span></span><br><span class="line">cluster-require-full-coverage no</span><br></pre></td></tr></table></figure>
+<h2 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h2><p>定义： 持有半数以上的槽的节点都标记某个节点时，就认为那个节点不可用<br><br>流程：<br><img src="http://poporz7f8.bkt.clouddn.com/keguanxiaxianmoshi.jpg" alt></p>
 <blockquote>
-<p>其他配置文件只需修改端口即可</p>
+<p>记录每个节点的状态，如果状态不可用，会将信息添加到故障列表中，列表用于维护故障列表，后再尝试客观下线。之后通知集群内所有节点标记故障节点为客观下线，通知故障节点的从节点准备执行转移</p>
 </blockquote>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost cluster]# redis-server redis-7000.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7001.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7002.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7003.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7004.conf</span><br><span class="line">[root@localhost cluster]# redis-server redis-7005.conf</span><br><span class="line">[root@localhost cluster]# ps -ef | grep redis</span><br><span class="line">root      57254      1  0 01:44 ?        00:00:00 redis-server *:7000 [cluster]</span><br><span class="line">root      57258      1  0 01:44 ?        00:00:00 redis-server *:7001 [cluster]</span><br><span class="line">root      57262      1  0 01:44 ?        00:00:00 redis-server *:7002 [cluster]</span><br><span class="line">root      57266      1  0 01:44 ?        00:00:00 redis-server *:7003 [cluster]</span><br><span class="line">root      57270      1  0 01:44 ?        00:00:00 redis-server *:7004 [cluster]</span><br><span class="line">root      57274      1  0 01:44 ?        00:00:00 redis-server *:7005 [cluster]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试连接</span></span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000</span><br><span class="line">127.0.0.1:7000&gt; set hello world</span><br><span class="line">(error) CLUSTERDOWN The cluster is down</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>我们可发现当set值时，错误表示当前集群是一个下线状态，因为在集群模式下，只有成功分配了槽且16383都进行了完整的分配，才可进行对外提供服务</p>
-</blockquote>
-<h2 id="meet"><a href="#meet" class="headerlink" title="meet"></a>meet</h2><blockquote>
-<p>port meet port<br>完成节点之间的通信</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7001</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7002</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7003</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7004</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster meet 192.168.211.134 7005</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster nodes</span><br><span class="line">9c736c0733323151ee5aeaa8444cf177ab9b312b 192.168.211.134:7005 master - 0 1554832945389 5 connected</span><br><span class="line">97ba85211fa2d68ebff5ae4848eb4a52a899be5a 192.168.211.134:7003 master - 0 1554832943331 4 connected</span><br><span class="line">0ed9079a0d32b7e926a96d6a03d431c1228deffb 192.168.211.134:7000 myself,master - 0 0 1 connected</span><br><span class="line">89d495be82b618256b5c79a56f6894658db4cfa8 192.168.211.134:7004 master - 0 1554832942315 3 connected</span><br><span class="line">b4c274d2501d4d105c8b7acf7787a66287a7406a 192.168.211.134:7001 master - 0 1554832941298 0 connected</span><br><span class="line">8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 192.168.211.134:7002 master - 0 1554832944358 2 connected</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>此时6个节点已经达成相互通信!</p>
-</blockquote>
-<h2 id="分配槽点"><a href="#分配槽点" class="headerlink" title="分配槽点"></a>分配槽点</h2><p>redis总共有16384个槽点，并且只有主节点需要分配槽点，这里我们使用的是三主三从，因此将槽点均分为三等分:0–5460，5461–10922，10923–16383</p>
+<h2 id="故障恢复"><a href="#故障恢复" class="headerlink" title="故障恢复"></a>故障恢复</h2><p>客观下线通知从节点，从节点接收到消息开始准备进行故障的恢复，从而保证集群的高可用，实现流程有：</p>
 <ul>
-<li><p>首先我们编写一个sh脚本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">start=$1</span><br><span class="line">end=$2</span><br><span class="line">port=$3</span><br><span class="line"></span><br><span class="line">for slot in `seq $&#123;start&#125; $&#123;end&#125;`</span><br><span class="line">do</span><br><span class="line">        echo "slot:$&#123;slot&#125;"</span><br><span class="line">        redis-cli -h 192.168.211.134 -p $&#123;port&#125; cluster addslots $&#123;slot&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<li>资格检查<br>检查哪些从节点可能成为主节点的资格条件：</li>
+</ul>
+<ol>
+<li>每个从节点检查与故障主节点的断线时间</li>
+<li>超过cluster-node-timeout(15) * cluster-slave-validity-factory(10)取消资格</li>
+</ol>
+<ul>
+<li><p>选举<br>具备更大的偏移量（更接近主节点）成为主节点的可能性更大，选举的时间更小且投票个数更高，收集3张选票大于N/2+1，那么执行替换主节点工作</p>
 </li>
-<li><p>分别为7000、7001、7002三个从节点分配槽节点</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh add_slots.sh 0 5460 7000</span><br><span class="line">sh add_slots.sh 5461 10922 7001</span><br><span class="line">sh add_slots.sh 10923 16383 7002</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看槽信息<br><img src="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg" alt></p>
+<li><p>替换主节点</p>
 </li>
 </ul>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg" alt></p>
+<ol>
+<li>当前节点取消从节点复制，变为主节点（slaveof one one）</li>
+<li>执行clusterDelSlot撤销故障主节点负责的槽，并执行clusterAddSlot把这些槽分配给自己</li>
+<li>集群广播消息，表明已经替换了故障从节点</li>
+</ol>
+<h1 id="故障转移实验"><a href="#故障转移实验" class="headerlink" title="故障转移实验"></a>故障转移实验</h1><p><strong>环境</strong>: springboot + 3主3从节点<br><br><strong>目的</strong>: 不断的从节点中set值, 中途将其中一个master kill观察情况</p>
+<h2 id="maven依赖和配置"><a href="#maven依赖和配置" class="headerlink" title="maven依赖和配置"></a>maven依赖和配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.lettuce<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lettuce-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>TODO: spring-boot-starter-data-redis内部使用的不是jedis实现的连接池，经过之前的测试，如果使用lettuce-core这个连接池没有达到故障转移的效果, 所以这次实验使用jedis内部的连接池完成</p>
+<p><strong>application.yml</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    cluster:</span></span><br><span class="line"><span class="attr">      nodes:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7001</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7002</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7003</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7004</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7005</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7006</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootRedisApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(SpringbootRedisApplicationTests.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 不断的set值</span></span><br><span class="line">                <span class="keyword">int</span> index = <span class="keyword">new</span> Random().nextInt(<span class="number">10000</span>);</span><br><span class="line">                String key = <span class="string">"k-"</span> + index;</span><br><span class="line">                String value = <span class="string">"v-"</span> + index;</span><br><span class="line">                redisTemplate.boundValueOps(key).set(value);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 输出日志</span></span><br><span class="line">                logger.info(<span class="string">"&#123;&#125; value is &#123;&#125;"</span>, key, redisTemplate.boundValueOps(key).get());              </span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                logger.error(e.getMessage(), e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>设置值<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c -p 7000</span><br><span class="line">127.0.0.1:7000&gt; set hello world</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<li><p>此时节点状态：<br><img src="http://poporz7f8.bkt.clouddn.com/clustertest01.jpg" alt><br><img src="http://poporz7f8.bkt.clouddn.com/clustertest02.jpg" alt></p>
+</li>
+<li><p>开始不断的set值，在进行kill主节点，观察日志输出：<br><img src="http://poporz7f8.bkt.clouddn.com/clustertest03.jpg" alt></p>
 </li>
 </ul>
-<h2 id="主从关系分配"><a href="#主从关系分配" class="headerlink" title="主从关系分配"></a>主从关系分配</h2><blockquote>
-<p>cluster replicate node-id<br>完成 7000-&gt;7003、7001-&gt;7004、7002-&gt;7005</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost cluster]# redis-cli -p 7003 cluster replicate 0ed9079a0d32b7e926a96d6a03d431c1228deffb</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7004 cluster replicate b4c274d2501d4d105c8b7acf7787a66287a7406a</span><br><span class="line">OK</span><br><span class="line">[root@localhost cluster]# redis-cli -p 7005 cluster replicate 8465de32a8e17d23134d8ae8d62f2c78c9e40ef2</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">[root@localhost cluster]# redis-cli -p 7000 cluster nodes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以发现7005-7004都成为了salve</span></span><br><span class="line">9c736c0733323151ee5aeaa8444cf177ab9b312b 192.168.211.134:7005 slave 8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 0 1554833875305 5 connected</span><br><span class="line">97ba85211fa2d68ebff5ae4848eb4a52a899be5a 192.168.211.134:7003 slave 9c736c0733323151ee5aeaa8444cf177ab9b312b 0 1554833874286 5 connected</span><br><span class="line">89d495be82b618256b5c79a56f6894658db4cfa8 192.168.211.134:7004 slave b4c274d2501d4d105c8b7acf7787a66287a7406a 0 1554833871215 3 connected</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3个主节点</span></span><br><span class="line">0ed9079a0d32b7e926a96d6a03d431c1228deffb 192.168.211.134:7000 myself,master - 0 0 1 connected</span><br><span class="line">b4c274d2501d4d105c8b7acf7787a66287a7406a 192.168.211.134:7001 master - 0 1554833873263 0 connected</span><br><span class="line">8465de32a8e17d23134d8ae8d62f2c78c9e40ef2 192.168.211.134:7002 master - 0 1554833876331 2 connected</span><br></pre></td></tr></table></figure>
-<h1 id="Ruby搭建集群"><a href="#Ruby搭建集群" class="headerlink" title="Ruby搭建集群"></a>Ruby搭建集群</h1><p>ruby是官方推荐的搭建集群方式，自动分配槽和主从复制</p>
-<h2 id="安装ruby环境"><a href="#安装ruby环境" class="headerlink" title="安装ruby环境"></a>安装ruby环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ruby依赖</span></span><br><span class="line">yum install ruby rubygems -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> gem-redis安装  https://rubygems.org/gems/redis/versions/3.0.0</span></span><br><span class="line">gem install -l redis-3.0.0.gem  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时redis3.0.0/src目录有 redis.trib.rb文件，将它拷贝到/usr/lcoal/bin</span></span><br><span class="line">cp redis-trib.rb /usr/local/bin/redis-trib</span><br></pre></td></tr></table></figure>
-<ul>
-<li>redis-trib用于管理集群的命令<br><img src="http://poporz7f8.bkt.clouddn.com/redis-trib.jpg" alt></li>
-</ul>
-<h2 id="配置6个节点并启动"><a href="#配置6个节点并启动" class="headerlink" title="配置6个节点并启动"></a>配置6个节点并启动</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">port</span> <span class="number">7001</span></span><br><span class="line"><span class="string">daemonize</span> <span class="literal">yes</span></span><br><span class="line"><span class="string">dir</span> <span class="string">./</span></span><br><span class="line"><span class="string">logfile</span> <span class="string">"7001.log"</span></span><br><span class="line"><span class="string">dbfilename</span> <span class="string">"dump-7001.rdb"</span></span><br><span class="line"><span class="string">cluster-enabled</span> <span class="literal">yes</span></span><br><span class="line"><span class="string">cluster-config-file</span> <span class="string">nodes-7001.conf</span></span><br><span class="line"><span class="string">cluster-require-full-coverage</span> <span class="literal">no</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>其他节点修改端口即可，分别启动：<br><img src="http://poporz7f8.bkt.clouddn.com/ztai.jpg" alt></p>
-</blockquote>
-<h2 id="使用redis-trib搭建集群"><a href="#使用redis-trib搭建集群" class="headerlink" title="使用redis-trib搭建集群"></a>使用redis-trib搭建集群</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-trib create --replicas 1 192.168.211.136:7001 192.168.211.136:7002 192.168.211.136:7003 192.168.211.136:7004 192.168.211.136:7005 192.168.211.136:7006</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>启动状态如下<br><img src="http://poporz7f8.bkt.clouddn.com/redis-ruby-cluster.jpg" alt></p>
-</li>
-<li><p>cluster info打印集群信息<br><img src="http://poporz7f8.bkt.clouddn.com/redis-jiqungeshu.jpg" alt></p>
-</li>
-<li><p>cluster nodes列出集群已知节点<br><img src="http://poporz7f8.bkt.clouddn.com/cluster-nodes.jpg" alt></p>
-</li>
-</ul>
+<p><img src="http://poporz7f8.bkt.clouddn.com/clustertest04.jpg" alt></p>
+<p><img src="http://poporz7f8.bkt.clouddn.com/clustertest05.jpg" alt></p>
 
       
     </div>
@@ -597,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/08/redis集群——哨兵/" rel="next" title="redis集群——哨兵">
-                <i class="fa fa-chevron-left"></i> redis集群——哨兵
+              <a href="/2019/04/14/springboot原理/" rel="next" title="springboot原理">
+                <i class="fa fa-chevron-left"></i> springboot原理
               </a>
             
           </div>
@@ -607,8 +532,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/12/redis集群伸缩/" rel="prev" title="redis集群伸缩">
-                redis集群伸缩 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/15/rediscluster常见运维问题/" rel="prev" title="rediscluster常见运维问题">
+                rediscluster常见运维问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -778,7 +703,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sentinel问题引入"><span class="nav-number">1.</span> <span class="nav-text">sentinel问题引入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sentinel和cluster"><span class="nav-number">1.1.</span> <span class="nav-text">sentinel和cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据分布"><span class="nav-number">2.</span> <span class="nav-text">数据分布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序分区-哈希分区"><span class="nav-number">2.1.</span> <span class="nav-text">顺序分区 | 哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比"><span class="nav-number">2.2.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希分区探究"><span class="nav-number">3.</span> <span class="nav-text">哈希分区探究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点取余分区"><span class="nav-number">3.1.</span> <span class="nav-text">节点取余分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性哈希分区"><span class="nav-number">3.2.</span> <span class="nav-text">一致性哈希分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟槽分区"><span class="nav-number">3.3.</span> <span class="nav-text">虚拟槽分区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redisCluster架构"><span class="nav-number">4.</span> <span class="nav-text">redisCluster架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本架构"><span class="nav-number">4.1.</span> <span class="nav-text">基本架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原生命令安装"><span class="nav-number">5.</span> <span class="nav-text">原生命令安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-7000-70005-conf"><span class="nav-number">5.1.</span> <span class="nav-text">redis-[7000-70005].conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">5.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meet"><span class="nav-number">5.3.</span> <span class="nav-text">meet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配槽点"><span class="nav-number">5.4.</span> <span class="nav-text">分配槽点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从关系分配"><span class="nav-number">5.5.</span> <span class="nav-text">主从关系分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ruby搭建集群"><span class="nav-number">6.</span> <span class="nav-text">Ruby搭建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ruby环境"><span class="nav-number">6.1.</span> <span class="nav-text">安装ruby环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置6个节点并启动"><span class="nav-number">6.2.</span> <span class="nav-text">配置6个节点并启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用redis-trib搭建集群"><span class="nav-number">6.3.</span> <span class="nav-text">使用redis-trib搭建集群</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#故障转移"><span class="nav-number">1.</span> <span class="nav-text">故障转移</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#故障发现"><span class="nav-number">1.1.</span> <span class="nav-text">故障发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主观下线"><span class="nav-number">1.2.</span> <span class="nav-text">主观下线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客观下线"><span class="nav-number">1.3.</span> <span class="nav-text">客观下线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障恢复"><span class="nav-number">1.4.</span> <span class="nav-text">故障恢复</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#故障转移实验"><span class="nav-number">2.</span> <span class="nav-text">故障转移实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven依赖和配置"><span class="nav-number">2.1.</span> <span class="nav-text">maven依赖和配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试类"><span class="nav-number">2.2.</span> <span class="nav-text">测试类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -985,9 +910,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/11/redisCluster/';
-          this.page.identifier = '2019/04/11/redisCluster/';
-          this.page.title = 'redisCluster';
+          this.page.url = 'http://yoursite.com/2019/04/15/rediscluster高可用/';
+          this.page.identifier = '2019/04/15/rediscluster高可用/';
+          this.page.title = 'rediscluster高可用';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
