@@ -493,7 +493,7 @@
 <h1 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h1><blockquote>
 <p><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">http://download.redis.io/releases/</a></p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 依赖</span><br><span class="line">yum install gcc-c++</span><br><span class="line"><span class="meta">#</span> 下载</span><br><span class="line">wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line"><span class="meta">#</span> cd到redis目录编译，会产生redis.conf、src等文件</span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span> 安装到指定目录产生bin文件</span><br><span class="line">make install PREFIX=/install/redis</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 如果客户端连接不了请关闭防火墙</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 依赖</span></span><br><span class="line">yum install gcc-c++</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span>到redis目录编译，会产生redis.conf、src等文件</span></span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装到指定目录产生bin文件</span></span><br><span class="line">make install PREFIX=/install/redis</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果客户端连接不了请关闭防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>bin目录下6个可执行文件</p>
 <blockquote>
@@ -662,7 +662,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -673,7 +673,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -684,7 +684,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -775,7 +775,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">14.3k</span>
+    <span title="Site words total count">15.6k</span>
   
 </div>
 
