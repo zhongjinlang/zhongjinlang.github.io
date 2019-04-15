@@ -90,7 +90,7 @@
 <meta property="og:description" content="MySQL逻辑架构 本章节来自 高性能MySQL 第一章 MySQL架构与历史    最上层服务是多数基于网络的客户端/服务器都有类似的架构  第二层是MySQL核心服务功能，查询解析、分析、优化、缓存、内置函数、存储过程、触发器、视图等  第三层包含存储存储引擎，它负责MySQL中数据的存储和提取，存储引擎API包含几十个底层函数，例如执行开始一个事务等操作。注意：存储引擎并不会提取SQL">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.jpg">
-<meta property="og:updated_time" content="2019-04-15T15:09:37.454Z">
+<meta property="og:updated_time" content="2019-04-15T15:54:29.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL架构与存储引擎">
 <meta name="twitter:description" content="MySQL逻辑架构 本章节来自 高性能MySQL 第一章 MySQL架构与历史    最上层服务是多数基于网络的客户端/服务器都有类似的架构  第二层是MySQL核心服务功能，查询解析、分析、优化、缓存、内置函数、存储过程、触发器、视图等  第三层包含存储存储引擎，它负责MySQL中数据的存储和提取，存储引擎API包含几十个底层函数，例如执行开始一个事务等操作。注意：存储引擎并不会提取SQL">
@@ -506,7 +506,7 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li><p>MySQL拥有分层架构，上层是服务器层的服务、和查询执行引擎。下层存储引擎</p>
 </li>
-<li><p>mysql的引擎和区别：InnoDB、MyISAM, 5.1之前的版本采用MyIsAM。InnoDB支持事务而MyISAM不支持事务，如果需要大量的SELECT使用MyISAM，其他情况优先使用InnoDB</p>
+<li><p>mysql的引擎和区别：InnoDB、MyISAM, 5.1之前的版本采用MyIsAM。InnoDB支持事务而MyISAM不支持事务，如果需要大量的插入数据操作使用MyISAM，其他情况优先使用InnoDB</p>
 </li>
 <li><p>如果要处理大数据量使用第三方引擎 infobright</p>
 </li>
