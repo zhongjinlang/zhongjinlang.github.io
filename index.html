@@ -306,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper的watch机制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeperACL权限控制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -325,7 +325,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/18/zookeeper的watch机制/" itemprop="url">zookeeper的watch机制</a></h1>
+                <a class="post-title-link" href="/2019/04/18/zookeeperACL权限控制/" itemprop="url">zookeeperACL权限控制</a></h1>
         
 
         <div class="post-meta">
@@ -337,7 +337,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T21:19:33+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T00:33:12+08:00">
                 2019-04-18
               </time>
             
@@ -378,8 +378,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/18/zookeeper的watch机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper的watch机制/" itemprop="commentCount"></span>
+                <a href="/2019/04/18/zookeeperACL权限控制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeperACL权限控制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  502
+                  944
                 </span>
               
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1m
+                  4m
                 </span>
               
             </div>
@@ -440,15 +440,15 @@
       
         
           
-          何为watch?针对每个节点的操作，都会有一个监督者watch。当节点发现变化时，如create、set、delete都会触发一个watch事件。zookeeper中的watch是一次性的，触发后立即销毁。注意是在zookeeper中
-
-父节点，子节点增删改都会触发watch
-
-针对不同类型的操作，
+          何为ACL(access control lists)?可以对节点设置读写等权限，来保障数据的安全性，权限permission可以指定不同的范围以及角色
+ACL命令行
+getAcl：获取某个节点的权限信息
+setAcl：设置某个节点的权限
+addauth： 输入认证授权信息，注册用户将用户根据指定的
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/18/zookeeper的watch机制/#more" rel="contents">
+            <a class="btn" href="/2019/04/18/zookeeperACL权限控制/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -499,7 +499,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper命令使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -518,7 +518,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/18/zookeeper命令使用/" itemprop="url">zookeeper命令使用</a></h1>
+                <a class="post-title-link" href="/2019/04/18/zookeeper概述/" itemprop="url">zookeeper概述</a></h1>
         
 
         <div class="post-meta">
@@ -571,8 +571,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/18/zookeeper命令使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper命令使用/" itemprop="commentCount"></span>
+                <a href="/2019/04/18/zookeeper概述/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper概述/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -594,7 +594,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  643
+                  685
                 </span>
               
 
@@ -633,15 +633,14 @@
       
         
           
-          常用命令
-通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]
+          简介ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，它是集群的管理者，监视着集群中各个节点的状态根据节点提交的反馈进行下一步合理操作。最终，将简单易用的接口和性能高效、功能稳定的系统提供给用户
+分布式系统
 
-
-ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
+很多台计算机组成一个整体，一
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/18/zookeeper命令使用/#more" rel="contents">
+            <a class="btn" href="/2019/04/18/zookeeper概述/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -888,7 +887,7 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper概述/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper命令使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -907,7 +906,7 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/18/zookeeper概述/" itemprop="url">zookeeper概述</a></h1>
+                <a class="post-title-link" href="/2019/04/18/zookeeper命令使用/" itemprop="url">zookeeper命令使用</a></h1>
         
 
         <div class="post-meta">
@@ -960,8 +959,8 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/18/zookeeper概述/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper概述/" itemprop="commentCount"></span>
+                <a href="/2019/04/18/zookeeper命令使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper命令使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -983,7 +982,7 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  685
+                  643
                 </span>
               
 
@@ -1022,14 +1021,15 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
       
         
           
-          简介ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，它是集群的管理者，监视着集群中各个节点的状态根据节点提交的反馈进行下一步合理操作。最终，将简单易用的接口和性能高效、功能稳定的系统提供给用户
-分布式系统
+          常用命令
+通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]
 
-很多台计算机组成一个整体，一
+
+ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/18/zookeeper概述/#more" rel="contents">
+            <a class="btn" href="/2019/04/18/zookeeper命令使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1080,7 +1080,7 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/zookeeperACL权限控制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper的watch机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -1099,7 +1099,7 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/17/zookeeperACL权限控制/" itemprop="url">zookeeperACL权限控制</a></h1>
+                <a class="post-title-link" href="/2019/04/18/zookeeper的watch机制/" itemprop="url">zookeeper的watch机制</a></h1>
         
 
         <div class="post-meta">
@@ -1111,8 +1111,8 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T22:28:00+08:00">
-                2019-04-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T00:29:33+08:00">
+                2019-04-18
               </time>
             
 
@@ -1152,8 +1152,8 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/17/zookeeperACL权限控制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/17/zookeeperACL权限控制/" itemprop="commentCount"></span>
+                <a href="/2019/04/18/zookeeper的watch机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper的watch机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1175,7 +1175,7 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  944
+                  502
                 </span>
               
 
@@ -1191,7 +1191,7 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4m
+                  1m
                 </span>
               
             </div>
@@ -1214,15 +1214,15 @@ ls | ls2查看zookeeper路径1234[zk: localhost:2181(CO
       
         
           
-          何为ACL(access control lists)?可以对节点设置读写等权限，来保障数据的安全性，权限permission可以指定不同的范围以及角色
-ACL命令行
-getAcl：获取某个节点的权限信息
-setAcl：设置某个节点的权限
-addauth： 输入认证授权信息，注册用户将用户根据指定的
+          何为watch?针对每个节点的操作，都会有一个监督者watch。当节点发现变化时，如create、set、delete都会触发一个watch事件。zookeeper中的watch是一次性的，触发后立即销毁。注意是在zookeeper中
+
+父节点，子节点增删改都会触发watch
+
+针对不同类型的操作，
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/17/zookeeperACL权限控制/#more" rel="contents">
+            <a class="btn" href="/2019/04/18/zookeeper的watch机制/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
