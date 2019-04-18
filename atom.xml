@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-17T18:21:19.175Z</updated>
+  <updated>2019-04-18T07:06:08.103Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>zookeeper集群</title>
+    <link href="http://yoursite.com/2019/04/18/zookeeper%E9%9B%86%E7%BE%A4/"/>
+    <id>http://yoursite.com/2019/04/18/zookeeper集群/</id>
+    <published>2019-04-18T06:08:54.000Z</published>
+    <updated>2019-04-18T07:06:08.103Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="zookeeper集群概述"><a href="#zookeeper集群概述" class="headerlink" title="zookeeper集群概述"></a>zookeeper集群概述</h1><p>zookeeper集群包含主从节点，心跳机制（选举模式），架构如下<br><img src="http://poporz7f8.bkt.clouddn.com/04.jpg" alt></p><p><em>选举模式</em>: 如果上述图中的master宕机了, slave1和slave进行选举，只有其中一个为master。如果原来的master恢复了，那么会加入到集群中成为slave。集群个数建议为奇数因为需要选举的过程</p><h1 id="搭建集群"><a href="#搭建集群" class="headerlink" title="搭建集群"></a>搭建集群</h1><ul><li>配置数据文件 myid 1/2/3 对应 server.1/2/3</li><li>通过 ./zkCli.sh -server [ip]:[port] 检测集群是否配置成功</li></ul><p><em>拷贝3份zookeeper文件, 在第一份文件中的zoo.cfg配置如下信息</em><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每个文件都需要加入该配置</span></span><br><span class="line"><span class="comment"># master节点ip | 数据同步的端口 | 选举端口</span></span><br><span class="line"><span class="string">server.1=192.168.211.136:2888:3888</span></span><br><span class="line"><span class="string">server.2=192.168.211.136:2889:3889</span></span><br><span class="line"><span class="string">server.3=192.168.211.136:2890:3890</span></span><br></pre></td></tr></table></figure></p><p><em>在dataDir数据源目录创建 myid 添加数字 1</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang dataDir]# vim myid</span><br><span class="line">[root@zhongjinlang dataDir]# ll</span><br><span class="line">总用量 8</span><br><span class="line">-rw-r--r--. 1 root root 2 4月  18 00:42 myid</span><br><span class="line">drwxr-xr-x. 2 root root 6 4月  18 00:32 version-2</span><br><span class="line">-rw-r--r--. 1 root root 4 4月  18 00:32 zookeeper_server.pid</span><br></pre></td></tr></table></figure></p><blockquote><p>其他文件修改端口 2182、2183和创建myid即可</p></blockquote><p><em>分别启动 ./zkServer.sh start 并在2181中set一个节点</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 1] create /data 123 </span><br><span class="line">Created /data</span><br><span class="line">[zk: localhost:2181(CONNECTED) 2] ls /</span><br><span class="line">[zookeeper, data]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 退出当前连接，连接2182</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 3] [root@zhongjinlang bin]# ./zkCli.sh -server </span><br><span class="line">localhost:2182</span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时发现从节点2182有了master的数据（2183也有）</span></span><br><span class="line">[zk: localhost:2182(CONNECTED) 0] ls /</span><br><span class="line">[zookeeper, data]</span><br></pre></td></tr></table></figure></p><h2 id="查看集群状态"><a href="#查看集群状态" class="headerlink" title="查看集群状态"></a>查看集群状态</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2181</span><br><span class="line">Mode: follower # 从节点</span><br><span class="line"></span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2182</span><br><span class="line">Mode: leader # 主节点</span><br><span class="line"></span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2183</span><br><span class="line">Mode: follower # 从节点</span><br></pre></td></tr></table></figure><h2 id="选举模式实验"><a href="#选举模式实验" class="headerlink" title="选举模式实验"></a>选举模式实验</h2><p>上述可看出2182为主节点，我们将2182进程kill，观察谁会成为主节点</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 此时已经连接不了2182</span></span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2182</span><br><span class="line">Ncat: Connection refused.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别连接其他节点</span></span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2181</span><br><span class="line">Mode: follower</span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2183</span><br><span class="line">Mode: leader # 2183成为了主节点</span><br></pre></td></tr></table></figure><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul><li>zookeeper集群包含主从节点、心跳机制。当主节点挂了，经过选举会将某一个从节点成为主节点，来保证服务的高可用</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;zookeeper集群概述&quot;&gt;&lt;a href=&quot;#zookeeper集群概述&quot; class=&quot;headerlink&quot; title=&quot;zookeeper集群概述&quot;&gt;&lt;/a&gt;zookeeper集群概述&lt;/h1&gt;&lt;p&gt;zookeeper集群包含主从节点，心跳机制（选举模
+      
+    
+    </summary>
+    
+      <category term="zookeeper" scheme="http://yoursite.com/categories/zookeeper/"/>
+    
+    
+      <category term="zookeeper" scheme="http://yoursite.com/tags/zookeeper/"/>
+    
+  </entry>
   
   <entry>
     <title>zookeeperACL权限控制</title>
@@ -500,32 +525,6 @@
 &lt;li&gt;keys[patten]（查看所有的key）&lt;/li&gt;
 &lt;li&gt;dbsiz（查看所有key的大小）&lt;/li&gt;
 &lt;
-      
-    
-    </summary>
-    
-      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
-    
-    
-      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>redis初识</title>
-    <link href="http://yoursite.com/2019/04/05/redis%E5%88%9D%E8%AF%86/"/>
-    <id>http://yoursite.com/2019/04/05/redis初识/</id>
-    <published>2019-04-05T14:50:33.000Z</published>
-    <updated>2019-04-17T18:19:33.912Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><p>redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。</p><h1 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h1><ul><li>多种数据结构<br><img src="http://poporz7f8.bkt.clouddn.com/redis-datastructure.jpg" alt></li></ul><hr><blockquote><p>其中还扩展数据结构有</p></blockquote><blockquote><p>bitmaps：位图 ，（布隆过滤器可使用位图来实现）</p></blockquote><blockquote><p>hyperloglog：超小内存唯一值计数（12k</p></blockquote><blockquote><p>geo：地理信息位置</p></blockquote><ul><li>速度快</li></ul><blockquote><p>redis可达到10w读写速度，将数据存储到内存中，使用C语言编写（50000 line），单线程</p></blockquote><ul><li>持久化</li><li>功能丰富</li><li>主从复制</li><li>高可用、分布式</li></ul><h1 id="redis使用场景"><a href="#redis使用场景" class="headerlink" title="redis使用场景"></a>redis使用场景</h1><ul><li><p>缓存系统</p><blockquote><p>先从cache中获取数据，如果有返回数据，没有则从数据库中取数据并加入到缓存中</p></blockquote></li><li><p>计数器</p></li><li><p>消息队列系统</p></li><li><p>排行榜</p></li><li><p>社交网络</p></li><li><p>实时系统</p></li></ul><h1 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h1><blockquote><p><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">http://download.redis.io/releases/</a></p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 依赖</span></span><br><span class="line">yum install gcc-c++</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span>到redis目录编译，会产生redis.conf、src等文件</span></span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装到指定目录产生bin文件</span></span><br><span class="line">make install PREFIX=/install/redis</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果客户端连接不了请关闭防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure><ul><li><p>bin目录下6个可执行文件</p><blockquote><p>redis-server：redis服务器 </p></blockquote><blockquote><p>redis-cli：redis命令行客户端</p></blockquote><blockquote><p>redis-benchmark：基准测试</p></blockquote><blockquote><p>redis-check-aof：持久化aof文件修复工具</p></blockquote><blockquote><p>redis-check-dump：持久化rdb文件修复工具</p></blockquote><blockquote><p>redis-sentinel：sentinel服务器（2.8version）</p></blockquote></li></ul><ul><li><p>三种启动redis方式</p><blockquote><p>redis-serve（默认配置） </p></blockquote><blockquote><p>redis-serve – port 6380（动态参数启动，默认端口是6379）</p></blockquote><blockquote><p>redis-serve &amp;confipath（参与配置文件启动）</p></blockquote></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;引入&quot;&gt;&lt;a href=&quot;#引入&quot; class=&quot;headerlink&quot; title=&quot;引入&quot;&gt;&lt;/a&gt;引入&lt;/h1&gt;&lt;p&gt;redis是一款开源的nosql,基于key-value的键值对存储服务系统，支持多种数据结构。&lt;/p&gt;
-&lt;h1 id=&quot;redis的特性&quot;
       
     
     </summary>
