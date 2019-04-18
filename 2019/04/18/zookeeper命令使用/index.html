@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="常用命令 通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]   ls | ls2查看zookeeper路径1234[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CON">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-17T18:20:24.574Z">
+<meta property="og:updated_time" content="2019-04-18T05:38:35.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper命令使用">
 <meta name="twitter:description" content="常用命令 通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]   ls | ls2查看zookeeper路径1234[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CON">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  643
+                  991
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2m
+                  4m
                 </span>
               
             </div>
@@ -495,6 +495,25 @@
 <li><p>delete path [version]: 直接删除节点, 加上版本号只能删除最新数据</p>
 </li>
 </ul>
+<h1 id="四字命令-four-letter-words"><a href="#四字命令-four-letter-words" class="headerlink" title="四字命令 four letter words"></a>四字命令 four letter words</h1><p>zookeeper可通过它自身提供的简写命令来和服务器进行交互, 可查看服务器的一些状态信息。使用运维来进行监控</p>
+<ul>
+<li>需要使用nc命令，安装yum install nc</li>
+<li>语法： echo [commod] | nc[ip] [port]</li>
+</ul>
+<h2 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h2><p>它可查看zookeeper的状态信息，以及是否mode（集群还是单机）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo stat | nc 192.168.211.136 2181</span><br><span class="line">Zookeeper version: 3.4.11-37e277162d567b55a07d1755f0b31c32e93c01a0, built on 11/01/2017 18:06 GMT</span><br><span class="line">Clients:</span><br><span class="line"> /192.168.211.136:34346[0](queued=0,recved=1,sent=0)</span><br><span class="line"></span><br><span class="line">Latency min/avg/max: 0/0/27</span><br><span class="line">Received: 2696</span><br><span class="line">Sent: 2701</span><br><span class="line">Connections: 1</span><br><span class="line">Outstanding: 0</span><br><span class="line">Zxid: 0x45</span><br><span class="line">Mode: standalone</span><br><span class="line">Node count: 8</span><br></pre></td></tr></table></figure>
+<h2 id="ruok"><a href="#ruok" class="headerlink" title="ruok"></a>ruok</h2><p>查看当前zk服务是否启动，启动返回imok</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo ruok | nc localhost 2181</span><br><span class="line">imok[root@zhongjinlang /]#</span><br></pre></td></tr></table></figure>
+<h2 id="dump"><a href="#dump" class="headerlink" title="dump"></a>dump</h2><p>列出未经处理的会话和临时节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo dump | nc localhost 2181</span><br><span class="line">SessionTracker dump:</span><br><span class="line">Session Sets (0):</span><br><span class="line">ephemeral nodes dump:</span><br><span class="line">Sessions with Ephemerals (0):</span><br></pre></td></tr></table></figure>
+<h2 id="conf"><a href="#conf" class="headerlink" title="conf"></a>conf</h2><p>查看服务器配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo conf | nc localhost 2181</span><br><span class="line">clientPort=2181</span><br><span class="line">dataDir=/usr/local/server/zookeeper/zookeeper-3.4.11/bin/../dataDir/version-2</span><br><span class="line">dataLogDir=/usr/local/server/zookeeper/zookeeper-3.4.11/bin/../dataLogDir/version-2</span><br><span class="line">tickTime=2000</span><br><span class="line">maxClientCnxns=60</span><br><span class="line">minSessionTimeout=4000</span><br><span class="line">maxSessionTimeout=40000</span><br><span class="line">serverId=0</span><br></pre></td></tr></table></figure>
+<h2 id="cons"><a href="#cons" class="headerlink" title="cons"></a>cons</h2><p>展示连接到服务器的客户端信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo cons | nc localhost 2181</span><br><span class="line"> /0:0:0:0:0:0:0:1:47224[0](queued=0,recved=1,sent=0)</span><br></pre></td></tr></table></figure>
+<h2 id="mntr"><a href="#mntr" class="headerlink" title="mntr"></a>mntr</h2><p>监控zookeeper的健康信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo mntr | nc localhost 2181</span><br><span class="line">zk_version	3.4.11-37e277162d567b55a07d1755f0b31c32e93c01a0, built on 11/01/2017 18:06 GMT</span><br><span class="line">zk_avg_latency	0</span><br><span class="line">zk_max_latency	27</span><br><span class="line">zk_min_latency	0</span><br><span class="line">zk_packets_received	2703</span><br><span class="line">zk_packets_sent	2708</span><br><span class="line">zk_num_alive_connections	1</span><br><span class="line">zk_outstanding_requests	0</span><br><span class="line">zk_server_state	standalone</span><br><span class="line">zk_znode_count	8</span><br><span class="line">zk_watch_count	0</span><br><span class="line">zk_ephemerals_count	0</span><br><span class="line">zk_approximate_data_size	85</span><br><span class="line">zk_open_file_descriptor_count	30</span><br><span class="line">zk_max_file_descriptor_count	4096</span><br></pre></td></tr></table></figure>
+<h2 id="wchs"><a href="#wchs" class="headerlink" title="wchs"></a>wchs</h2><p>展示watch信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo wchs | nc localhost 2181</span><br><span class="line">0 connections watching 0 paths</span><br><span class="line">Total watches:0</span><br></pre></td></tr></table></figure>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>ls / 查看zk目录</li>
 <li>ls2 / 查看节点信息</li>
@@ -524,7 +543,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 02:04:24</p>
+  <p><span>最后更新:</span>2019年04月18日 13:04:35</p>
   <p><span>原始链接:</span><a href="/2019/04/18/zookeeper命令使用/" title="zookeeper命令使用">http://yoursite.com/2019/04/18/zookeeper命令使用/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -747,7 +766,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ls-ls2"><span class="nav-number">1.1.</span> <span class="nav-text">ls | ls2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-stat"><span class="nav-number">1.2.</span> <span class="nav-text">get | stat</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#节点操作命令"><span class="nav-number">2.</span> <span class="nav-text">节点操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#create"><span class="nav-number">2.1.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-delete"><span class="nav-number">2.2.</span> <span class="nav-text">set | delete</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ls-ls2"><span class="nav-number">1.1.</span> <span class="nav-text">ls | ls2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-stat"><span class="nav-number">1.2.</span> <span class="nav-text">get | stat</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#节点操作命令"><span class="nav-number">2.</span> <span class="nav-text">节点操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#create"><span class="nav-number">2.1.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-delete"><span class="nav-number">2.2.</span> <span class="nav-text">set | delete</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四字命令-four-letter-words"><span class="nav-number">3.</span> <span class="nav-text">四字命令 four letter words</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stat"><span class="nav-number">3.1.</span> <span class="nav-text">stat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ruok"><span class="nav-number">3.2.</span> <span class="nav-text">ruok</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dump"><span class="nav-number">3.3.</span> <span class="nav-text">dump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conf"><span class="nav-number">3.4.</span> <span class="nav-text">conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cons"><span class="nav-number">3.5.</span> <span class="nav-text">cons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mntr"><span class="nav-number">3.6.</span> <span class="nav-text">mntr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wchs"><span class="nav-number">3.7.</span> <span class="nav-text">wchs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -782,7 +801,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">20.8k</span>
+    <span title="Site words total count">21.1k</span>
   
 </div>
 
