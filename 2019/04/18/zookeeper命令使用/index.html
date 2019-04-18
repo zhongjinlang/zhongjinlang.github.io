@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="常用命令 通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]   ls | ls2查看zookeeper路径1234[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CON">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-18T05:38:35.008Z">
+<meta property="og:updated_time" content="2019-04-18T05:40:42.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper命令使用">
 <meta name="twitter:description" content="常用命令 通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]   ls | ls2查看zookeeper路径1234[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CON">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  991
+                  1k
                 </span>
               
 
@@ -498,7 +498,7 @@
 <h1 id="四字命令-four-letter-words"><a href="#四字命令-four-letter-words" class="headerlink" title="四字命令 four letter words"></a>四字命令 four letter words</h1><p>zookeeper可通过它自身提供的简写命令来和服务器进行交互, 可查看服务器的一些状态信息。使用运维来进行监控</p>
 <ul>
 <li>需要使用nc命令，安装yum install nc</li>
-<li>语法： echo [commod] | nc[ip] [port]</li>
+<li>语法： echo [commod] | nc [ip] [port]</li>
 </ul>
 <h2 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h2><p>它可查看zookeeper的状态信息，以及是否mode（集群还是单机）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo stat | nc 192.168.211.136 2181</span><br><span class="line">Zookeeper version: 3.4.11-37e277162d567b55a07d1755f0b31c32e93c01a0, built on 11/01/2017 18:06 GMT</span><br><span class="line">Clients:</span><br><span class="line"> /192.168.211.136:34346[0](queued=0,recved=1,sent=0)</span><br><span class="line"></span><br><span class="line">Latency min/avg/max: 0/0/27</span><br><span class="line">Received: 2696</span><br><span class="line">Sent: 2701</span><br><span class="line">Connections: 1</span><br><span class="line">Outstanding: 0</span><br><span class="line">Zxid: 0x45</span><br><span class="line">Mode: standalone</span><br><span class="line">Node count: 8</span><br></pre></td></tr></table></figure>
@@ -524,6 +524,7 @@
 <li>set path data [version]修改节点</li>
 <li>delete path data [version]删除节点</li>
 <li>使用set和delete时候，建议根据version删除，可达到<em>乐观锁的</em>效果，不会删除到之前旧的数据</li>
+<li>zookeeper提供四字命令可查看服务器的一些状态信息，语法：echo [命令] | nc [ip] [port]</li>
 </ul>
 
       
@@ -543,7 +544,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 13:04:35</p>
+  <p><span>最后更新:</span>2019年04月18日 13:04:42</p>
   <p><span>原始链接:</span><a href="/2019/04/18/zookeeper命令使用/" title="zookeeper命令使用">http://yoursite.com/2019/04/18/zookeeper命令使用/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
