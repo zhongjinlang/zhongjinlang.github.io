@@ -90,7 +90,7 @@
 <meta property="og:description" content="zookeeper集群概述zookeeper集群包含主从节点，心跳机制（选举模式），架构如下 选举模式: 如果上述图中的master宕机了, slave1和slave进行选举，只有其中一个为master。如果原来的master恢复了，那么会加入到集群中成为slave。集群个数建议为奇数因为需要选举的过程 搭建集群 配置数据文件 myid 1/2/3 对应 server.1/2/3 通过 ./zkC">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/04.jpg">
-<meta property="og:updated_time" content="2019-04-18T07:06:08.103Z">
+<meta property="og:updated_time" content="2019-04-18T07:06:50.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper集群">
 <meta name="twitter:description" content="zookeeper集群概述zookeeper集群包含主从节点，心跳机制（选举模式），架构如下 选举模式: 如果上述图中的master宕机了, slave1和slave进行选举，只有其中一个为master。如果原来的master恢复了，那么会加入到集群中成为slave。集群个数建议为奇数因为需要选举的过程 搭建集群 配置数据文件 myid 1/2/3 对应 server.1/2/3 通过 ./zkC">
@@ -422,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  536
+                  538
                 </span>
               
 
@@ -475,7 +475,7 @@
 <h2 id="选举模式实验"><a href="#选举模式实验" class="headerlink" title="选举模式实验"></a>选举模式实验</h2><p>上述可看出2182为主节点，我们将2182进程kill，观察谁会成为主节点</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 此时已经连接不了2182</span></span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2182</span><br><span class="line">Ncat: Connection refused.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别连接其他节点</span></span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2181</span><br><span class="line">Mode: follower</span><br><span class="line">[root@zhongjinlang bin]# echo stat | nc localhost 2183</span><br><span class="line">Mode: leader # 2183成为了主节点</span><br></pre></td></tr></table></figure>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>zookeeper集群包含主从节点、心跳机制。当主节点挂了，经过选举会将某一个从节点成为主节点，来保证服务的高可用</li>
+<li>zookeeper集群包含主从节点、心跳机制。当主节点挂了，经过选举会将某一个从节点成为主节点，来保证整体服务的高可用</li>
 </ul>
 
       
@@ -495,7 +495,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 15:04:08</p>
+  <p><span>最后更新:</span>2019年04月18日 15:04:50</p>
   <p><span>原始链接:</span><a href="/2019/04/18/zookeeper集群/" title="zookeeper集群">http://yoursite.com/2019/04/18/zookeeper集群/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
