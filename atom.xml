@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-19T08:24:09.064Z</updated>
+  <updated>2019-04-19T08:25:31.643Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>zookeeper分布式锁</title>
-    <link href="http://yoursite.com/2019/04/19/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"/>
-    <id>http://yoursite.com/2019/04/19/zookeeper分布式锁/</id>
+    <title>zookeeper分布式锁原理</title>
+    <link href="http://yoursite.com/2019/04/19/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E7%90%86/"/>
+    <id>http://yoursite.com/2019/04/19/zookeeper分布式锁原理/</id>
     <published>2019-04-18T16:06:16.000Z</published>
-    <updated>2019-04-19T08:24:09.064Z</updated>
+    <updated>2019-04-19T08:25:31.643Z</updated>
     
     <content type="html"><![CDATA[<h1 id="死锁-活锁概念"><a href="#死锁-活锁概念" class="headerlink" title="死锁 | 活锁概念"></a>死锁 | 活锁概念</h1><p><strong>死锁</strong></p><ul><li>如果有两个服务订单服务和商品服务，订单服务需要读取库存操作, 商品服务也需要读取库存操作(图1)</li><li>此时订单服务读取完库存之后并没有释放(没有提交)。当商品服务再次读取时，库存数据可能会不一致（脏读）。通常这种情况采用<em>死锁</em></li><li>解决：在订单服务访问库存的时候，无论crud操作都加一把锁(未释放)。那么商品服务就不能访问库存了(图2)</li></ul><p><em>图1</em></p><p><img src="http://poporz7f8.bkt.clouddn.com/05.jpg" alt></p><p><em>图2</em></p><p><img src="http://poporz7f8.bkt.clouddn.com/06.jpg" alt></p><p><em>活锁</em><br>无论多少个服务，只对库存进行<strong>读取的操作</strong> 那么其他服务都可以去读取，否则都要进行加锁。这种情况成为<em>活锁</em></p><h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><p>在分布式环境下，当不同的服务访问某一个共享资源数据(数据库)的时候，可能会发生数据不一致的情况</p><p><em>下订单流程</em><br><img src="http://poporz7f8.bkt.clouddn.com/07.jpg" alt><br>如果在创建订单和扣除库存的操作没有完成（sleep），此时有其他请求进入时，那么库存的数量就可能会造成不一致(之前的值，因为sleep了)</p><h2 id="zookeeper分布式锁"><a href="#zookeeper分布式锁" class="headerlink" title="zookeeper分布式锁"></a>zookeeper分布式锁</h2><p><img src="http://poporz7f8.bkt.clouddn.com/09.jpg" alt></p><ul><li>在获取锁的时候，要根据锁是否被占用才可获取。如果没有占用创建锁 <em>zk临时节点</em>。临时节点会根据客户端会话的断开而断开（释放锁）</li></ul><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul><li>什么是死锁：当A服务进行CRUD库存的时候，其他服务不可访问库存</li><li>什么是活锁：如果A服务只是进行读库存的操作，那么其他服务可访问库存</li><li>利用Zookeeper不能重复创建一个节点的特性来实现一个分布式锁，与redis很类似</li></ul>]]></content>
     
