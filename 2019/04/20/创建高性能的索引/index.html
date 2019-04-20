@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="mysql,">
 
 
 
@@ -81,16 +81,20 @@
 
 
 
-<meta name="description" content="胖虎是个码农">
-<meta property="og:type" content="website">
-<meta property="og:title" content="胖虎的博客">
-<meta property="og:url" content="http://yoursite.com/tags/分布式/index.html">
+<meta name="description" content="前言本章节来自 高性能MySQL 第五章 创建高性能的索引索引在MySQL中也称为key，它是存储引擎用于快速找到记录的一种数据结构。索引能够轻易将查询性能提高几个数量级 索引基础存储引擎是如何使用索引的？ 首先在索引中找到对应的值，然后根据匹配的索引记录找到对应的数据行。也就是说，如果某个列建立了索引，那么会先在索引中查找。  可创建多个索引，如果多个列，那么顺序非常重要  索引的类型 索引在存">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建高性能的索引">
+<meta property="og:url" content="http://yoursite.com/2019/04/20/创建高性能的索引/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="胖虎是个码农">
+<meta property="og:description" content="前言本章节来自 高性能MySQL 第五章 创建高性能的索引索引在MySQL中也称为key，它是存储引擎用于快速找到记录的一种数据结构。索引能够轻易将查询性能提高几个数量级 索引基础存储引擎是如何使用索引的？ 首先在索引中找到对应的值，然后根据匹配的索引记录找到对应的数据行。也就是说，如果某个列建立了索引，那么会先在索引中查找。  可创建多个索引，如果多个列，那么顺序非常重要  索引的类型 索引在存">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.jpg">
+<meta property="og:updated_time" content="2019-04-20T05:54:48.316Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="胖虎的博客">
-<meta name="twitter:description" content="胖虎是个码农">
+<meta name="twitter:title" content="创建高性能的索引">
+<meta name="twitter:description" content="前言本章节来自 高性能MySQL 第五章 创建高性能的索引索引在MySQL中也称为key，它是存储引擎用于快速找到记录的一种数据结构。索引能够轻易将查询性能提高几个数量级 索引基础存储引擎是如何使用索引的？ 首先在索引中找到对应的值，然后根据匹配的索引记录找到对应的数据行。也就是说，如果某个列建立了索引，那么会先在索引中查找。  可创建多个索引，如果多个列，那么顺序非常重要  索引的类型 索引在存">
+<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.jpg">
 
 
 
@@ -120,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/分布式/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/20/创建高性能的索引/">
 
 
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -141,7 +145,7 @@
 
 
 
-  <title>标签: 分布式 | 胖虎的博客</title>
+  <title>创建高性能的索引 | 胖虎的博客</title>
   
 
 
@@ -160,7 +164,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://your-url" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -306,52 +310,314 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>分布式<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/创建高性能的索引/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="胖虎">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="胖虎的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/04/17/zookeeper概述/" itemprop="url">
-              
-                <span itemprop="name">zookeeper概述</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">创建高性能的索引</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-17T08:29:33+08:00" content="2019-04-17">
-          04-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-20T00:00:00+08:00">
+                2019-04-20
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/高性能MySQL读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">高性能MySQL读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/20/创建高性能的索引/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/20/创建高性能的索引/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6m
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><em>本章节来自 <strong>高性能MySQL</strong> 第五章 创建高性能的索引</em><br>索引在MySQL中也称为key，它是存储引擎用于快速找到记录的一种数据结构。索引能够轻易将查询性能提高几个数量级</p>
+<h1 id="索引基础"><a href="#索引基础" class="headerlink" title="索引基础"></a>索引基础</h1><p>存储引擎是如何使用索引的？ 首先在索引中找到对应的值，然后根据匹配的索引记录找到对应的数据行。也就是说，如果某个列建立了索引，那么会先在索引中查找。</p>
+<ul>
+<li>可创建多个索引，如果多个列，那么顺序非常重要</li>
+</ul>
+<h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><p><img src="http://poporz7f8.bkt.clouddn.com/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.jpg" alt></p>
+<p>索引在存储引擎层，因此不同的存储引擎对索引的工作方式也不一样，并不是所有的存储引擎都支持所有类型的索引</p>
+<p><strong>B-Tree索引</strong></p>
+<blockquote>
+<p>术语B-Tree是因为MySQL在create table和其他语句中也使用该关键字<br></p>
+</blockquote>
+<p>内部算法实际使用B+Tree实现，InnoDB使用B+Tree，NDB集群使用T-Tree来存储索引</p>
+<ul>
+<li>B-Tree与二叉树的形式存储索引，意味着所有的值都是顺序的，能够快速访问数据不需要进行全表扫描</li>
+<li>B-Tree对索引是顺序组织存储，所以适合查找范围数据</li>
+</ul>
+<p><strong>哈希索引</strong><br>哈希索引基于哈希表实现，只有精确匹配索引所有列的查询才有效, 哈希索引会将所有的哈希码存储在索引中，同时在哈希表中存储每个数据行的指针</p>
+<ul>
+<li>在MySQL中，只有memory引擎支持哈希索引</li>
+<li>如果要查询很多关联的表，哈希索引非常使用用于查询</li>
+<li>InnoDB有一种特殊的功能 <em>自适应哈希索引</em> 如果它注意到某些索引使用频繁，内部会基于B-Tree之上创建哈希索引</li>
+</ul>
+<p><strong>创建自定义索引</strong><br>我们可模拟InnoDB一样创建函数, 虽然还是使用B-Tree进行查找，但是使用哈希值来查询<br><br><em>我们有如下表</em><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> hash_test(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT PRIMARY <span class="keyword">KEY</span> ,</span><br><span class="line">  <span class="keyword">url</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line">  url_crc <span class="built_in">int</span> <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>例如url存储”<a href="http://www.mysql.com&quot;" target="_blank" rel="noopener">http://www.mysql.com&quot;</a>, 我们进行如下查询效率是非常低的，使用的是全表扫描<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">url</span> <span class="keyword">FROM</span> hash_test <span class="keyword">WHERE</span> <span class="keyword">url</span> = <span class="string">'http://www.mysql.com'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>因此我们在上述表中添加了url_crc它用于存储URL的哈希值，通过哈希值来进行查询，效率是极高的<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要将值存储到url_crr列</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">crc32</span>(<span class="string">'http://www.mysql.com'</span>);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">url</span> <span class="keyword">FROM</span> hash_test <span class="keyword">WHERE</span> <span class="keyword">url</span> = <span class="string">'http://www.mysql.com'</span> <span class="keyword">AND</span> url_crc = <span class="keyword">crc32</span>(<span class="string">"http://www.mysql.com"</span>);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>上述过程的缺陷是需要手动设置哈希值，当然可使用触发器来完成。注意：哈希冲突问题，或可使用FNV64()哈希函数，冲突比CRC32()少</p>
+</blockquote>
+<p><strong>全文索引</strong><br>它查找的是文本中的关键词，而不是直接比较索引中的值。类似于搜索引擎做的事情</p>
+<h1 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h1><ul>
+<li>大大减少了服务器需要扫描的数据量</li>
+<li>可以帮助服务器避免排序和临时表</li>
+<li>可将随机I/O变为顺序IO</li>
+</ul>
+<p><em>索引是最好的解决方案吗?</em><br>只有当索引帮助存储引擎快速查找到记录带来的好处大于其带来的额外工作时，索引才是最有效的</p>
+<h1 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h1><p>正确的创建和使用索引是实现高性能查询的基础</p>
+<h2 id="独立的列"><a href="#独立的列" class="headerlink" title="独立的列"></a>独立的列</h2><p><em>不当的使用索引</em><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">id</span> + <span class="number">1</span> = <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<p>如果查询总的列不是独立的，则MySQL不会使用索引。独立的列是指索引列不能是表达式的一部分，也不能是函数的参数</p>
+<h2 id="前缀索引和索引选择性"><a href="#前缀索引和索引选择性" class="headerlink" title="前缀索引和索引选择性"></a>前缀索引和索引选择性</h2><p>如果需要索引很长的字符串，这会导致索引变的大且慢。我们可采用<em>索引开始部分的字符</em>来提高索引效率。但是也会降低索引的选择性。指定是如果你使用部分字符，那么出现重复的值越高</p>
+<ul>
+<li>对于blob、text或很长的varcher类型的列必须采用前缀索引</li>
+</ul>
+<h2 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h2><p>在多个列上建立独立的单列索引大部分情况下并不能提高性能，在MySQL5.0版本引入了”索引合并”的策略，一定程度上表上的多个单列索引来定位指定的行</p>
+<ul>
+<li>OR、AND、UNION以集合的方式会根据索引查询并不会进行全表扫描</li>
+</ul>
+<h2 id="选择合适的索引顺序"><a href="#选择合适的索引顺序" class="headerlink" title="选择合适的索引顺序"></a>选择合适的索引顺序</h2><p>在B-Tree索引中，意味着安装最左列进行排序，其次第二列</p>
+<ul>
+<li>将选择性最高的列放到索引最前列</li>
+</ul>
+<h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><p>InnoDB的聚簇索引在同一个结构中保存了B-Tree索引和数据行，它的优点有</p>
+<ul>
+<li>把相关数据保存在一起，例如实现电子邮箱时，可根据用户ID聚集数据获取全部邮件</li>
+<li>数据访问更快，聚簇索引将索引和数据存储在一个B-Tree中</li>
+</ul>
+<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>MySQL可直接获取列的数据，这样就不再需要读取数据行, 如果一个索引包含所有需要查询的字段的值，称为覆盖索引</p>
+<ul>
+<li>覆盖索引必须要存储索引的值，并不是所有的存储引擎都支持覆盖索引</li>
+</ul>
+<h2 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h2><ul>
+<li>MySQL有两种方式生成有序的结果，排序、按索引顺序扫描 <em>可使用explain select table 查看tyep值 如果为index则使用了索引扫描来做排序</em></li>
+</ul>
+<h2 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h2><p>MyISAM使用前缀压缩来减少索引的大小，从而让更多的索引放入内存中</p>
+<ul>
+<li>可以在create table语句中指定pack_keys参数来控制压缩索引的方式</li>
+</ul>
+<h2 id="冗余和重复的索引"><a href="#冗余和重复的索引" class="headerlink" title="冗余和重复的索引"></a>冗余和重复的索引</h2><p>如果在相同列上创建多个索引, 那么MySQL需要单独维护重复的索引，这会影响性能</p>
+<ul>
+<li>未使用的索引考虑删除</li>
+</ul>
+<h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><p>索引可以让查询锁定更少的行，如果你的查询从不访问那些不需要的行，那么就会锁定更少的行</p>
+<ul>
+<li>InnoDB行锁效率高，只有在访问行的时候才会对其加锁</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>如果列中建立了索引，存储引擎会根据索引快速查询到记录。</li>
+<li>InnoDB使用B-Tree索引，所有中都是顺序的，避免了全表扫描。哈希索引只有memory</li>
+<li>可以使用CRC32(‘url’)获取哈希值，可通过哈希值来查询较长的字符串如URL地址，不要使用SHA1()和MD5()作为哈希函数</li>
+<li>编写查询语句时尽可能选择合适的索引以避免单行查找，尽可能使用数据原生顺序从而避免而外的排序操作，尽可能使用索引覆盖查询</li>
+<li>不要因”应该为where子句中出现的所有列创建索引”所谓的经验法来创建索引，而是要应该根找出消耗最长时间的查询来创建合适的索引</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+  <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
+  <p><span>最后更新:</span>2019年04月20日 13:04:48</p>
+  <p><span>原始链接:</span><a href="/2019/04/20/创建高性能的索引/" title="创建高性能的索引">http://yoursite.com/2019/04/20/创建高性能的索引/</a></p>
+  <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
+</div>
+
+      
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i>mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/19/Schema与数据类型优化/" rel="next" title="Schema与数据类型优化">
+                <i class="fa fa-chevron-left"></i> Schema与数据类型优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -359,6 +625,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -381,8 +661,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -399,7 +688,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -421,7 +710,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -468,7 +757,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -476,6 +765,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引基础"><span class="nav-number">2.</span> <span class="nav-text">索引基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的类型"><span class="nav-number">2.1.</span> <span class="nav-text">索引的类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引的优点"><span class="nav-number">3.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高性能的索引策略"><span class="nav-number">4.</span> <span class="nav-text">高性能的索引策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#独立的列"><span class="nav-number">4.1.</span> <span class="nav-text">独立的列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前缀索引和索引选择性"><span class="nav-number">4.2.</span> <span class="nav-text">前缀索引和索引选择性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多列索引"><span class="nav-number">4.3.</span> <span class="nav-text">多列索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择合适的索引顺序"><span class="nav-number">4.4.</span> <span class="nav-text">选择合适的索引顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚簇索引"><span class="nav-number">4.5.</span> <span class="nav-text">聚簇索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖索引"><span class="nav-number">4.6.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用索引扫描来做排序"><span class="nav-number">4.7.</span> <span class="nav-text">使用索引扫描来做排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩（前缀压缩）索引"><span class="nav-number">4.8.</span> <span class="nav-text">压缩（前缀压缩）索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#冗余和重复的索引"><span class="nav-number">4.9.</span> <span class="nav-text">冗余和重复的索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引和锁"><span class="nav-number">4.10.</span> <span class="nav-text">索引和锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -505,7 +810,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">23k</span>
+    <span title="Site words total count">24.8k</span>
   
 </div>
 
@@ -659,6 +964,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -676,6 +985,18 @@
       <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/04/20/创建高性能的索引/';
+          this.page.identifier = '2019/04/20/创建高性能的索引/';
+          this.page.title = '创建高性能的索引';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
