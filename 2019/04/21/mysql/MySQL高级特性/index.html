@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="zookeeper,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -81,18 +81,17 @@
 
 
 
-<meta name="description" content="何为ACL(access control lists)?可以对节点设置读写等权限，来保障数据的安全性，权限permission可以指定不同的范围以及角色 ACL命令行 getAcl：获取某个节点的权限信息 setAcl：设置某个节点的权限 addauth： 输入认证授权信息，注册用户将用户根据指定的权限才可登入  ACL的构成一 zookeeper的ACL通过[scheme:id:permissi">
-<meta name="keywords" content="zookeeper">
+<meta name="description" content="前言本章节来自 高性能MySQL 第七章 MySQL高级特性本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器 分区表对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个物理子表组成。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：  表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="zookeeperACL权限控制">
-<meta property="og:url" content="http://yoursite.com/2019/04/18/zookeeper/zookeeperACL权限控制/index.html">
+<meta property="og:title" content="MySQL高级特性">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/mysql/MySQL高级特性/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="何为ACL(access control lists)?可以对节点设置读写等权限，来保障数据的安全性，权限permission可以指定不同的范围以及角色 ACL命令行 getAcl：获取某个节点的权限信息 setAcl：设置某个节点的权限 addauth： 输入认证授权信息，注册用户将用户根据指定的权限才可登入  ACL的构成一 zookeeper的ACL通过[scheme:id:permissi">
+<meta property="og:description" content="前言本章节来自 高性能MySQL 第七章 MySQL高级特性本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器 分区表对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个物理子表组成。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：  表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-18T17:12:54.359Z">
+<meta property="og:updated_time" content="2019-04-21T08:36:30.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zookeeperACL权限控制">
-<meta name="twitter:description" content="何为ACL(access control lists)?可以对节点设置读写等权限，来保障数据的安全性，权限permission可以指定不同的范围以及角色 ACL命令行 getAcl：获取某个节点的权限信息 setAcl：设置某个节点的权限 addauth： 输入认证授权信息，注册用户将用户根据指定的权限才可登入  ACL的构成一 zookeeper的ACL通过[scheme:id:permissi">
+<meta name="twitter:title" content="MySQL高级特性">
+<meta name="twitter:description" content="前言本章节来自 高性能MySQL 第七章 MySQL高级特性本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器 分区表对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个物理子表组成。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：  表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据">
 
 
 
@@ -122,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/18/zookeeper/zookeeperACL权限控制/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/21/mysql/MySQL高级特性/">
 
 
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -143,7 +142,7 @@
 
 
 
-  <title>zookeeperACL权限控制 | 胖虎的博客</title>
+  <title>MySQL高级特性 | 胖虎的博客</title>
   
 
 
@@ -322,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper/zookeeperACL权限控制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/mysql/MySQL高级特性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -339,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">zookeeperACL权限控制</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL高级特性</h1>
         
 
         <div class="post-meta">
@@ -351,8 +350,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T01:12:12+08:00">
-                2019-04-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T14:07:49+08:00">
+                2019-04-21
               </time>
             
 
@@ -374,8 +373,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">zookeeper</span>
+                  <a href="/categories/高性能MySQL读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">高性能MySQL读书笔记</span>
                   </a>
                 </span>
 
@@ -392,8 +391,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/18/zookeeper/zookeeperACL权限控制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper/zookeeperACL权限控制/" itemprop="commentCount"></span>
+                <a href="/2019/04/21/mysql/MySQL高级特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/mysql/MySQL高级特性/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -420,7 +419,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  944
+                  815
                 </span>
               
 
@@ -436,7 +435,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4m
+                  2m
                 </span>
               
             </div>
@@ -457,61 +456,32 @@
       
 
       
-        <h1 id="何为ACL-access-control-lists"><a href="#何为ACL-access-control-lists" class="headerlink" title="何为ACL(access control lists)?"></a>何为ACL(access control lists)?</h1><p>可以对节点设置读写等权限，来保障数据的安全性，权限permission可以指定不同的范围以及角色<br></p>
-<h1 id="ACL命令行"><a href="#ACL命令行" class="headerlink" title="ACL命令行"></a>ACL命令行</h1><ul>
-<li>getAcl：获取某个节点的权限信息</li>
-<li>setAcl：设置某个节点的权限</li>
-<li>addauth： 输入认证授权信息，注册用户将用户根据指定的权限才可登入</li>
-</ul>
-<h2 id="ACL的构成一"><a href="#ACL的构成一" class="headerlink" title="ACL的构成一"></a>ACL的构成一</h2><ul>
-<li><p>zookeeper的ACL通过[scheme:id:permission]来构成权限列表</p>
-<blockquote>
-<p>scheme: 代表采用的某种全新机制</p>
-</blockquote>
-<blockquote>
-<p>id: 代表允许访问的用户</p>
-</blockquote>
-<blockquote>
-<p>permission: 权限组合字符串</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="ACL的构成二-scheme"><a href="#ACL的构成二-scheme" class="headerlink" title="ACL的构成二 - scheme"></a>ACL的构成二 - scheme</h2><ul>
-<li><p>world：只有一个用户, 语法: world:anyone:[permission] 默认情况下它表示任何人都可访问这一节点</p>
-</li>
-<li><p>auth：认证登入，需要注册用户且有权限。语法：auth:user:password:[permission]</p>
-</li>
-<li><p>digest：需要对密码进行加密才可访问，语法：digest：username:BASE64(SHA1(password)):[permission]</p>
-</li>
-<li><p>ip: 可限制某个ip的访问，语法：ip:192.168.1.1:[permission]</p>
-</li>
-<li><p>super: 代表超级管理员，拥有所有权限</p>
-</li>
-</ul>
-<h2 id="ACL的构成三-permission"><a href="#ACL的构成三-permission" class="headerlink" title="ACL的构成三 - permission"></a>ACL的构成三 - permission</h2><p>权限字符串使用缩写 crdwa，分别表示：</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><em>本章节来自 <strong>高性能MySQL</strong> 第七章 MySQL高级特性</em><br>本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器</p>
+<h1 id="分区表"><a href="#分区表" class="headerlink" title="分区表"></a>分区表</h1><p>对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个<em>物理子表组成</em>。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：</p>
 <ul>
-<li>c: create创建子节点。表示设置了改权限才可进行创建子节点</li>
-<li>r: read获取节点/子节点列表的权限 </li>
-<li>d: delete删除子节点权限</li>
-<li>w: write写节点数据权限</li>
-<li>a: admin权限才可分配permission</li>
+<li>表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据</li>
+<li>分区表的数据容易维护</li>
+<li>分区表的的数据可分布在不同的物理设备上</li>
+<li>如果需要，还可以备份和恢复符独立的分区，在大的数据集场景效率非常好</li>
 </ul>
-<h1 id="ACL实战"><a href="#ACL实战" class="headerlink" title="ACL实战"></a>ACL实战</h1><h2 id="world"><a href="#world" class="headerlink" title="world"></a>world</h2><p><em>创建一个节点并查看默认的权限</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 18] create /imooc/abc data </span><br><span class="line">Created /imooc/abc</span><br><span class="line">[zk: localhost:2181(CONNECTED) 19] getAcl /imooc/abc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 拥有所有权限</span></span><br><span class="line">'world,'anyone</span><br><span class="line">: cdrwa</span><br></pre></td></tr></table></figure></p>
-<p><em>设置权限：禁止删除</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 20] setAcl /imooc/abc world:anyone:crwa</span><br></pre></td></tr></table></figure></p>
-<p><em>此时节点的权限、后新创建一个节点再进行删除测试（因为当前节点拥有之前的权限）</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 21] getAcl /imooc/abc</span><br><span class="line">'world,'anyone</span><br><span class="line">: crwa</span><br><span class="line">[zk: localhost:2181(CONNECTED) 22] create /imooc/abc/xyz new-data-isnotdelete </span><br><span class="line">Created /imooc/abc/xyz</span><br><span class="line">[zk: localhost:2181(CONNECTED) 23] delete /imooc/abc/xyz</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示权限不足</span></span><br><span class="line">Authentication is not valid : /imooc/abc/xyz</span><br></pre></td></tr></table></figure></p>
-<h2 id="auth"><a href="#auth" class="headerlink" title="auth"></a>auth</h2><p>明文登入<br><em>注册账号并登入</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 39] create /name/zhangsan zs </span><br><span class="line">Created /name/zhangsan</span><br><span class="line">[zk: localhost:2181(CONNECTED) 40] getAcl /name/zhangsan</span><br><span class="line">'world,'anyone</span><br><span class="line">: cdrwa</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登入提示没有这个用户</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 41] setAcl /name/zhangsan auth:zhangsan:123:cdrwa     </span><br><span class="line">Acl is not valid : /name/zhangsan</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注册一个用户</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 42] addauth digest zhangsan:zhangsan</span><br><span class="line"><span class="meta">#</span><span class="bash"> 再次登入</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 43] setAcl /name/zhangsan auth:zhangsan:123:cdrwa</span><br></pre></td></tr></table></figure></p>
-<p><em>此时权限信息</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 44] getAcl /name/zhangsan</span><br><span class="line"><span class="meta">#</span><span class="bash"> 密码存在数据库中是一个密文</span></span><br><span class="line">'digest,'zhangsan:7Tjni+rxBvYp1MDxthriuVT77Gw=</span><br><span class="line">: cdrwa</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># digest</span></span></span><br><span class="line">使用密文方式登入</span><br><span class="line"></span><br><span class="line">*创建新的节点 并设置登入账号以及密码*</span><br><span class="line">```shell</span><br><span class="line">[zk: localhost:2181(CONNECTED) 6] getAcl /name/lisi</span><br><span class="line">'world,'anyone</span><br><span class="line">: cdrwa</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置密码（密文）</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 7] setAcl /name/lisi digest:lisi:7Tjni+rxBvYp1MDxthriuVT77Gw=:cdra</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看权限</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 8] getAcl /name/lisi</span><br><span class="line">'digest,'lisi:7Tjni+rxBvYp1MDxthriuVT77Gw=</span><br><span class="line">: cdra</span><br></pre></td></tr></table></figure></p>
-<h2 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h2><p>控制某个网段是否有权限来访问目录节点，通常用于控制客户端</p>
-<p><em>创建一个新的节点</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 19] create /name/ip ip</span><br><span class="line">Created /name/ip</span><br><span class="line">[zk: localhost:2181(CONNECTED) 20] getAcl /name/ip</span><br><span class="line">'world,'anyone</span><br><span class="line">: cdrwa</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置权限</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 21] setAcl /name/ip ip:192.168.117.1:cdrwa</span><br><span class="line">[zk: localhost:2181(CONNECTED) 22] getAcl /name/ip</span><br><span class="line">'ip,'192.168.117.1</span><br><span class="line">: cdrwa</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时虚拟机不可访问</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 23] get /name/ip</span><br><span class="line">Authentication is not valid : /name/ip</span><br></pre></td></tr></table></figure></p>
+<p><em>分区别的一些限制</em></p>
+<ul>
+<li>一个表最多有1024个分区</li>
+<li>分区字段中有主键或者唯一索引的列，必须包含进行来</li>
+<li>分区表中无法使用外键约束</li>
+</ul>
+<h2 id="分区表的原理"><a href="#分区表的原理" class="headerlink" title="分区表的原理"></a>分区表的原理</h2><p>从存储引擎的角度看，底层表和一个普通表没有任何不同，存储引擎也无需知道这是一个普通表还是一个分区表的一部分。<br><em>将每一年的销售额存放在不同的分区中</em><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> sales(</span><br><span class="line">  order_date datetime <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (<span class="keyword">year</span>(order_date))(</span><br><span class="line">  <span class="keyword">PARTITION</span> P_2010 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2010</span>),</span><br><span class="line">  <span class="keyword">PARTITION</span> P_2011 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2011</span>),</span><br><span class="line">  <span class="keyword">PARTITION</span> P_2012 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2012</span>),</span><br><span class="line">  <span class="keyword">PARTITION</span> p_catchall <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> MAXVALUE</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h2 id="如何使用分区表"><a href="#如何使用分区表" class="headerlink" title="如何使用分区表"></a>如何使用分区表</h2><p>如果表数据巨大（10TB），那么这个时候B-Tree索引就无法起作用了，如infobright放弃B-Tree，选择了一些更粗颗粒度的但消耗更少的方式检索数。分区以代价非常小的方式定位到需要的数据在哪一片区域。在这片区域中，可以顺序扫描，可以建立索引，还可将数据缓存到内存等操作。为了保证大数据量的可扩展性，有如下策略</p>
+<ul>
+<li><p>全量扫描数据，不需要索引<br>使用简单的分区方式存放表，不要任何索引，根据分区的规则大致定位需要的数据位置</p>
+</li>
+<li><p>索引数据，分离热点<br>可将热点数据单独方在一个分区中。例如希望从一个非常大的表中查询出一段时间内的记录（热点）。而这个表中包含了很多年的历史记录</p>
+</li>
+</ul>
+<h2 id="合并表"><a href="#合并表" class="headerlink" title="合并表"></a>合并表</h2><p>合并表是一种早期的、简单的分区实现，和分区别相比有一些不同的限制，并且缺乏优化。分区别对于用户来说是透明的、不可访问的。单合并表允许用户访问，分区表是一种被淘汰的技术，在未来的版本中可能被删除</p>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>视图本身是一个虚拟表，不存在任何数据。在使用SQL语句访问视图时，它返回的数据是MySQL从其他表中生成的</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>zookeeper的ACL可对节点进行权限控制来保障数据安全性</li>
-<li>world：默认所有用户登入</li>
-<li>auth：注册用户登入，注册密码时为明文</li>
-<li>digest：注册用户登入，注册密码时为密文</li>
-<li>ip: 可限制网段访问</li>
-<li>super: 可访问所有权限</li>
-<li>ACL使用场景一：开发/测试环境分离，开发者无权操作测试库的节点，只能看</li>
-<li>ACL使用场景二：生产环境上控制指定IP的服务可以访问相关节点，防止混乱</li>
+<li>分区表对于用户来说是不能访问底层的各个分区，使用场景：将热点数据单独放在一个分区中</li>
 </ul>
 
       
@@ -531,8 +501,8 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月19日 01:04:54</p>
-  <p><span>原始链接:</span><a href="/2019/04/18/zookeeper/zookeeperACL权限控制/" title="zookeeperACL权限控制">http://yoursite.com/2019/04/18/zookeeper/zookeeperACL权限控制/</a></p>
+  <p><span>最后更新:</span>2019年04月21日 16:04:30</p>
+  <p><span>原始链接:</span><a href="/2019/04/21/mysql/MySQL高级特性/" title="MySQL高级特性">http://yoursite.com/2019/04/21/mysql/MySQL高级特性/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
 
@@ -547,12 +517,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/zookeeper/" rel="tag"><i class="fa fa-tag"></i>zookeeper</a>
-          
-        </div>
-      
 
       
       
@@ -562,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/zookeeper/zookeeper的watch机制/" rel="next" title="zookeeper的watch机制">
-                <i class="fa fa-chevron-left"></i> zookeeper的watch机制
+              <a href="/2019/04/21/mysql/查询性能优化/" rel="next" title="查询性能优化">
+                <i class="fa fa-chevron-left"></i> 查询性能优化
               </a>
             
           </div>
@@ -571,10 +535,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/18/zookeeper/zookeeper集群/" rel="prev" title="zookeeper集群">
-                zookeeper集群 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -752,7 +712,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#何为ACL-access-control-lists"><span class="nav-number">1.</span> <span class="nav-text">何为ACL(access control lists)?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACL命令行"><span class="nav-number">2.</span> <span class="nav-text">ACL命令行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACL的构成一"><span class="nav-number">2.1.</span> <span class="nav-text">ACL的构成一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACL的构成二-scheme"><span class="nav-number">2.2.</span> <span class="nav-text">ACL的构成二 - scheme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACL的构成三-permission"><span class="nav-number">2.3.</span> <span class="nav-text">ACL的构成三 - permission</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACL实战"><span class="nav-number">3.</span> <span class="nav-text">ACL实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#world"><span class="nav-number">3.1.</span> <span class="nav-text">world</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auth"><span class="nav-number">3.2.</span> <span class="nav-text">auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip"><span class="nav-number">3.3.</span> <span class="nav-text">ip</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分区表"><span class="nav-number">2.</span> <span class="nav-text">分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分区表的原理"><span class="nav-number">2.1.</span> <span class="nav-text">分区表的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用分区表"><span class="nav-number">2.2.</span> <span class="nav-text">如何使用分区表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并表"><span class="nav-number">2.3.</span> <span class="nav-text">合并表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图"><span class="nav-number">3.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -965,9 +925,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/18/zookeeper/zookeeperACL权限控制/';
-          this.page.identifier = '2019/04/18/zookeeper/zookeeperACL权限控制/';
-          this.page.title = 'zookeeperACL权限控制';
+          this.page.url = 'http://yoursite.com/2019/04/21/mysql/MySQL高级特性/';
+          this.page.identifier = '2019/04/21/mysql/MySQL高级特性/';
+          this.page.title = 'MySQL高级特性';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
