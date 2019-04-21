@@ -90,7 +90,7 @@
 <meta property="og:description" content="前言本章节来自 高性能MySQL 第六章 查询性能优化查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在 为什么查询速度会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。  查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/mysql-phone/mysql-001.jpg">
-<meta property="og:updated_time" content="2019-04-21T08:33:27.518Z">
+<meta property="og:updated_time" content="2019-04-21T08:37:42.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查询性能优化">
 <meta name="twitter:description" content="前言本章节来自 高性能MySQL 第六章 查询性能优化查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在 为什么查询速度会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。  查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后">
@@ -580,7 +580,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月21日 16:04:27</p>
+  <p><span>最后更新:</span>2019年04月21日 16:04:42</p>
   <p><span>原始链接:</span><a href="/2019/04/21/mysql/查询性能优化/" title="查询性能优化">http://yoursite.com/2019/04/21/mysql/查询性能优化/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -611,8 +611,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/21/concurrence/并发基础(一)/" rel="next" title="并发基础（一）">
-                <i class="fa fa-chevron-left"></i> 并发基础（一）
+              <a href="/2019/04/20/mysql/创建高性能的索引/" rel="next" title="创建高性能的索引">
+                <i class="fa fa-chevron-left"></i> 创建高性能的索引
               </a>
             
           </div>
@@ -620,10 +620,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/21/concurrence/并发压力测试(二)/" rel="prev" title="并发压力测试(二)">
-                并发压力测试(二) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -714,7 +710,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -725,7 +721,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -736,7 +732,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -783,7 +779,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -836,7 +832,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">29.9k</span>
+    <span title="Site words total count">27.4k</span>
   
 </div>
 
