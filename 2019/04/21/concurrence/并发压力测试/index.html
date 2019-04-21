@@ -94,7 +94,15 @@
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/04.jpg">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/05.jpg">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/06.jpg">
-<meta property="og:updated_time" content="2019-04-21T08:34:54.779Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/07.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/08.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/09.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/10.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/11.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/12.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/13.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/14.jpg">
+<meta property="og:updated_time" content="2019-04-21T13:37:37.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发压力测试">
 <meta name="twitter:description" content="postmanPostman 是一个很强大的 API调试、Http请求的工具，当你还准备拿着记事本傻傻的去写 Form 表单的时候，你来试试 Postman，你会震惊到的  我们将测试如下接口, 环境：springboot12345678@RestController@Slf4jpublic class TestController &amp;#123;    @RequestMapping(&quot;/test">
@@ -426,7 +434,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  348
+                  810
                 </span>
               
 
@@ -442,7 +450,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1m
+                  3m
                 </span>
               
             </div>
@@ -488,8 +496,43 @@
 <blockquote>
 <p>download: <a href="https://www.apachelounge.com/download/" target="_blank" rel="noopener">https://www.apachelounge.com/download/</a></p>
 </blockquote>
-<h1 id="jmeter"><a href="#jmeter" class="headerlink" title="jmeter"></a>jmeter</h1><p>apache组织开发的压力测试</p>
-<h1 id="代码并发模拟"><a href="#代码并发模拟" class="headerlink" title="代码并发模拟"></a>代码并发模拟</h1><p>Semaphore<br>CountDownLatch</p>
+<ul>
+<li><p>ab命令进行并发测试<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/07.jpg" alt></p>
+</li>
+<li><p>测试参数如下<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/08.jpg" alt></p>
+</li>
+</ul>
+<h1 id="jmeter"><a href="#jmeter" class="headerlink" title="jmeter"></a>jmeter</h1><p> Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测 试但后来扩展到其他测试领域。 它可以用于测试静态和动态资源例如静态文件、Java 小服务程序、CGI 脚本、Java 对象、 数据库， FTP 服务器， 等等。JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来在不同压力类别下测试它们的 强度和分析整体性能。另外，JMeter能够对应用程序做功能/回归测试，通过创建带有断言的脚本来验证你的程序返回了你期望的结果</p>
+<blockquote>
+<p>download:<a href="https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/</a></p>
+</blockquote>
+<p><em>解压完毕在bin目录下执行jmeter.bat会启动如下界面</em><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/09.jpg" alt></p>
+<blockquote>
+<p>新建一个线程组</p>
+</blockquote>
+<ul>
+<li><p>线程组配置<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/10.jpg" alt></p>
+</li>
+<li><p>创建测试请求和查询结果<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/11.jpg" alt></p>
+</li>
+</ul>
+<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/12.jpg" alt></p>
+<h1 id="代码并发模拟"><a href="#代码并发模拟" class="headerlink" title="代码并发模拟"></a>代码并发模拟</h1><ul>
+<li>CountDownLatch<br>计数器不断的向下减<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/13.jpg" alt></li>
+</ul>
+<blockquote>
+<p>该类可阻塞线程，并保证线程在满足特定的情况下继续执行</p>
+</blockquote>
+<ul>
+<li>Semaphore<br>字面意思为”信号量”<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/14.jpg" alt></li>
+</ul>
+<blockquote>
+<p>该类可阻塞进程，并且控制同一时间的请求并发量</p>
+</blockquote>
+<p>如果我们想模拟并发测试的时，并在所有线程执行完输出执行结果，应该结合上诉两个类来完成。</p>
+<ul>
+<li>代码实现<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcurrentTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 请求总数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> clientTotal = <span class="number">1000</span>;</span><br><span class="line">    <span class="comment">// 同时并发执行的线程数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> threadTotal = <span class="number">50</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        ExecutorService executorService = Executors.newCachedThreadPool();</span><br><span class="line">        <span class="keyword">final</span> Semaphore semaphore = <span class="keyword">new</span> Semaphore(threadTotal);</span><br><span class="line">        <span class="keyword">final</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(clientTotal);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; clientTotal; i++)&#123;</span><br><span class="line">            executorService.execute(()-&gt;&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    semaphore.acquire();</span><br><span class="line">                    add();</span><br><span class="line">                    semaphore.release();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    log.error(<span class="string">"exception"</span>, e);</span><br><span class="line">                &#125;</span><br><span class="line">                countDownLatch.countDown();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">        executorService.shutdown();</span><br><span class="line">        log.info(<span class="string">"count:&#123;&#125;"</span>, count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span></span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -508,7 +551,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月21日 16:04:54</p>
+  <p><span>最后更新:</span>2019年04月21日 21:04:37</p>
   <p><span>原始链接:</span><a href="/2019/04/21/concurrence/并发压力测试/" title="并发压力测试">http://yoursite.com/2019/04/21/concurrence/并发压力测试/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -539,8 +582,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/21/concurrence/并发基础/" rel="next" title="并发基础">
-                <i class="fa fa-chevron-left"></i> 并发基础
+              <a href="/2019/04/21/mysql/查询性能优化/" rel="next" title="查询性能优化">
+                <i class="fa fa-chevron-left"></i> 查询性能优化
               </a>
             
           </div>
@@ -764,7 +807,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30.7k</span>
+    <span title="Site words total count">31.2k</span>
   
 </div>
 
