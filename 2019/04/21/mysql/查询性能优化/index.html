@@ -85,12 +85,12 @@
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="查询性能优化">
-<meta property="og:url" content="http://yoursite.com/2019/04/20/mysql/查询性能优化/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/mysql/查询性能优化/index.html">
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="前言本章节来自 高性能MySQL 第六章 查询性能优化查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在 为什么查询速度会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。  查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/mysql-phone/mysql-001.jpg">
-<meta property="og:updated_time" content="2019-04-21T06:01:14.472Z">
+<meta property="og:updated_time" content="2019-04-21T08:02:26.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查询性能优化">
 <meta name="twitter:description" content="前言本章节来自 高性能MySQL 第六章 查询性能优化查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在 为什么查询速度会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。  查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后">
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/20/mysql/查询性能优化/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/21/mysql/查询性能优化/">
 
 
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -324,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/mysql/查询性能优化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/mysql/查询性能优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -353,8 +353,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-20T00:00:00+08:00">
-                2019-04-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T00:00:00+08:00">
+                2019-04-21
               </time>
             
 
@@ -394,8 +394,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/20/mysql/查询性能优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/20/mysql/查询性能优化/" itemprop="commentCount"></span>
+                <a href="/2019/04/21/mysql/查询性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/mysql/查询性能优化/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -580,8 +580,8 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月21日 14:04:14</p>
-  <p><span>原始链接:</span><a href="/2019/04/20/mysql/查询性能优化/" title="查询性能优化">http://yoursite.com/2019/04/20/mysql/查询性能优化/</a></p>
+  <p><span>最后更新:</span>2019年04月21日 16:04:26</p>
+  <p><span>原始链接:</span><a href="/2019/04/21/mysql/查询性能优化/" title="查询性能优化">http://yoursite.com/2019/04/21/mysql/查询性能优化/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
 
@@ -611,8 +611,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/19/mysql/Schema与数据类型优化/" rel="next" title="Schema与数据类型优化">
-                <i class="fa fa-chevron-left"></i> Schema与数据类型优化
+              <a href="/2019/04/21/concurrence/并发基础(一)/" rel="next" title="并发基础（一）">
+                <i class="fa fa-chevron-left"></i> 并发基础（一）
               </a>
             
           </div>
@@ -620,10 +620,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/20/mysql/创建高性能的索引/" rel="prev" title="创建高性能的索引">
-                创建高性能的索引 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1014,8 +1010,8 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/20/mysql/查询性能优化/';
-          this.page.identifier = '2019/04/20/mysql/查询性能优化/';
+          this.page.url = 'http://yoursite.com/2019/04/21/mysql/查询性能优化/';
+          this.page.identifier = '2019/04/21/mysql/查询性能优化/';
           this.page.title = '查询性能优化';
         };
         var d = document, s = d.createElement('script');
