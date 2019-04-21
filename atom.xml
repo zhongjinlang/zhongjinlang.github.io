@@ -18,8 +18,8 @@
   
   <entry>
     <title>并发基础（一）</title>
-    <link href="http://yoursite.com/2019/04/21/%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80(%E4%B8%80)/"/>
-    <id>http://yoursite.com/2019/04/21/并发基础(一)/</id>
+    <link href="http://yoursite.com/2019/04/21/concurrence/%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80(%E4%B8%80)/"/>
+    <id>http://yoursite.com/2019/04/21/concurrence/并发基础(一)/</id>
     <published>2019-04-20T16:00:00.000Z</published>
     <updated>2019-04-21T06:00:29.037Z</updated>
     
@@ -42,34 +42,9 @@
   </entry>
   
   <entry>
-    <title>查询性能优化</title>
-    <link href="http://yoursite.com/2019/04/20/%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>http://yoursite.com/2019/04/20/查询性能优化/</id>
-    <published>2019-04-19T16:00:00.000Z</published>
-    <updated>2019-04-21T06:01:14.472Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><em>本章节来自 <strong>高性能MySQL</strong> 第六章 查询性能优化</em><br>查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在</p><h1 id="为什么查询速度会慢"><a href="#为什么查询速度会慢" class="headerlink" title="为什么查询速度会慢"></a>为什么查询速度会慢</h1><p>如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。</p><ul><li>查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后返回结果给客户端</li><li>在每一个消耗大量实际的查询案例中，都可能看到一些不必要的额外操作、重复、某些操作执行太慢等</li></ul><h1 id="慢查询基础：优化数据访问"><a href="#慢查询基础：优化数据访问" class="headerlink" title="慢查询基础：优化数据访问"></a>慢查询基础：优化数据访问</h1><p>查询性能低下最基本的原因是访问数据太多</p><ul><li>确认程序是否在检索大量不需要的数据</li><li>确认MySQL服务器层是否存在分析大量不需要的数据</li></ul><h2 id="是否向数据库请求了不需要的数据"><a href="#是否向数据库请求了不需要的数据" class="headerlink" title="是否向数据库请求了不需要的数据"></a>是否向数据库请求了不需要的数据</h2><p>有些查询会请求超过实际需要的数据，然后这些多余的数据会被应用程序丢弃。这会给MySQL服务器带来额外的负担，并增加网络开销等</p><p><strong>查询不需要的记录</strong><br>我们通常会认为MySQL只会返回需要的数据，实际MySQL是先返回全部结果集后进行计算</p><p><strong>多表关联时返回全部列</strong><br>千万不要写select * 这样会导致查询所有关联表的字段数据。应该只取需要的列</p><p><strong>总是取出所有列</strong><br>当编写select *时，会让优化器无法完成索引覆盖扫描这类优化。但也并不是坏事，如果你的程序中使用了缓存机制，可能有其好处</p><p><strong>重复查询相同的数据</strong><br>如果不断的重复执行相同的查询，每次返回完全相同的数据。比较好的解决方案是，当初次查询的时候将这个数据缓存起来。例如用户每次评论都需要查询用户头像的URL</p><h2 id="MySQL是否存在扫描额外的记录"><a href="#MySQL是否存在扫描额外的记录" class="headerlink" title="MySQL是否存在扫描额外的记录"></a>MySQL是否存在扫描额外的记录</h2><p>衡量查询开销的三个指标</p><ul><li>响应时间</li><li>扫描的行数</li><li>返回的行数</li></ul><p>它们大致反映了MySQL在内部执行查询时需要访问多少数据，并可大概推算出查询运行的时间。这三个指标都会记录到MySQL的慢日志中</p><p><strong>响应时间</strong></p><ul><li>响应时间 = 服务时间 + 排队时间<br><em>服务时间</em>：数据库处理查询真正花了多少时间，<em>排队时间</em>是指服务器因为等待某些资源而没有真正执行查询的时间——可能是I/O、锁等待…</li></ul><p><strong>扫描的行数和返回的行数</strong><br>理想情况下扫描的行数和返回的行数应该是相同的。实际情况下这种完美的事并不多</p><p><strong>扫描的行数和访问类型</strong><br>在explain语句中的type列反应了访问类型，访问类型有多种，如全表扫描(ALL)、索引扫描、范围扫描等等。这些类型速度慢到快，扫描行数多到少</p><ul><li>索引让MySQL以最高效、扫描行数最少的方式找到需要的记录</li></ul><h1 id="重构查询的方式"><a href="#重构查询的方式" class="headerlink" title="重构查询的方式"></a>重构查询的方式</h1><h2 id="一个复杂查询还是多个简单查询"><a href="#一个复杂查询还是多个简单查询" class="headerlink" title="一个复杂查询还是多个简单查询"></a>一个复杂查询还是多个简单查询</h2><p>设计查询时需要考虑的重要问题是，是否需要将一个复杂的查询分成多个简单的查询。在以前总是认为网络通信，查询解析是一件代价很高的事情</p><ul><li>第一种情况不必考虑，现代网络比以前快很多</li><li>第二种情况其实在MySQL设计中连接和断开连接的处理非常高效，每秒内部能扫描百万行数据</li></ul><h2 id="切分查询"><a href="#切分查询" class="headerlink" title="切分查询"></a>切分查询</h2><p>有时候对一个大的查询我们可将切分小查询，例如删除旧的数据，将一个大的delete语句切分成多个较小的查询</p><ul><li>每次删除数据后，都暂停一会再做下一次删除，这样可以将服务器上原本一次性的压力分散到一个时间很长的时间段中</li></ul><h2 id="分散关联查询"><a href="#分散关联查询" class="headerlink" title="分散关联查询"></a>分散关联查询</h2><p>例如做多表关联查询，有如下语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tag</span><br><span class="line"><span class="keyword">join</span> tag_post <span class="keyword">on</span> tag_post.tag.id=tag.id</span><br><span class="line"><span class="keyword">join</span> post <span class="keyword">on</span> tag_post.post_id=post.id</span><br><span class="line"><span class="keyword">where</span> tag.tag=<span class="string">'mysql'</span></span><br></pre></td></tr></table></figure></p><p>可以分解为：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tag <span class="keyword">where</span> tag=<span class="string">'mysql'</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tag_post <span class="keyword">where</span> tag_id=?</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> post <span class="keyword">where</span> post.id <span class="keyword">in</span>(?)</span><br></pre></td></tr></table></figure></p><p><em>分解关联查询有如下优势：</em></p><ul><li>让缓存效率更高，方便其他程序从缓存中查询单表对象</li><li>执行单个查询减少锁的竞争</li><li>对数据拆分，做到高性能和可扩展等</li></ul><h1 id="查询执行的基础"><a href="#查询执行的基础" class="headerlink" title="查询执行的基础"></a>查询执行的基础</h1><p>MySQL执行一个查询的流程：<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/mysql-phone/mysql-001.jpg" alt></p><ul><li>客户端发送一条查询语句给服务器</li><li>服务器检查查询缓存，如果缓存中有数据，直接返回。否则进入下一个阶段</li><li>服务器进行SQL解析，预处理再由优化器生成对应的执行计划</li><li>MySQL根据优化器生成的执行计划，调用存储引擎的API来执行查询</li><li>最后将结果返回客户端</li></ul><p>我们对其上述的流程进一步的解析</p><h2 id="MySQL客户端-服务器通信协议"><a href="#MySQL客户端-服务器通信协议" class="headerlink" title="MySQL客户端/服务器通信协议"></a>MySQL客户端/服务器通信协议</h2><p>在任何一个时刻，要么由服务器向客户端发送数据，要么客户端向服务器发送数据，这两个动作不能同时发生。</p><ul><li>客户端用一个单独的数据包将查询传给服务器，一旦客户端发送了请求，它能做的事就只能等待</li><li>相反，服务器响应给客户端的数据通常很多，由多个数据包组成。当开始响应时，客户端必须完整接收整个返回结果，并不能简单的取出前面几条结果（<em>类似拉取数据的过程</em>）</li><li>获取结果集看上去是从MySQL服务器获取，实际从函数库(<em>连接MySQL的库函数</em>)的缓存中获取数据</li></ul><p><strong>查询状态</strong><br>对于一个MySQL连接，或者说一个线程，任何时刻都由一个连接状态，该状态表示了MySQL当前在做什么。使用<em>SHOW FULL PROCESSLIST</em>命令查询，command列表示当前的状态。有如下状态：</p><ul><li>sleep：线程正在等待客户端发送新的请求</li><li>query：线程正在执行查询或正在将结果发送给客户端</li><li>locked：在MySQL服务层，该线程等待表锁</li><li>analyzeing and statisticas：线程正在收集存储引擎的统计信息，并生成查询的执行计划</li><li>copying to table [on disk]：线程正在执行查询，并将结果集复制到一个临时表中，这种状态通常在做group by union等 </li><li>sorting result：线程正在对结果集进行排序</li><li>sending data：多种情况，线程可能在多个状态之间传送数据，或者在生成结果集等</li></ul><h2 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h2><blockquote><p>这里指的是query cache</p></blockquote><p>在解析一个查询语句之前，如果缓存开启，MySQL会优先检查这个查询是否在缓存，是直接返回，否则下一个阶段</p><h2 id="查询优化处理"><a href="#查询优化处理" class="headerlink" title="查询优化处理"></a>查询优化处理</h2><p>此阶段进入查询优化，目标是将一个SQL转换成一个执行计划。MySQL会根据执行计划和存储引擎机械进行交互。这包含了多个子阶段：解析SQL、预处理、优化SQL执行计划，如果该过程有任何错误都可能和终止查询</p><p><strong>语法解析器和预处理</strong><br>MySQL会将SQL语句解析为对应的<em>解析树</em>，检查数据表和数据列是否存在、正确等</p><p><strong>查询优化器</strong><br>优化器是将SQL转换成执行计划，一条查询可以有多种执行方式，最后都返回相同的值。查询优化器是一个非常复杂的部件，它使用了很多优化策略来生成一个最优的执行计划</p><h2 id="查询执行引擎"><a href="#查询执行引擎" class="headerlink" title="查询执行引擎"></a>查询执行引擎</h2><p>MySQL根据执行计划给出的指令逐步执行，在该过程中，有大量的操作需要通过调用存储引擎实现的接口来完成，这些接口称为’handler  API’</p><h2 id="返回结果给客户端"><a href="#返回结果给客户端" class="headerlink" title="返回结果给客户端"></a>返回结果给客户端</h2><p>最后一个阶段是将结果返回客户端，如果查询可以被缓存，那么MySQL在这个阶段会将结果存放到查询缓存中</p><h1 id="查询优化器的提示-hint"><a href="#查询优化器的提示-hint" class="headerlink" title="查询优化器的提示(hint)"></a>查询优化器的提示(hint)</h1><p>如果对优化器选择的执行计划不满意，可使用优化器提供的几个提示(hint)来控制最终的执行计划</p><p><em>sql_small_result和sql_big_result</em><br>sql_smqll_result告诉优化器结果集很少，可以将结果集放在内存中的索引临时表，以避免排序操作。sql_big_result则告诉优化器结果集可能非常大，建议使用磁盘临时表做排序操作</p><blockquote><p>p233介绍了更多了的hint</p></blockquote><h1 id="优化特定类型的查询"><a href="#优化特定类型的查询" class="headerlink" title="优化特定类型的查询"></a>优化特定类型的查询</h1><blockquote><p>本节介绍的多数优化技巧都是和特定的版本有关的，对于其他版本未必适用</p></blockquote><h2 id="优化count"><a href="#优化count" class="headerlink" title="优化count()"></a>优化count()</h2><p>count聚合函数：可统计某个列值的数量，也可统计行数</p><ul><li>使用count(*)时，并不会像我们猜想的那样扩展成所有的列，实际上，它会忽略所有的列而直接统计所有的行数</li><li>如果希望知道的是结果集的行数，最好使用count(*)，这样写意义清晰，性能也会更好</li></ul><h2 id="优化group-by和distinct"><a href="#优化group-by和distinct" class="headerlink" title="优化group by和distinct"></a>优化group by和distinct</h2><p>使用sql_big_result和sql_small_result来让优化器按照你希望的方式运行</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul><li>优化数据访问：访问的数据量过大，是否查询了不必要的数据</li><li>重构查询方式：将大的查询切分成小的查询，例如将多表查询分成单表查询</li><li>理解查询是如何被执行的，以及时间都消耗在那些地方</li><li>优化通常需要三管齐下，不做(查询缓存)，少做，快速的做</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;&lt;em&gt;本章节来自 &lt;strong&gt;高性能MySQL&lt;/strong&gt; 第六章 查询性能优化&lt;/em&gt;&lt;br&gt;查询优化、索引优化、库表结构优
-      
-    
-    </summary>
-    
-      <category term="高性能MySQL读书笔记" scheme="http://yoursite.com/categories/%E9%AB%98%E6%80%A7%E8%83%BDMySQL%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
     <title>创建高性能的索引</title>
-    <link href="http://yoursite.com/2019/04/20/%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/"/>
-    <id>http://yoursite.com/2019/04/20/创建高性能的索引/</id>
+    <link href="http://yoursite.com/2019/04/20/mysql/%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/"/>
+    <id>http://yoursite.com/2019/04/20/mysql/创建高性能的索引/</id>
     <published>2019-04-19T16:00:00.000Z</published>
     <updated>2019-04-21T05:57:36.769Z</updated>
     
@@ -92,9 +67,34 @@
   </entry>
   
   <entry>
+    <title>查询性能优化</title>
+    <link href="http://yoursite.com/2019/04/20/mysql/%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <id>http://yoursite.com/2019/04/20/mysql/查询性能优化/</id>
+    <published>2019-04-19T16:00:00.000Z</published>
+    <updated>2019-04-21T06:01:14.472Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><em>本章节来自 <strong>高性能MySQL</strong> 第六章 查询性能优化</em><br>查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在</p><h1 id="为什么查询速度会慢"><a href="#为什么查询速度会慢" class="headerlink" title="为什么查询速度会慢"></a>为什么查询速度会慢</h1><p>如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。</p><ul><li>查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后返回结果给客户端</li><li>在每一个消耗大量实际的查询案例中，都可能看到一些不必要的额外操作、重复、某些操作执行太慢等</li></ul><h1 id="慢查询基础：优化数据访问"><a href="#慢查询基础：优化数据访问" class="headerlink" title="慢查询基础：优化数据访问"></a>慢查询基础：优化数据访问</h1><p>查询性能低下最基本的原因是访问数据太多</p><ul><li>确认程序是否在检索大量不需要的数据</li><li>确认MySQL服务器层是否存在分析大量不需要的数据</li></ul><h2 id="是否向数据库请求了不需要的数据"><a href="#是否向数据库请求了不需要的数据" class="headerlink" title="是否向数据库请求了不需要的数据"></a>是否向数据库请求了不需要的数据</h2><p>有些查询会请求超过实际需要的数据，然后这些多余的数据会被应用程序丢弃。这会给MySQL服务器带来额外的负担，并增加网络开销等</p><p><strong>查询不需要的记录</strong><br>我们通常会认为MySQL只会返回需要的数据，实际MySQL是先返回全部结果集后进行计算</p><p><strong>多表关联时返回全部列</strong><br>千万不要写select * 这样会导致查询所有关联表的字段数据。应该只取需要的列</p><p><strong>总是取出所有列</strong><br>当编写select *时，会让优化器无法完成索引覆盖扫描这类优化。但也并不是坏事，如果你的程序中使用了缓存机制，可能有其好处</p><p><strong>重复查询相同的数据</strong><br>如果不断的重复执行相同的查询，每次返回完全相同的数据。比较好的解决方案是，当初次查询的时候将这个数据缓存起来。例如用户每次评论都需要查询用户头像的URL</p><h2 id="MySQL是否存在扫描额外的记录"><a href="#MySQL是否存在扫描额外的记录" class="headerlink" title="MySQL是否存在扫描额外的记录"></a>MySQL是否存在扫描额外的记录</h2><p>衡量查询开销的三个指标</p><ul><li>响应时间</li><li>扫描的行数</li><li>返回的行数</li></ul><p>它们大致反映了MySQL在内部执行查询时需要访问多少数据，并可大概推算出查询运行的时间。这三个指标都会记录到MySQL的慢日志中</p><p><strong>响应时间</strong></p><ul><li>响应时间 = 服务时间 + 排队时间<br><em>服务时间</em>：数据库处理查询真正花了多少时间，<em>排队时间</em>是指服务器因为等待某些资源而没有真正执行查询的时间——可能是I/O、锁等待…</li></ul><p><strong>扫描的行数和返回的行数</strong><br>理想情况下扫描的行数和返回的行数应该是相同的。实际情况下这种完美的事并不多</p><p><strong>扫描的行数和访问类型</strong><br>在explain语句中的type列反应了访问类型，访问类型有多种，如全表扫描(ALL)、索引扫描、范围扫描等等。这些类型速度慢到快，扫描行数多到少</p><ul><li>索引让MySQL以最高效、扫描行数最少的方式找到需要的记录</li></ul><h1 id="重构查询的方式"><a href="#重构查询的方式" class="headerlink" title="重构查询的方式"></a>重构查询的方式</h1><h2 id="一个复杂查询还是多个简单查询"><a href="#一个复杂查询还是多个简单查询" class="headerlink" title="一个复杂查询还是多个简单查询"></a>一个复杂查询还是多个简单查询</h2><p>设计查询时需要考虑的重要问题是，是否需要将一个复杂的查询分成多个简单的查询。在以前总是认为网络通信，查询解析是一件代价很高的事情</p><ul><li>第一种情况不必考虑，现代网络比以前快很多</li><li>第二种情况其实在MySQL设计中连接和断开连接的处理非常高效，每秒内部能扫描百万行数据</li></ul><h2 id="切分查询"><a href="#切分查询" class="headerlink" title="切分查询"></a>切分查询</h2><p>有时候对一个大的查询我们可将切分小查询，例如删除旧的数据，将一个大的delete语句切分成多个较小的查询</p><ul><li>每次删除数据后，都暂停一会再做下一次删除，这样可以将服务器上原本一次性的压力分散到一个时间很长的时间段中</li></ul><h2 id="分散关联查询"><a href="#分散关联查询" class="headerlink" title="分散关联查询"></a>分散关联查询</h2><p>例如做多表关联查询，有如下语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tag</span><br><span class="line"><span class="keyword">join</span> tag_post <span class="keyword">on</span> tag_post.tag.id=tag.id</span><br><span class="line"><span class="keyword">join</span> post <span class="keyword">on</span> tag_post.post_id=post.id</span><br><span class="line"><span class="keyword">where</span> tag.tag=<span class="string">'mysql'</span></span><br></pre></td></tr></table></figure></p><p>可以分解为：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tag <span class="keyword">where</span> tag=<span class="string">'mysql'</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> tag_post <span class="keyword">where</span> tag_id=?</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> post <span class="keyword">where</span> post.id <span class="keyword">in</span>(?)</span><br></pre></td></tr></table></figure></p><p><em>分解关联查询有如下优势：</em></p><ul><li>让缓存效率更高，方便其他程序从缓存中查询单表对象</li><li>执行单个查询减少锁的竞争</li><li>对数据拆分，做到高性能和可扩展等</li></ul><h1 id="查询执行的基础"><a href="#查询执行的基础" class="headerlink" title="查询执行的基础"></a>查询执行的基础</h1><p>MySQL执行一个查询的流程：<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/mysql-phone/mysql-001.jpg" alt></p><ul><li>客户端发送一条查询语句给服务器</li><li>服务器检查查询缓存，如果缓存中有数据，直接返回。否则进入下一个阶段</li><li>服务器进行SQL解析，预处理再由优化器生成对应的执行计划</li><li>MySQL根据优化器生成的执行计划，调用存储引擎的API来执行查询</li><li>最后将结果返回客户端</li></ul><p>我们对其上述的流程进一步的解析</p><h2 id="MySQL客户端-服务器通信协议"><a href="#MySQL客户端-服务器通信协议" class="headerlink" title="MySQL客户端/服务器通信协议"></a>MySQL客户端/服务器通信协议</h2><p>在任何一个时刻，要么由服务器向客户端发送数据，要么客户端向服务器发送数据，这两个动作不能同时发生。</p><ul><li>客户端用一个单独的数据包将查询传给服务器，一旦客户端发送了请求，它能做的事就只能等待</li><li>相反，服务器响应给客户端的数据通常很多，由多个数据包组成。当开始响应时，客户端必须完整接收整个返回结果，并不能简单的取出前面几条结果（<em>类似拉取数据的过程</em>）</li><li>获取结果集看上去是从MySQL服务器获取，实际从函数库(<em>连接MySQL的库函数</em>)的缓存中获取数据</li></ul><p><strong>查询状态</strong><br>对于一个MySQL连接，或者说一个线程，任何时刻都由一个连接状态，该状态表示了MySQL当前在做什么。使用<em>SHOW FULL PROCESSLIST</em>命令查询，command列表示当前的状态。有如下状态：</p><ul><li>sleep：线程正在等待客户端发送新的请求</li><li>query：线程正在执行查询或正在将结果发送给客户端</li><li>locked：在MySQL服务层，该线程等待表锁</li><li>analyzeing and statisticas：线程正在收集存储引擎的统计信息，并生成查询的执行计划</li><li>copying to table [on disk]：线程正在执行查询，并将结果集复制到一个临时表中，这种状态通常在做group by union等 </li><li>sorting result：线程正在对结果集进行排序</li><li>sending data：多种情况，线程可能在多个状态之间传送数据，或者在生成结果集等</li></ul><h2 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h2><blockquote><p>这里指的是query cache</p></blockquote><p>在解析一个查询语句之前，如果缓存开启，MySQL会优先检查这个查询是否在缓存，是直接返回，否则下一个阶段</p><h2 id="查询优化处理"><a href="#查询优化处理" class="headerlink" title="查询优化处理"></a>查询优化处理</h2><p>此阶段进入查询优化，目标是将一个SQL转换成一个执行计划。MySQL会根据执行计划和存储引擎机械进行交互。这包含了多个子阶段：解析SQL、预处理、优化SQL执行计划，如果该过程有任何错误都可能和终止查询</p><p><strong>语法解析器和预处理</strong><br>MySQL会将SQL语句解析为对应的<em>解析树</em>，检查数据表和数据列是否存在、正确等</p><p><strong>查询优化器</strong><br>优化器是将SQL转换成执行计划，一条查询可以有多种执行方式，最后都返回相同的值。查询优化器是一个非常复杂的部件，它使用了很多优化策略来生成一个最优的执行计划</p><h2 id="查询执行引擎"><a href="#查询执行引擎" class="headerlink" title="查询执行引擎"></a>查询执行引擎</h2><p>MySQL根据执行计划给出的指令逐步执行，在该过程中，有大量的操作需要通过调用存储引擎实现的接口来完成，这些接口称为’handler  API’</p><h2 id="返回结果给客户端"><a href="#返回结果给客户端" class="headerlink" title="返回结果给客户端"></a>返回结果给客户端</h2><p>最后一个阶段是将结果返回客户端，如果查询可以被缓存，那么MySQL在这个阶段会将结果存放到查询缓存中</p><h1 id="查询优化器的提示-hint"><a href="#查询优化器的提示-hint" class="headerlink" title="查询优化器的提示(hint)"></a>查询优化器的提示(hint)</h1><p>如果对优化器选择的执行计划不满意，可使用优化器提供的几个提示(hint)来控制最终的执行计划</p><p><em>sql_small_result和sql_big_result</em><br>sql_smqll_result告诉优化器结果集很少，可以将结果集放在内存中的索引临时表，以避免排序操作。sql_big_result则告诉优化器结果集可能非常大，建议使用磁盘临时表做排序操作</p><blockquote><p>p233介绍了更多了的hint</p></blockquote><h1 id="优化特定类型的查询"><a href="#优化特定类型的查询" class="headerlink" title="优化特定类型的查询"></a>优化特定类型的查询</h1><blockquote><p>本节介绍的多数优化技巧都是和特定的版本有关的，对于其他版本未必适用</p></blockquote><h2 id="优化count"><a href="#优化count" class="headerlink" title="优化count()"></a>优化count()</h2><p>count聚合函数：可统计某个列值的数量，也可统计行数</p><ul><li>使用count(*)时，并不会像我们猜想的那样扩展成所有的列，实际上，它会忽略所有的列而直接统计所有的行数</li><li>如果希望知道的是结果集的行数，最好使用count(*)，这样写意义清晰，性能也会更好</li></ul><h2 id="优化group-by和distinct"><a href="#优化group-by和distinct" class="headerlink" title="优化group by和distinct"></a>优化group by和distinct</h2><p>使用sql_big_result和sql_small_result来让优化器按照你希望的方式运行</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul><li>优化数据访问：访问的数据量过大，是否查询了不必要的数据</li><li>重构查询方式：将大的查询切分成小的查询，例如将多表查询分成单表查询</li><li>理解查询是如何被执行的，以及时间都消耗在那些地方</li><li>优化通常需要三管齐下，不做(查询缓存)，少做，快速的做</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;&lt;em&gt;本章节来自 &lt;strong&gt;高性能MySQL&lt;/strong&gt; 第六章 查询性能优化&lt;/em&gt;&lt;br&gt;查询优化、索引优化、库表结构优
+      
+    
+    </summary>
+    
+      <category term="高性能MySQL读书笔记" scheme="http://yoursite.com/categories/%E9%AB%98%E6%80%A7%E8%83%BDMySQL%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Schema与数据类型优化</title>
-    <link href="http://yoursite.com/2019/04/19/Schema%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/"/>
-    <id>http://yoursite.com/2019/04/19/Schema与数据类型优化/</id>
+    <link href="http://yoursite.com/2019/04/19/mysql/Schema%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/"/>
+    <id>http://yoursite.com/2019/04/19/mysql/Schema与数据类型优化/</id>
     <published>2019-04-19T08:39:23.000Z</published>
     <updated>2019-04-19T10:29:36.015Z</updated>
     
@@ -118,8 +118,8 @@
   
   <entry>
     <title>zookeeper分布式锁原理</title>
-    <link href="http://yoursite.com/2019/04/19/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E7%90%86/"/>
-    <id>http://yoursite.com/2019/04/19/zookeeper分布式锁原理/</id>
+    <link href="http://yoursite.com/2019/04/19/zookeeper/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E7%90%86/"/>
+    <id>http://yoursite.com/2019/04/19/zookeeper/zookeeper分布式锁原理/</id>
     <published>2019-04-18T16:06:16.000Z</published>
     <updated>2019-04-19T08:27:18.089Z</updated>
     
@@ -151,8 +151,8 @@
   
   <entry>
     <title>zookeeper集群</title>
-    <link href="http://yoursite.com/2019/04/18/zookeeper%E9%9B%86%E7%BE%A4/"/>
-    <id>http://yoursite.com/2019/04/18/zookeeper集群/</id>
+    <link href="http://yoursite.com/2019/04/18/zookeeper/zookeeper%E9%9B%86%E7%BE%A4/"/>
+    <id>http://yoursite.com/2019/04/18/zookeeper/zookeeper集群/</id>
     <published>2019-04-18T06:08:54.000Z</published>
     <updated>2019-04-18T17:12:32.555Z</updated>
     
@@ -176,8 +176,8 @@
   
   <entry>
     <title>zookeeperACL权限控制</title>
-    <link href="http://yoursite.com/2019/04/18/zookeeperACL%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/"/>
-    <id>http://yoursite.com/2019/04/18/zookeeperACL权限控制/</id>
+    <link href="http://yoursite.com/2019/04/18/zookeeper/zookeeperACL%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/"/>
+    <id>http://yoursite.com/2019/04/18/zookeeper/zookeeperACL权限控制/</id>
     <published>2019-04-17T17:12:12.000Z</published>
     <updated>2019-04-18T17:12:54.359Z</updated>
     
@@ -201,8 +201,8 @@
   
   <entry>
     <title>zookeeper的watch机制</title>
-    <link href="http://yoursite.com/2019/04/18/zookeeper%E7%9A%84watch%E6%9C%BA%E5%88%B6/"/>
-    <id>http://yoursite.com/2019/04/18/zookeeper的watch机制/</id>
+    <link href="http://yoursite.com/2019/04/18/zookeeper/zookeeper%E7%9A%84watch%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2019/04/18/zookeeper/zookeeper的watch机制/</id>
     <published>2019-04-17T16:11:33.000Z</published>
     <updated>2019-04-18T17:12:36.497Z</updated>
     
@@ -226,8 +226,8 @@
   
   <entry>
     <title>zookeeper命令使用</title>
-    <link href="http://yoursite.com/2019/04/18/zookeeper%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2019/04/18/zookeeper命令使用/</id>
+    <link href="http://yoursite.com/2019/04/18/zookeeper/zookeeper%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/04/18/zookeeper/zookeeper命令使用/</id>
     <published>2019-04-17T16:10:33.000Z</published>
     <updated>2019-04-18T17:12:48.999Z</updated>
     
@@ -254,8 +254,8 @@
   
   <entry>
     <title>zookeeper基本数据模型</title>
-    <link href="http://yoursite.com/2019/04/17/zookeeper%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://yoursite.com/2019/04/17/zookeeper基本数据模型/</id>
+    <link href="http://yoursite.com/2019/04/17/zookeeper/zookeeper%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://yoursite.com/2019/04/17/zookeeper/zookeeper基本数据模型/</id>
     <published>2019-04-17T01:29:33.000Z</published>
     <updated>2019-04-18T17:12:44.984Z</updated>
     
@@ -282,8 +282,8 @@
   
   <entry>
     <title>zookeeper概述</title>
-    <link href="http://yoursite.com/2019/04/17/zookeeper%E6%A6%82%E8%BF%B0/"/>
-    <id>http://yoursite.com/2019/04/17/zookeeper概述/</id>
+    <link href="http://yoursite.com/2019/04/17/zookeeper/zookeeper%E6%A6%82%E8%BF%B0/"/>
+    <id>http://yoursite.com/2019/04/17/zookeeper/zookeeper概述/</id>
     <published>2019-04-17T00:29:33.000Z</published>
     <updated>2019-04-19T10:45:35.188Z</updated>
     
@@ -307,8 +307,8 @@
   
   <entry>
     <title>redis缓存使用与优化</title>
-    <link href="http://yoursite.com/2019/04/16/redis%E7%BC%93%E5%AD%98%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/"/>
-    <id>http://yoursite.com/2019/04/16/redis缓存使用与优化/</id>
+    <link href="http://yoursite.com/2019/04/16/redis/redis%E7%BC%93%E5%AD%98%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/"/>
+    <id>http://yoursite.com/2019/04/16/redis/redis缓存使用与优化/</id>
     <published>2019-04-15T17:21:17.000Z</published>
     <updated>2019-04-17T18:19:44.688Z</updated>
     
@@ -332,8 +332,8 @@
   
   <entry>
     <title>MySQL架构与存储引擎</title>
-    <link href="http://yoursite.com/2019/04/15/MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E6%A6%82%E8%BF%B0/"/>
-    <id>http://yoursite.com/2019/04/15/MySQL存储引擎概述/</id>
+    <link href="http://yoursite.com/2019/04/15/mysql/MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E6%A6%82%E8%BF%B0/"/>
+    <id>http://yoursite.com/2019/04/15/mysql/MySQL存储引擎概述/</id>
     <published>2019-04-15T12:48:06.000Z</published>
     <updated>2019-04-19T08:37:42.877Z</updated>
     
@@ -357,8 +357,8 @@
   
   <entry>
     <title>redis集群总结</title>
-    <link href="http://yoursite.com/2019/04/15/redis%E9%9B%86%E7%BE%A4%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2019/04/15/redis集群总结/</id>
+    <link href="http://yoursite.com/2019/04/15/redis/redis%E9%9B%86%E7%BE%A4%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/04/15/redis/redis集群总结/</id>
     <published>2019-04-15T08:47:57.000Z</published>
     <updated>2019-04-19T08:22:07.834Z</updated>
     
@@ -382,8 +382,8 @@
   
   <entry>
     <title>rediscluster常见运维问题</title>
-    <link href="http://yoursite.com/2019/04/15/rediscluster%E5%B8%B8%E8%A7%81%E8%BF%90%E7%BB%B4%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2019/04/15/rediscluster常见运维问题/</id>
+    <link href="http://yoursite.com/2019/04/15/redis/rediscluster%E5%B8%B8%E8%A7%81%E8%BF%90%E7%BB%B4%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/04/15/redis/rediscluster常见运维问题/</id>
     <published>2019-04-15T07:54:03.000Z</published>
     <updated>2019-04-17T18:19:24.121Z</updated>
     
@@ -408,8 +408,8 @@
   
   <entry>
     <title>rediscluster高可用</title>
-    <link href="http://yoursite.com/2019/04/15/rediscluster%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
-    <id>http://yoursite.com/2019/04/15/rediscluster高可用/</id>
+    <link href="http://yoursite.com/2019/04/15/redis/rediscluster%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/04/15/redis/rediscluster高可用/</id>
     <published>2019-04-15T07:49:51.000Z</published>
     <updated>2019-04-17T18:19:28.619Z</updated>
     
@@ -433,8 +433,8 @@
   
   <entry>
     <title>springboot原理</title>
-    <link href="http://yoursite.com/2019/04/14/springboot%E5%8E%9F%E7%90%86/"/>
-    <id>http://yoursite.com/2019/04/14/springboot原理/</id>
+    <link href="http://yoursite.com/2019/04/14/springboot/springboot%E5%8E%9F%E7%90%86/"/>
+    <id>http://yoursite.com/2019/04/14/springboot/springboot原理/</id>
     <published>2019-04-13T17:43:31.000Z</published>
     <updated>2019-04-19T08:22:05.495Z</updated>
     
@@ -458,8 +458,8 @@
   
   <entry>
     <title>redis集群伸缩</title>
-    <link href="http://yoursite.com/2019/04/12/redis%E9%9B%86%E7%BE%A4%E4%BC%B8%E7%BC%A9/"/>
-    <id>http://yoursite.com/2019/04/12/redis集群伸缩/</id>
+    <link href="http://yoursite.com/2019/04/12/redis/redis%E9%9B%86%E7%BE%A4%E4%BC%B8%E7%BC%A9/"/>
+    <id>http://yoursite.com/2019/04/12/redis/redis集群伸缩/</id>
     <published>2019-04-12T07:53:48.000Z</published>
     <updated>2019-04-17T18:19:58.229Z</updated>
     
@@ -483,8 +483,8 @@
   
   <entry>
     <title>redisCluster</title>
-    <link href="http://yoursite.com/2019/04/11/redisCluster/"/>
-    <id>http://yoursite.com/2019/04/11/redisCluster/</id>
+    <link href="http://yoursite.com/2019/04/11/redis/redisCluster/"/>
+    <id>http://yoursite.com/2019/04/11/redis/redisCluster/</id>
     <published>2019-04-11T13:37:51.000Z</published>
     <updated>2019-04-17T18:19:20.462Z</updated>
     
@@ -508,8 +508,8 @@
   
   <entry>
     <title>redis集群——哨兵</title>
-    <link href="http://yoursite.com/2019/04/08/redis%E9%9B%86%E7%BE%A4%E2%80%94%E2%80%94%E5%93%A8%E5%85%B5/"/>
-    <id>http://yoursite.com/2019/04/08/redis集群——哨兵/</id>
+    <link href="http://yoursite.com/2019/04/08/redis/redis%E9%9B%86%E7%BE%A4%E2%80%94%E2%80%94%E5%93%A8%E5%85%B5/"/>
+    <id>http://yoursite.com/2019/04/08/redis/redis集群——哨兵/</id>
     <published>2019-04-08T08:59:57.000Z</published>
     <updated>2019-04-17T18:19:49.582Z</updated>
     
