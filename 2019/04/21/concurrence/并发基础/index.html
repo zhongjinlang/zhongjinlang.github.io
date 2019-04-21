@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="zookeeper,乐观锁,">
+  <meta name="keywords" content="并发,">
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="常用命令 通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]   ls | ls2查看zookeeper路径1234[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CON">
-<meta name="keywords" content="zookeeper,乐观锁">
+<meta name="description" content="基本概念并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程会交替执行，这些线程是同时存在的。如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可同时运行 高并发(high concurrent)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求  并发：多个线程操作相同的资源，保证线程安全，合理使用资源">
+<meta name="keywords" content="并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="zookeeper命令使用">
-<meta property="og:url" content="http://yoursite.com/2019/04/18/zookeeper/zookeeper命令使用/index.html">
+<meta property="og:title" content="并发基础">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/concurrence/并发基础/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="常用命令 通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]   ls | ls2查看zookeeper路径1234[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CON">
+<meta property="og:description" content="基本概念并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程会交替执行，这些线程是同时存在的。如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可同时运行 高并发(high concurrent)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求  并发：多个线程操作相同的资源，保证线程安全，合理使用资源">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-18T17:12:48.999Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/01.jpg">
+<meta property="og:image" content="https://img-blog.csdn.net/20180522220730109">
+<meta property="og:updated_time" content="2019-04-21T08:35:21.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zookeeper命令使用">
-<meta name="twitter:description" content="常用命令 通过 ./zkCli.sh打开客户端进行命令行后台操作12[root@zhongjinlang bin]# zkCli.sh[zk: localhost:2181(CONNECTED) 0]   ls | ls2查看zookeeper路径1234[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CON">
+<meta name="twitter:title" content="并发基础">
+<meta name="twitter:description" content="基本概念并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程会交替执行，这些线程是同时存在的。如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可同时运行 高并发(high concurrent)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求  并发：多个线程操作相同的资源，保证线程安全，合理使用资源">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/01.jpg">
 
 
 
@@ -122,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/18/zookeeper/zookeeper命令使用/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/21/concurrence/并发基础/">
 
 
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -143,7 +146,7 @@
 
 
 
-  <title>zookeeper命令使用 | 胖虎的博客</title>
+  <title>并发基础 | 胖虎的博客</title>
   
 
 
@@ -322,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/zookeeper/zookeeper命令使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/concurrence/并发基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -339,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">zookeeper命令使用</h1>
+          <h1 class="post-title" itemprop="name headline">并发基础</h1>
         
 
         <div class="post-meta">
@@ -351,8 +354,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T00:10:33+08:00">
-                2019-04-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T00:00:00+08:00">
+                2019-04-21
               </time>
             
 
@@ -374,8 +377,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">zookeeper</span>
+                  <a href="/categories/Java并发系列文章/" itemprop="url" rel="index">
+                    <span itemprop="name">Java并发系列文章</span>
                   </a>
                 </span>
 
@@ -392,8 +395,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/18/zookeeper/zookeeper命令使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/zookeeper/zookeeper命令使用/" itemprop="commentCount"></span>
+                <a href="/2019/04/21/concurrence/并发基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/concurrence/并发基础/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -420,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  2.2k
                 </span>
               
 
@@ -436,7 +439,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4m
+                  7m
                 </span>
               
             </div>
@@ -457,74 +460,81 @@
       
 
       
-        <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
-<li>通过 ./zkCli.sh打开客户端进行命令行后台操作<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang bin]# zkCli.sh</span><br><span class="line">[zk: localhost:2181(CONNECTED) 0]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="ls-ls2"><a href="#ls-ls2" class="headerlink" title="ls | ls2"></a>ls | ls2</h2><p><strong>查看zookeeper路径</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 0] ls /</span><br><span class="line">[zookeeper]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 2] ls /zookeeper</span><br><span class="line">[quota]</span><br></pre></td></tr></table></figure></p>
-<p><strong>查看状态信息</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 3] ls2 /</span><br><span class="line">[zookeeper]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建了之后，zk为这个节点所分配的ID</span></span><br><span class="line">cZxid = 0x0</span><br><span class="line"><span class="meta">#</span><span class="bash"> create-time</span></span><br><span class="line">ctime = Thu Jan 01 08:00:00 CST 1970</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改后zk的ID</span></span><br><span class="line">mZxid = 0x0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改后节点的时间</span></span><br><span class="line">mtime = Thu Jan 01 08:00:00 CST 1970</span><br><span class="line"><span class="meta">#</span><span class="bash"> 子节点ID</span></span><br><span class="line">pZxid = 0x0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 子节点发生变化后的version值</span></span><br><span class="line">cversion = -1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当前节点数据的version，修改后累加1</span></span><br><span class="line">dataVersion = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 权限</span></span><br><span class="line">aclVersion = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 数据长度</span></span><br><span class="line">dataLength = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 子节点个数（ls /）</span></span><br><span class="line">numChildren = 1</span><br></pre></td></tr></table></figure></p>
-<h2 id="get-stat"><a href="#get-stat" class="headerlink" title="get | stat"></a>get | stat</h2><ul>
-<li><p>stat命令：ls2 = ls + stat</p>
-</li>
-<li><p>get：取出当前节点数据，如果没有数据，与上述内容一至</p>
-</li>
-</ul>
-<h1 id="节点操作命令"><a href="#节点操作命令" class="headerlink" title="节点操作命令"></a>节点操作命令</h1><p>讲述该节内容前，我们先阐述session的基本原理：</p>
+        <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p><em>并发</em>：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程会交替执行，这些线程是同时存在的。如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可同时运行<br></p>
+<p><em>高并发(high concurrent)</em>：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够<em>同时并行处理</em>很多请求</p>
 <ul>
-<li>客户端与服务端之间的连接存在会话</li>
-<li>每个会话都可设置一个超时时间（30分钟不操作session失效）：心跳结束，则session过期</li>
-<li>session过期，临时节点znode会被抛弃</li>
-<li>心跳机制： 客户端向服务端的ping包请求</li>
+<li>并发：多个线程操作相同的资源，保证线程安全，合理使用资源</li>
+<li>高并发：服务能同时处理很多请求，提高程序性能</li>
 </ul>
-<h2 id="create"><a href="#create" class="headerlink" title="create"></a>create</h2><ul>
-<li><p>创建默认节点节点（持久化节点）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 11] create /imooc immoc-data </span><br><span class="line">Created /imooc</span><br><span class="line">[zk: localhost:2181(CONNECTED) 12] get /immoc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当前节点的持久化数据</span></span><br><span class="line">immoc-data</span><br><span class="line">..</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 数据长度</span></span><br><span class="line">dataLength = 10</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建节点后目录为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 4] ls /     </span><br><span class="line">[zookeeper, imooc]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建临时节点: create -e /imooc/tmp immoc-data</p>
-</li>
-<li><p>创建顺序节点: 每个节点后缀都会增加数值</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 5] create -s /imooc/sec seq </span><br><span class="line">Created /imooc/sec0000000001</span><br><span class="line">[zk: localhost:2181(CONNECTED) 6] create -s /imooc/sec seq</span><br><span class="line">Created /imooc/sec0000000002</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="set-delete"><a href="#set-delete" class="headerlink" title="set | delete"></a>set | delete</h2><ul>
-<li><p>set path data [version]：修改节点如果默认不设置版本号，直接删除。加上版本号可实现乐观锁(只能修改最新的数据)</p>
-</li>
-<li><p>delete path [version]: 直接删除节点, 加上版本号只能删除最新数据</p>
-</li>
-</ul>
-<h1 id="四字命令-four-letter-words"><a href="#四字命令-four-letter-words" class="headerlink" title="四字命令 four letter words"></a>四字命令 four letter words</h1><p>zookeeper可通过它自身提供的简写命令来和服务器进行交互, 可查看服务器的一些状态信息。使用运维来进行监控</p>
+<h1 id="CPU多级缓存"><a href="#CPU多级缓存" class="headerlink" title="CPU多级缓存"></a>CPU多级缓存</h1><p>随着现代半导体工艺的发展，CPU的频率越来远快，相对内存快了一个数量级，对于访存的操作CPU就需要等待主存，这样会导致资源的白白浪费。所以cache的出现是为了解决CPU与内存速度不匹配的问题<br></p>
+<p>cache 的工作原理是基于“局部性”原理，它包含以下两个方面：</p>
 <ul>
-<li>需要使用nc命令，安装yum install nc</li>
-<li>语法： echo [commod] | nc [ip] [port]</li>
+<li>时间局部性：如果某个数据被访问，那么不久将来它很可能再次被访问</li>
+<li>空间局部性：如果某个数据被访问，那么与它相邻的数据也可能被访问</li>
 </ul>
-<h2 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h2><p>它可查看zookeeper的状态信息，以及是否mode（集群还是单机）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo stat | nc 192.168.211.136 2181</span><br><span class="line">Zookeeper version: 3.4.11-37e277162d567b55a07d1755f0b31c32e93c01a0, built on 11/01/2017 18:06 GMT</span><br><span class="line">Clients:</span><br><span class="line"> /192.168.211.136:34346[0](queued=0,recved=1,sent=0)</span><br><span class="line"></span><br><span class="line">Latency min/avg/max: 0/0/27</span><br><span class="line">Received: 2696</span><br><span class="line">Sent: 2701</span><br><span class="line">Connections: 1</span><br><span class="line">Outstanding: 0</span><br><span class="line">Zxid: 0x45</span><br><span class="line">Mode: standalone</span><br><span class="line">Node count: 8</span><br></pre></td></tr></table></figure>
-<h2 id="ruok"><a href="#ruok" class="headerlink" title="ruok"></a>ruok</h2><p>查看当前zk服务是否启动，启动返回imok</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo ruok | nc localhost 2181</span><br><span class="line">imok[root@zhongjinlang /]#</span><br></pre></td></tr></table></figure>
-<h2 id="dump"><a href="#dump" class="headerlink" title="dump"></a>dump</h2><p>列出未经处理的会话和临时节点</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo dump | nc localhost 2181</span><br><span class="line">SessionTracker dump:</span><br><span class="line">Session Sets (0):</span><br><span class="line">ephemeral nodes dump:</span><br><span class="line">Sessions with Ephemerals (0):</span><br></pre></td></tr></table></figure>
-<h2 id="conf"><a href="#conf" class="headerlink" title="conf"></a>conf</h2><p>查看服务器配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo conf | nc localhost 2181</span><br><span class="line">clientPort=2181</span><br><span class="line">dataDir=/usr/local/server/zookeeper/zookeeper-3.4.11/bin/../dataDir/version-2</span><br><span class="line">dataLogDir=/usr/local/server/zookeeper/zookeeper-3.4.11/bin/../dataLogDir/version-2</span><br><span class="line">tickTime=2000</span><br><span class="line">maxClientCnxns=60</span><br><span class="line">minSessionTimeout=4000</span><br><span class="line">maxSessionTimeout=40000</span><br><span class="line">serverId=0</span><br></pre></td></tr></table></figure>
-<h2 id="cons"><a href="#cons" class="headerlink" title="cons"></a>cons</h2><p>展示连接到服务器的客户端信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo cons | nc localhost 2181</span><br><span class="line"> /0:0:0:0:0:0:0:1:47224[0](queued=0,recved=1,sent=0)</span><br></pre></td></tr></table></figure>
-<h2 id="mntr"><a href="#mntr" class="headerlink" title="mntr"></a>mntr</h2><p>监控zookeeper的健康信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo mntr | nc localhost 2181</span><br><span class="line">zk_version	3.4.11-37e277162d567b55a07d1755f0b31c32e93c01a0, built on 11/01/2017 18:06 GMT</span><br><span class="line">zk_avg_latency	0</span><br><span class="line">zk_max_latency	27</span><br><span class="line">zk_min_latency	0</span><br><span class="line">zk_packets_received	2703</span><br><span class="line">zk_packets_sent	2708</span><br><span class="line">zk_num_alive_connections	1</span><br><span class="line">zk_outstanding_requests	0</span><br><span class="line">zk_server_state	standalone</span><br><span class="line">zk_znode_count	8</span><br><span class="line">zk_watch_count	0</span><br><span class="line">zk_ephemerals_count	0</span><br><span class="line">zk_approximate_data_size	85</span><br><span class="line">zk_open_file_descriptor_count	30</span><br><span class="line">zk_max_file_descriptor_count	4096</span><br></pre></td></tr></table></figure>
-<h2 id="wchs"><a href="#wchs" class="headerlink" title="wchs"></a>wchs</h2><p>展示watch信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang /]# echo wchs | nc localhost 2181</span><br><span class="line">0 connections watching 0 paths</span><br><span class="line">Total watches:0</span><br></pre></td></tr></table></figure>
+<p>cache中保存着cpu刚用过的数据或者是循环使用的数据，这时，从cache中读取数据就会很快，减少了cpu等待的时间，提高了系统的性能</p>
+<h2 id="缓存带来的问题"><a href="#缓存带来的问题" class="headerlink" title="缓存带来的问题"></a>缓存带来的问题</h2><p>cache 给系统带来性能上飞跃的同时，也引入了新的问题“缓存一致性问题”。设想如下场景（cpu一共有两个核，core1和core2）：<br>以i++为例，i的初始值是0.那么在开始每个核都存储了i的值0，当第core1块做i++的时候，其缓存中的值变成了1，即使马上回写到主内存，那么在回写之后core2缓存中的i值依然是0，其执行i++，回写到内存就会覆盖第一块内核的操作，使得最终的结果是1，而不是预期中的2</p>
+<h1 id="缓存一致性-MESI"><a href="#缓存一致性-MESI" class="headerlink" title="缓存一致性(MESI)"></a>缓存一致性(MESI)</h1><p>为了达到数据访问的一致，需要各个处理器在访问缓存时遵循一些协议，在读写时根据协议来操作，常见的协议有MSI，MESI，MOSI等。我们介绍其中最经典的MESI协议</p>
+<p>在MESI协议中，每个cache line有4个状态，可用2个bit表示，它们分别是：</p>
+<ul>
+<li>M(Modified): 这行数据有效，数据被修改了，和内存中的数据不一致，数据只存在于本Cache中</li>
+<li>E(Exclusive): 这行数据有效，数据和内存中的数据一致，数据只存在于本Cache中</li>
+<li>S(Shared): 这行数据有效，数据和内存中的数据一致，数据存在于很多Cache中</li>
+<li>I(Invalid): 这行数据无效</li>
+</ul>
+<p><strong>CPU多级缓存-乱序执行优化</strong><br>处理器为提高运算速度而做出违背代码原有顺序的优化</p>
+<p><strong>乱序执行优化出现问题的原因</strong><br>在单核时代处理器做出的优化可以保证执行结果不会远离预期目标，但是，在多核时代却并非如此。在多核时代，同时会有多个核同时执行指令，每一个核的指令都可能被乱序。另外,处理器还引入了L1，L2,…,Ln等多级缓存机制，每个核心都有自己的缓存机制，这样就导致了逻辑次序上后写入内存的数据未必真的最后写入。最后就带来一个问题，如果不做任何防护措施，处理器最终得出的结果和逻辑得出结果会大不相同。比如，在一个核上执行写入操作，并在最后写一个标记用来表示操作完毕，之后从另外一个核上通过判断这个标记来判定所需要的数据是否已经就绪，这种做法就存在一定风险：标记位先被写入但之前的操作却并未完成(可能是未计算完成，也可能是数据没有从处理器缓存刷新到主存中，最终导致另外的核使用了错误的数据)</p>
+<h1 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h1><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/01.jpg" alt></p>
+<p>JMM规定了线程的工作内存和主内存的交互关系，以及线程之间的可见性和程序的执行顺序。一方面，要为程序员提供足够强的内存可见性保证；另一方面，对编译器和处理器的限制要尽可能地放松。JMM对程序员屏蔽了CPU以及OS内存的使用问题，能够使程序在不同的CPU和OS内存上都能够达到预期的效果。</p>
+<p>Java采用内存共享的模式来实现线程之间的通信。编译器和处理器可以对程序进行重排序优化处理，但是需要遵守一些规则，不能随意重排序</p>
+<h2 id="Java内存模型—同步八种操作"><a href="#Java内存模型—同步八种操作" class="headerlink" title="Java内存模型—同步八种操作"></a>Java内存模型—同步八种操作</h2><p><img src="https://img-blog.csdn.net/20180522220730109" alt></p>
+<ul>
+<li><p>lock(锁定)：作用于主内存的变量，把一个变量标记为一条线程独占状态</p>
+</li>
+<li><p>unlock(解锁)：作用于主内存的变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定</p>
+</li>
+<li><p>read(读取)：作用于主内存的变量，把一个变量值从主内存传输到线程的工作内存中，以便随后的load动作使用</p>
+</li>
+<li><p>load(载入)：作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中</p>
+</li>
+<li><p>use(使用)：作用于工作内存的变量，把工作内存中的一个变量值传递给执行引擎</p>
+</li>
+<li><p>assign(赋值)：作用于工作内存的变量，它把一个从执行引擎接收到的值赋给工作内存的变量</p>
+</li>
+<li><p>store(存储)：作用于工作内存的变量，把工作内存中的一个变量的值传送到主内存中，以便随后的write的操作</p>
+</li>
+<li><p>write(写入)：作用于工作内存的变量，它把store操作从工作内存中的一个变量的值传送到主内存的变量中</p>
+</li>
+</ul>
+<h2 id="同步规则分析"><a href="#同步规则分析" class="headerlink" title="同步规则分析"></a>同步规则分析</h2><ul>
+<li><p>不允许一个线程无原因地（没有发生过任何assign操作）把数据从工作内存同步会主内存中</p>
+</li>
+<li><p>一个新的变量只能在主内存中诞生，不允许在工作内存中直接使用一个未被初始化（load或者assign）的变量。即就是对一个变量实施use和store操作之前，必须先自行assign和load操作。</p>
+</li>
+<li><p>一个变量在同一时刻只允许一条线程对其进行lock操作，但lock操作可以被同一线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。lock和unlock必须成对出现。</p>
+</li>
+<li><p>如果对一个变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使用这个变量之前需要重新执行load或assign操作初始化变量的值。</p>
+</li>
+<li><p>如果一个变量事先没有被lock操作锁定，则不允许对它执行unlock操作；也不允许去unlock一个被其他线程锁定的变量。</p>
+</li>
+</ul>
+<p>-对一个变量执行unlock操作之前，必须先把此变量同步到主内存中（执行store和write操作）</p>
+<h1 id="并发的优势和风险"><a href="#并发的优势和风险" class="headerlink" title="并发的优势和风险"></a>并发的优势和风险</h1><p><em>优势</em>:</p>
+<ul>
+<li>速度：同时处理多个请求，响应更快；复杂的操作可以分成多个进程（或线程）同时进行</li>
+<li>设计：程序设计在某些情况下更简单，也可以有更多的选择</li>
+<li>资源利用：CPU能够等待IO的时候能够做一些其他的事情</li>
+</ul>
+<p><em>风险</em>:</p>
+<ul>
+<li>安全性：多个线程共享数据时可能会产生于期望不相符的结果</li>
+<li>活跃性：某个操作无法继续进行下去时，就会发生活跃性问题。比如：死锁、饥饿等问题。</li>
+<li>性能：线程过多时会使得：CPU频繁切换，调度时间增多；同步机制；消耗过多内存</li>
+</ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>ls / 查看zk目录</li>
-<li>ls2 / 查看节点信息</li>
-<li>get / 取出当前节点信息</li>
-<li>zookeeper存储了节点的各种状态，如数据的大小、修改时间等</li>
-<li>ephemeralOwner = 0x0属性如果为0x0那么为临时节点，否则为持久节点（后面是一串数据）。临时节点在断开连接后消失（10秒左右延迟 - 心跳机制）</li>
-<li>create path data创建持久化节点</li>
-<li>set path data [version]修改节点</li>
-<li>delete path data [version]删除节点</li>
-<li>使用set和delete时候，建议根据version删除，可达到<em>乐观锁的</em>效果，不会删除到之前旧的数据</li>
-<li>zookeeper提供四字命令可查看服务器的一些状态信息，语法：echo [命令] | nc [ip] [port]</li>
+<li>CPU多级缓存：缓存一致性、乱序执行优化</li>
+<li>Java内存模型： JMM规定、抽象结构、同步八种操作以及规则</li>
+<li>Java并发的优势与风险</li>
 </ul>
 
       
@@ -544,8 +554,8 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月19日 01:04:48</p>
-  <p><span>原始链接:</span><a href="/2019/04/18/zookeeper/zookeeper命令使用/" title="zookeeper命令使用">http://yoursite.com/2019/04/18/zookeeper/zookeeper命令使用/</a></p>
+  <p><span>最后更新:</span>2019年04月21日 16:04:21</p>
+  <p><span>原始链接:</span><a href="/2019/04/21/concurrence/并发基础/" title="并发基础">http://yoursite.com/2019/04/21/concurrence/并发基础/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
 
@@ -562,9 +572,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/zookeeper/" rel="tag"><i class="fa fa-tag"></i>zookeeper</a>
-          
-            <a href="/tags/乐观锁/" rel="tag"><i class="fa fa-tag"></i>乐观锁</a>
+            <a href="/tags/并发/" rel="tag"><i class="fa fa-tag"></i>并发</a>
           
         </div>
       
@@ -577,8 +585,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/17/zookeeper/zookeeper基本数据模型/" rel="next" title="zookeeper基本数据模型">
-                <i class="fa fa-chevron-left"></i> zookeeper基本数据模型
+              <a href="/2019/04/20/mysql/创建高性能的索引/" rel="next" title="创建高性能的索引">
+                <i class="fa fa-chevron-left"></i> 创建高性能的索引
               </a>
             
           </div>
@@ -587,8 +595,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/18/zookeeper/zookeeper的watch机制/" rel="prev" title="zookeeper的watch机制">
-                zookeeper的watch机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/21/mysql/查询性能优化/" rel="prev" title="查询性能优化">
+                查询性能优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -767,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ls-ls2"><span class="nav-number">1.1.</span> <span class="nav-text">ls | ls2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-stat"><span class="nav-number">1.2.</span> <span class="nav-text">get | stat</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#节点操作命令"><span class="nav-number">2.</span> <span class="nav-text">节点操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#create"><span class="nav-number">2.1.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-delete"><span class="nav-number">2.2.</span> <span class="nav-text">set | delete</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四字命令-four-letter-words"><span class="nav-number">3.</span> <span class="nav-text">四字命令 four letter words</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stat"><span class="nav-number">3.1.</span> <span class="nav-text">stat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ruok"><span class="nav-number">3.2.</span> <span class="nav-text">ruok</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dump"><span class="nav-number">3.3.</span> <span class="nav-text">dump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conf"><span class="nav-number">3.4.</span> <span class="nav-text">conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cons"><span class="nav-number">3.5.</span> <span class="nav-text">cons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mntr"><span class="nav-number">3.6.</span> <span class="nav-text">mntr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wchs"><span class="nav-number">3.7.</span> <span class="nav-text">wchs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU多级缓存"><span class="nav-number">2.</span> <span class="nav-text">CPU多级缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存带来的问题"><span class="nav-number">2.1.</span> <span class="nav-text">缓存带来的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存一致性-MESI"><span class="nav-number">3.</span> <span class="nav-text">缓存一致性(MESI)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java内存模型"><span class="nav-number">4.</span> <span class="nav-text">Java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存模型—同步八种操作"><span class="nav-number">4.1.</span> <span class="nav-text">Java内存模型—同步八种操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步规则分析"><span class="nav-number">4.2.</span> <span class="nav-text">同步规则分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发的优势和风险"><span class="nav-number">5.</span> <span class="nav-text">并发的优势和风险</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -980,9 +988,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/18/zookeeper/zookeeper命令使用/';
-          this.page.identifier = '2019/04/18/zookeeper/zookeeper命令使用/';
-          this.page.title = 'zookeeper命令使用';
+          this.page.url = 'http://yoursite.com/2019/04/21/concurrence/并发基础/';
+          this.page.identifier = '2019/04/21/concurrence/并发基础/';
+          this.page.title = '并发基础';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
