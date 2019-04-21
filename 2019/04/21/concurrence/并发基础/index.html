@@ -90,8 +90,8 @@
 <meta property="og:description" content="基本概念并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程会交替执行，这些线程是同时存在的。如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可同时运行 高并发(high concurrent)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求  并发：多个线程操作相同的资源，保证线程安全，合理使用资源">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/01.jpg">
-<meta property="og:image" content="https://img-blog.csdn.net/20180522220730109">
-<meta property="og:updated_time" content="2019-04-21T16:15:41.619Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/17.jpg">
+<meta property="og:updated_time" content="2019-04-21T17:33:31.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发基础">
 <meta name="twitter:description" content="基本概念并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程会交替执行，这些线程是同时存在的。如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可同时运行 高并发(high concurrent)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求  并发：多个线程操作相同的资源，保证线程安全，合理使用资源">
@@ -487,7 +487,7 @@
 <h1 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h1><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/01.jpg" alt></p>
 <p>JMM规定了线程的工作内存和主内存的交互关系，以及线程之间的可见性和程序的执行顺序。一方面，要为程序员提供足够强的内存可见性保证；另一方面，对编译器和处理器的限制要尽可能地放松。JMM对程序员屏蔽了CPU以及OS内存的使用问题，能够使程序在不同的CPU和OS内存上都能够达到预期的效果。</p>
 <p>Java采用内存共享的模式来实现线程之间的通信。编译器和处理器可以对程序进行重排序优化处理，但是需要遵守一些规则，不能随意重排序</p>
-<h2 id="Java内存模型—同步八种操作"><a href="#Java内存模型—同步八种操作" class="headerlink" title="Java内存模型—同步八种操作"></a>Java内存模型—同步八种操作</h2><p><img src="https://img-blog.csdn.net/20180522220730109" alt></p>
+<h2 id="Java内存模型—同步八种操作"><a href="#Java内存模型—同步八种操作" class="headerlink" title="Java内存模型—同步八种操作"></a>Java内存模型—同步八种操作</h2><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/17.jpg" alt></p>
 <ul>
 <li><p>lock(锁定)：作用于主内存的变量，把一个变量标记为一条线程独占状态</p>
 </li>
@@ -554,7 +554,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月22日 00:04:41</p>
+  <p><span>最后更新:</span>2019年04月22日 01:04:31</p>
   <p><span>原始链接:</span><a href="/2019/04/21/concurrence/并发基础/" title="并发基础">http://yoursite.com/2019/04/21/concurrence/并发基础/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -585,8 +585,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/20/mysql/创建高性能的索引/" rel="next" title="创建高性能的索引">
-                <i class="fa fa-chevron-left"></i> 创建高性能的索引
+              <a href="/2019/04/21/concurrence/并发压力测试/" rel="next" title="并发压力测试">
+                <i class="fa fa-chevron-left"></i> 并发压力测试
               </a>
             
           </div>
@@ -595,8 +595,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/21/concurrence/并发压力测试/" rel="prev" title="并发压力测试">
-                并发压力测试 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/22/concurrence/线程安全性/" rel="prev" title="线程安全性">
+                线程安全性 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
