@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="mysql,">
 
 
 
@@ -82,6 +82,7 @@
 
 
 <meta name="description" content="前言本章节来自 高性能MySQL 第六章 查询性能优化查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在 为什么查询速度会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。  查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="查询性能优化">
 <meta property="og:url" content="http://yoursite.com/2019/04/20/查询性能优化/index.html">
@@ -89,7 +90,7 @@
 <meta property="og:description" content="前言本章节来自 高性能MySQL 第六章 查询性能优化查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在 为什么查询速度会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。  查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/mysql-phone/mysql-001.jpg">
-<meta property="og:updated_time" content="2019-04-21T05:57:12.759Z">
+<meta property="og:updated_time" content="2019-04-21T06:01:14.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查询性能优化">
 <meta name="twitter:description" content="前言本章节来自 高性能MySQL 第六章 查询性能优化查询优化、索引优化、库表结构优化需要齐头并进，一个不落，本章节理解MySQL如何真正的指向查询，并明白高效的低效的原因何在 为什么查询速度会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定的时间。因此我们要优化查询实际上就是优化子任务。  查询生命周期：从客户，到服务器，然后再服务器上进行解析，生成指向计划，执行，后">
@@ -363,6 +364,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/高性能MySQL读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">高性能MySQL读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -557,7 +580,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月21日 13:04:12</p>
+  <p><span>最后更新:</span>2019年04月21日 14:04:14</p>
   <p><span>原始链接:</span><a href="/2019/04/20/查询性能优化/" title="查询性能优化">http://yoursite.com/2019/04/20/查询性能优化/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -573,6 +596,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i>mysql</a>
+          
+        </div>
+      
 
       
       
@@ -582,8 +611,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/19/Schema与数据类型优化/" rel="next" title="Schema与数据类型优化">
-                <i class="fa fa-chevron-left"></i> Schema与数据类型优化
+              <a href="/2019/04/20/创建高性能的索引/" rel="next" title="创建高性能的索引">
+                <i class="fa fa-chevron-left"></i> 创建高性能的索引
               </a>
             
           </div>
@@ -592,8 +621,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/20/创建高性能的索引/" rel="prev" title="创建高性能的索引">
-                创建高性能的索引 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/21/并发基础(一)/" rel="prev" title="并发基础（一）">
+                并发基础（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -754,7 +783,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
