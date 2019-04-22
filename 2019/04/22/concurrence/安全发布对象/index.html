@@ -81,32 +81,18 @@
 
 
 
-<meta name="description" content="postmanPostman 是一个很强大的 API调试、Http请求的工具  我们将测试如下接口, 环境：springboot12345678@RestController@Slf4jpublic class TestController &amp;#123;    @RequestMapping(&quot;/test.do&quot;)    public String test()&amp;#123;        retu">
+<meta name="description" content="什么是发布对象?发布对象：使一个对象能够被当前范围之外的外码所使用对象逸出一种错误的发布，当一个对象还没有构造完成时，就被其他线程所见了 不安全的发布对象案例123456789101112131415161718@Slf4j@NotThreadSafepublic class UnsafePublish &amp;#123;    private String[] status = &amp;#123;&quot;a&quot;,">
 <meta name="keywords" content="并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发压力测试">
-<meta property="og:url" content="http://yoursite.com/2019/04/21/concurrence/并发压力测试/index.html">
+<meta property="og:title" content="安全发布对象">
+<meta property="og:url" content="http://yoursite.com/2019/04/22/concurrence/安全发布对象/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="postmanPostman 是一个很强大的 API调试、Http请求的工具  我们将测试如下接口, 环境：springboot12345678@RestController@Slf4jpublic class TestController &amp;#123;    @RequestMapping(&quot;/test.do&quot;)    public String test()&amp;#123;        retu">
+<meta property="og:description" content="什么是发布对象?发布对象：使一个对象能够被当前范围之外的外码所使用对象逸出一种错误的发布，当一个对象还没有构造完成时，就被其他线程所见了 不安全的发布对象案例123456789101112131415161718@Slf4j@NotThreadSafepublic class UnsafePublish &amp;#123;    private String[] status = &amp;#123;&quot;a&quot;,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/02.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/03.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/04.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/05.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/06.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/07.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/08.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/09.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/10.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/11.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/12.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/13.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/14.jpg">
-<meta property="og:updated_time" content="2019-04-21T17:34:14.711Z">
+<meta property="og:updated_time" content="2019-04-22T09:34:45.443Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发压力测试">
-<meta name="twitter:description" content="postmanPostman 是一个很强大的 API调试、Http请求的工具  我们将测试如下接口, 环境：springboot12345678@RestController@Slf4jpublic class TestController &amp;#123;    @RequestMapping(&quot;/test.do&quot;)    public String test()&amp;#123;        retu">
-<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/02.jpg">
+<meta name="twitter:title" content="安全发布对象">
+<meta name="twitter:description" content="什么是发布对象?发布对象：使一个对象能够被当前范围之外的外码所使用对象逸出一种错误的发布，当一个对象还没有构造完成时，就被其他线程所见了 不安全的发布对象案例123456789101112131415161718@Slf4j@NotThreadSafepublic class UnsafePublish &amp;#123;    private String[] status = &amp;#123;&quot;a&quot;,">
 
 
 
@@ -136,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/21/concurrence/并发压力测试/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/22/concurrence/安全发布对象/">
 
 
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -157,7 +143,7 @@
 
 
 
-  <title>并发压力测试 | 胖虎的博客</title>
+  <title>安全发布对象 | 胖虎的博客</title>
   
 
 
@@ -336,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/concurrence/并发压力测试/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/concurrence/安全发布对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -353,7 +339,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">并发压力测试</h1>
+          <h1 class="post-title" itemprop="name headline">安全发布对象</h1>
         
 
         <div class="post-meta">
@@ -365,8 +351,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T00:00:00+08:00">
-                2019-04-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T17:34:20+08:00">
+                2019-04-22
               </time>
             
 
@@ -406,8 +392,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/21/concurrence/并发压力测试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/concurrence/并发压力测试/" itemprop="commentCount"></span>
+                <a href="/2019/04/22/concurrence/安全发布对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/22/concurrence/安全发布对象/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -434,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  794
+                  913
                 </span>
               
 
@@ -471,72 +457,40 @@
       
 
       
-        <h1 id="postman"><a href="#postman" class="headerlink" title="postman"></a>postman</h1><p>Postman 是一个很强大的 API调试、Http请求的工具</p>
+        <h1 id="什么是发布对象"><a href="#什么是发布对象" class="headerlink" title="什么是发布对象?"></a>什么是发布对象?</h1><p>发布对象：使一个对象能够被当前范围之外的外码所使用<br><em>对象逸出</em><br>一种错误的发布，当一个对象还没有构造完成时，就被其他线程所见了</p>
+<p><em>不安全的发布对象案例</em><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnsafePublish</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String[] status = &#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String[] getStatus() &#123;</span><br><span class="line">        <span class="keyword">return</span> status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UnsafePublish unsafePublish = <span class="keyword">new</span> UnsafePublish();</span><br><span class="line">        log.info(<span class="string">"&#123;&#125;"</span>, Arrays.toString(unsafePublish.getStatus())); <span class="comment">// abc</span></span><br><span class="line"></span><br><span class="line">        unsafePublish.getStatus()[<span class="number">0</span>] = <span class="string">"z"</span>;</span><br><span class="line">        log.info(<span class="string">"&#123;&#125;"</span>, Arrays.toString(unsafePublish.getStatus())); <span class="comment">// zbc</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>可能产生对象逸出</em><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="meta">@NotRecommend</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Escape</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> thisCanBeEscape = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Escape</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> innerClass();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">innerClass</span></span>&#123;</span><br><span class="line">        <span class="comment">// 对象没有被正确构造之前就发布对象，可能会不安全</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">innerClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            log.info(<span class="string">"&#123;&#125;"</span>, Escape.<span class="keyword">this</span>.thisCanBeEscape); <span class="comment">// 启动了另一个对象引用</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Escape();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="安全发布对象"><a href="#安全发布对象" class="headerlink" title="安全发布对象"></a>安全发布对象</h1><p>安全发布对象的四种方法：</p>
 <ul>
-<li>我们将测试如下接口, 环境：springboot<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/test.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"test"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>在静态初始化函数中初始化一个对象引用</li>
+<li>将对象的引用保存到volatile类型域或者AtomicReference对象中</li>
+<li>将对象的引用保存到某个正确的构造对象的final类型域中</li>
+<li>将对象的引用保存到一个由锁保护的域中</li>
 </ul>
+<p>此时我们会想到采用单例模式来构建一个对象</p>
+<h2 id="单例-懒汉模式"><a href="#单例-懒汉模式" class="headerlink" title="单例-懒汉模式"></a>单例-懒汉模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 懒汉模式：单例实例在第一次使用时创建</span></span><br><span class="line"><span class="comment"> * 单线程环境下安全，但是多线程环境不安全</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleExample1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleExample1</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleExample1 instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态工厂方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleExample1 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            instance = <span class="keyword">new</span> SingleExample1();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>@Slf4j采用了lombok简化了代码，它可直接使用log.info()使用日志对象</p>
+<p>懒汉模式线程不安全，当然可以使用synchronization修饰方法这样就线程安全了。但是不推荐，会导致性能下降</p>
 </blockquote>
-<p><strong>使用之前我们先配置全局参数，方便日后的使用</strong></p>
-<ul>
-<li><p>设置全局变量<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/02.jpg" alt></p>
-</li>
-<li><p>定义全局变量参数<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/03.jpg" alt></p>
-</li>
-<li><p>测试接口<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/04.jpg" alt></p>
-</li>
-</ul>
-<h2 id="模拟并发"><a href="#模拟并发" class="headerlink" title="模拟并发"></a>模拟并发</h2><p>创建一个分类目录，将上述的测试接口添加到该目录中，点击run<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/05.jpg" alt></p>
-<ul>
-<li>此时会出现新的窗口，进行并发测试<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/06.jpg" alt></li>
-</ul>
-<h1 id="apache-benche"><a href="#apache-benche" class="headerlink" title="apache benche"></a>apache benche</h1><p>ApacheBench 是 Apache 服务器自带的一个web压力测试工具，简称ab。ab又是一个命令行工具，对发起负载的本机要求很低，根据ab命令可以创建很多的并发访问线程，模拟多个访问者同时对某一URL地址进行访问，因此可以用来测试目标服务器的负载压力。总的来说ab工具小巧简单，上手学习较快，可以提供需要的基本性能指标，但是没有图形化结果，不能监控</p>
+<h2 id="单例-饿汉模式"><a href="#单例-饿汉模式" class="headerlink" title="单例-饿汉模式"></a>单例-饿汉模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 饿汗模式：单例实例在类加载时就进行创建</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleExample2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleExample2</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingleExample2 instance = <span class="keyword">new</span> SingleExample2();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态工厂方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleExample2 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>download: <a href="https://www.apachelounge.com/download/" target="_blank" rel="noopener">https://www.apachelounge.com/download/</a></p>
+<p>饿汉模式是线程安全的</p>
 </blockquote>
-<ul>
-<li><p>ab命令进行并发测试<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/07.jpg" alt></p>
-</li>
-<li><p>测试参数如下<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/08.jpg" alt></p>
-</li>
-</ul>
-<h1 id="jmeter"><a href="#jmeter" class="headerlink" title="jmeter"></a>jmeter</h1><p> Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测 试但后来扩展到其他测试领域。 它可以用于测试静态和动态资源例如静态文件、Java 小服务程序、CGI 脚本、Java 对象、 数据库， FTP 服务器， 等等。JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来在不同压力类别下测试它们的 强度和分析整体性能。另外，JMeter能够对应用程序做功能/回归测试，通过创建带有断言的脚本来验证你的程序返回了你期望的结果</p>
+<h2 id="优化懒汉模式"><a href="#优化懒汉模式" class="headerlink" title="优化懒汉模式"></a>优化懒汉模式</h2><p><em>使用双重检测机制</em><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleExample4</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleExample4</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> SingleExample4 instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态工厂方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleExample4 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123; <span class="comment">// 双从检测机制</span></span><br><span class="line">            <span class="keyword">synchronized</span> (SingleExample4.class)&#123; <span class="comment">// 同步锁</span></span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> SingleExample4();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>download:<a href="https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/</a></p>
+<p>注意：必须加上volatile否则还是线程不安全的。因为可能会导致指令重排问题。而volatile有个使用场景其中的双重检测机制</p>
 </blockquote>
-<p><em>解压完毕在bin目录下执行jmeter.bat会启动如下界面</em><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/09.jpg" alt></p>
+<h2 id="枚举发布安全对象"><a href="#枚举发布安全对象" class="headerlink" title="枚举发布安全对象"></a>枚举发布安全对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="meta">@Recommend</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleExample5</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingleExample5</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回枚举声明的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingleExample5 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Singleton.INSTANCE.getInstance();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">enum</span> Singleton&#123;</span><br><span class="line">        INSTANCE;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> SingleExample5 single;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 给私有变量创建对象</span></span><br><span class="line">        <span class="comment">// JVM保证这个方法只会被调用一次</span></span><br><span class="line">        Singleton() &#123;</span><br><span class="line">            single = <span class="keyword">new</span> SingleExample5();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回私有变量</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> SingleExample5 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> single;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>新建一个线程组</p>
+<p>枚举发布安全对象是对比单例模式更为推荐的。因为它会在实际调用的时候才会初始化，不会造成资源的浪费</p>
 </blockquote>
-<ul>
-<li><p>线程组配置<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/10.jpg" alt></p>
-</li>
-<li><p>创建测试请求和查询结果<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/11.jpg" alt></p>
-</li>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>发布对象：使一个对象能够被当前范围之外的外码所使用</li>
+<li>对象逸出：一种错误的发布，当一个对象还没有构造完成时，就被其他线程所见了</li>
+<li>单例-懒汉模式：对象在第一次使用时进行创建，它是线程不安全的。可使用volatile的双重检测机制来实现</li>
+<li>单例-饿汉模式：类装载的时候就进行创建，它是线程安全的</li>
+<li>volatile可禁止指令重排，具有有序性</li>
 </ul>
-<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/12.jpg" alt></p>
-<h1 id="代码并发模拟"><a href="#代码并发模拟" class="headerlink" title="代码并发模拟"></a>代码并发模拟</h1><ul>
-<li>CountDownLatch<br>计数器不断的向下减<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/13.jpg" alt></li>
-</ul>
-<blockquote>
-<p>该类可阻塞线程，并保证线程在满足特定的情况下继续执行</p>
-</blockquote>
-<ul>
-<li>Semaphore<br>字面意思为”信号量”<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/concurrent/14.jpg" alt></li>
-</ul>
-<blockquote>
-<p>该类可阻塞进程，并且控制同一时间的请求并发量</p>
-</blockquote>
-<p>如果我们想模拟并发测试的时，并在所有线程执行完输出执行结果，应该结合上诉两个类来完成。</p>
-<ul>
-<li>代码实现<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcurrentTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 请求总数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> clientTotal = <span class="number">5000</span>;</span><br><span class="line">    <span class="comment">// 同时并发执行的线程数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> threadTotal = <span class="number">50</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        ExecutorService executorService = Executors.newCachedThreadPool();</span><br><span class="line">        <span class="keyword">final</span> Semaphore semaphore = <span class="keyword">new</span> Semaphore(threadTotal);</span><br><span class="line">        <span class="keyword">final</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(clientTotal);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; clientTotal; i++)&#123;</span><br><span class="line">            executorService.execute(()-&gt;&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    semaphore.acquire();</span><br><span class="line">                    add();</span><br><span class="line">                    semaphore.release();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    log.error(<span class="string">"exception"</span>, e);</span><br><span class="line">                &#125;</span><br><span class="line">                countDownLatch.countDown();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">        executorService.shutdown();</span><br><span class="line">        log.info(<span class="string">"count:&#123;&#125;"</span>, count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span></span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>不做同步的情况下，该结果是不一致的</p>
-</blockquote>
 
       
     </div>
@@ -555,8 +509,8 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月22日 01:04:14</p>
-  <p><span>原始链接:</span><a href="/2019/04/21/concurrence/并发压力测试/" title="并发压力测试">http://yoursite.com/2019/04/21/concurrence/并发压力测试/</a></p>
+  <p><span>最后更新:</span>2019年04月22日 17:04:45</p>
+  <p><span>原始链接:</span><a href="/2019/04/22/concurrence/安全发布对象/" title="安全发布对象">http://yoursite.com/2019/04/22/concurrence/安全发布对象/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
 
@@ -586,8 +540,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/21/concurrence/并发基础/" rel="next" title="并发基础">
-                <i class="fa fa-chevron-left"></i> 并发基础
+              <a href="/2019/04/22/concurrence/线程安全性/" rel="next" title="线程安全性">
+                <i class="fa fa-chevron-left"></i> 线程安全性
               </a>
             
           </div>
@@ -595,10 +549,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/21/mysql/查询性能优化/" rel="prev" title="查询性能优化">
-                查询性能优化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -776,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#postman"><span class="nav-number">1.</span> <span class="nav-text">postman</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟并发"><span class="nav-number">1.1.</span> <span class="nav-text">模拟并发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#apache-benche"><span class="nav-number">2.</span> <span class="nav-text">apache benche</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jmeter"><span class="nav-number">3.</span> <span class="nav-text">jmeter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码并发模拟"><span class="nav-number">4.</span> <span class="nav-text">代码并发模拟</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是发布对象"><span class="nav-number">1.</span> <span class="nav-text">什么是发布对象?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全发布对象"><span class="nav-number">2.</span> <span class="nav-text">安全发布对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例-懒汉模式"><span class="nav-number">2.1.</span> <span class="nav-text">单例-懒汉模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例-饿汉模式"><span class="nav-number">2.2.</span> <span class="nav-text">单例-饿汉模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化懒汉模式"><span class="nav-number">2.3.</span> <span class="nav-text">优化懒汉模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举发布安全对象"><span class="nav-number">2.4.</span> <span class="nav-text">枚举发布安全对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -989,9 +939,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/21/concurrence/并发压力测试/';
-          this.page.identifier = '2019/04/21/concurrence/并发压力测试/';
-          this.page.title = '并发压力测试';
+          this.page.url = 'http://yoursite.com/2019/04/22/concurrence/安全发布对象/';
+          this.page.identifier = '2019/04/22/concurrence/安全发布对象/';
+          this.page.title = '安全发布对象';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
