@@ -89,16 +89,16 @@
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="主从复制 单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性  主从复制的作用：数据副本（高可用分布式基础）、读写分离提高性能  两种实现方式命令slaveof和配置文件的方式 slaveof1234# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-master-slave.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-test.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis6379log.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis6380log.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-slavecopy.jpg">
-<meta property="og:updated_time" content="2019-04-17T18:19:53.795Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/10.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/11.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/12.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/13.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/14.jpg">
+<meta property="og:updated_time" content="2019-04-25T08:31:11.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis集群——复制">
 <meta name="twitter:description" content="主从复制 单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈 主节点master负责写数据，从节点slave负责读数据，主节点定期把数据同步到从节点保证数据的一致性  主从复制的作用：数据副本（高可用分布式基础）、读写分离提高性能  两种实现方式命令slaveof和配置文件的方式 slaveof1234# 6380节点（从）复制6379节点（主）redis-6380 &amp;gt;">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-master-slave.jpg">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/10.jpg">
 
 
 
@@ -333,7 +333,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+      <meta itemprop="image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -463,7 +463,7 @@
       
 
       
-        <h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-master-slave.jpg" alt></p>
+        <h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/10.jpg" alt></p>
 <p>单机部署redis所存在的问题：机器故障数据转移、容量瓶颈、QPS瓶颈</p>
 <p>主节点master负责<strong>写数据</strong>，从节点slave负责<strong>读数据</strong>，主节点定期把数据同步到从节点保证数据的一致性</p>
 <blockquote>
@@ -489,11 +489,11 @@
 <li>开启服务并连接客户端<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis-6379.conf</span><br><span class="line">redis-cli -p 6380</span><br><span class="line">127.0.0.1:6379&gt; info replication # 查看分片信息</span><br><span class="line">role:slave # 已成为从节点</span><br><span class="line">master_host:192.169.211.134 # 主节点地址</span><br><span class="line">master_port:6379 # 主节点端口</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>从主节点6379端口中set值，从节点会复制主节点的数据<br><img src="http://poporz7f8.bkt.clouddn.com/redis-test.jpg" alt></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>从主节点6379端口中set值，从节点会复制主节点的数据<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/11.jpg" alt></p>
 <h1 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h1><p>主从复制的读写分离实际上内部使用命令的方式进行数据的同步，我们可以分析两个日志文件</p>
-<h2 id="6379-log"><a href="#6379-log" class="headerlink" title="6379.log"></a>6379.log</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis6379log.jpg" alt></p>
+<h2 id="6379-log"><a href="#6379-log" class="headerlink" title="6379.log"></a>6379.log</h2><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/12.jpg" alt></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 表示6380需要进行复制操作</span></span><br><span class="line">Slave 192.168.211.134:6380 asks for synchronization</span><br><span class="line"><span class="meta">#</span><span class="bash"> resync 全量复制操作</span></span><br><span class="line">Full resync requested by slave 192.168.211.134:6380</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以发现复制操作是使用RDB进行实现的，实际就是将快照进行同步</span></span><br><span class="line">Starting BGSAVE for SYNC with target: disk</span><br></pre></td></tr></table></figure>
-<h2 id="6380-log"><a href="#6380-log" class="headerlink" title="6380.log"></a>6380.log</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis6380log.jpg" alt></p>
+<h2 id="6380-log"><a href="#6380-log" class="headerlink" title="6380.log"></a>6380.log</h2><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/13.jpg" alt></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 连接主节点</span></span><br><span class="line">Connecting to MASTER 192.168.211.134:6379</span><br><span class="line"><span class="meta">#</span><span class="bash"> 主从复制</span></span><br><span class="line">MASTER &lt;-&gt; SLAVE sync started</span><br><span class="line"><span class="meta">#</span><span class="bash"> 拿到master的runid（每一个redis启动时的随机ID）</span></span><br><span class="line">Full resync from master: f45a09af5ab5fe887ad7a33b451e4955b1dafebd:1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拿到master节点数据(rbd)</span></span><br><span class="line">receiving 31 bytes from master</span><br><span class="line"><span class="meta">#</span><span class="bash"> 清空之前的数据(全量复制的情况下)</span></span><br><span class="line">Flushing old data</span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载rdb</span></span><br><span class="line">Loading DB in memory</span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载成功</span></span><br><span class="line">Finished with success</span><br></pre></td></tr></table></figure>
 <h2 id="验证Flushing-old-data"><a href="#验证Flushing-old-data" class="headerlink" title="验证Flushing old data"></a>验证Flushing old data</h2><p>我们可以看到上述6380日志，当拿到master节点之后做的事情，清空旧的数据、加载RDB，如下实验验证是否安装该流程进行的</p>
 <ul>
@@ -534,7 +534,7 @@
 <blockquote>
 <p>通常offset差距不会太大，否则可能有其他问题如网络、阻塞</p>
 </blockquote>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-slavecopy.jpg" alt></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/14.jpg" alt></p>
 <p>如果对于一个存了很多数据的master，slave期望复制master中的数据，并且这些数据是时刻同步的、完整的。这样就可达到完整的数据同步效果。</p>
 <ul>
 <li>首先将本身的RDB文件同步给slave，为了达到时刻同步，在此期间，master写入的命令也会记录下来。当slave将RDB加载完后，会通过偏移量的对比将这期间master写入的值同步给slave</li>
@@ -588,7 +588,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 02:04:53</p>
+  <p><span>最后更新:</span>2019年04月25日 16:04:11</p>
   <p><span>原始链接:</span><a href="/2019/04/07/redis/redis集群——复制/" title="redis集群——复制">http://yoursite.com/2019/04/07/redis/redis集群——复制/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -709,7 +709,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="http://poporz7f8.bkt.clouddn.com/panghu.png" alt="胖虎">
+              <img class="site-author-image" itemprop="image" src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png" alt="胖虎">
             
               <p class="site-author-name" itemprop="name">胖虎</p>
               <p class="site-description motion-element" itemprop="description">胖虎是个码农</p>
@@ -722,7 +722,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -791,7 +791,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -844,7 +844,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.3k</span>
+    <span title="Site words total count">39.2k</span>
   
 </div>
 

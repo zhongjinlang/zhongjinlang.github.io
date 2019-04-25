@@ -89,13 +89,13 @@
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="zookeeper模型介绍 数据为树形结构，可理解为Linux的目录结构 /usr/local/..  每一个节点成为znode，它可有子节点，也可以有数据  每个节点分为临时节点和永久节点，临时节点在客户端断开连接后消失。永久节点是一个持久化的节点  每个zk节点都有各自的版本号，可通过命令显示节点信息  每当节点数据发生变化时，那么该节点的版本号就会累加（乐观锁）  删除/修改过时的节点，版本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/02.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/003.jpg">
-<meta property="og:updated_time" content="2019-04-18T17:12:44.984Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/zookeeper/02.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/zookeeper/003.jpg">
+<meta property="og:updated_time" content="2019-04-25T07:46:58.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper基本数据模型">
 <meta name="twitter:description" content="zookeeper模型介绍 数据为树形结构，可理解为Linux的目录结构 /usr/local/..  每一个节点成为znode，它可有子节点，也可以有数据  每个节点分为临时节点和永久节点，临时节点在客户端断开连接后消失。永久节点是一个持久化的节点  每个zk节点都有各自的版本号，可通过命令显示节点信息  每当节点数据发生变化时，那么该节点的版本号就会累加（乐观锁）  删除/修改过时的节点，版本">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/02.jpg">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/zookeeper/02.jpg">
 
 
 
@@ -330,7 +330,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+      <meta itemprop="image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -482,8 +482,7 @@
 <li>客户端连接 - 查看znode结构 - 关闭客户端连接</li>
 </ul>
 <p><strong>连接客户端</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@zhongjinlang bin]# ./zkCli.sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示一推信息...</span></span><br><span class="line">WATCHER::</span><br><span class="line">WatchedEvent state:SyncConnected type:None path:null</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里需要回车</span></span><br><span class="line">[zk: localhost:2181(CONNECTED) 0]</span><br></pre></td></tr></table></figure></p>
-<p><strong>zookeeper命令</strong></p>
-<p><img src="http://poporz7f8.bkt.clouddn.com/02.jpg" alt></p>
+<p><strong>zookeeper命令</strong><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/zookeeper/02.jpg" alt></p>
 <p><strong>查看znode</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 4] ls /zookeeper/quota</span><br><span class="line">[]</span><br></pre></td></tr></table></figure></p>
 <h1 id="zookeeper的作用"><a href="#zookeeper的作用" class="headerlink" title="zookeeper的作用"></a>zookeeper的作用</h1><ul>
 <li><p>master节点选举，当主节点挂了，从节点就会接手工作，从而保证集群是高可用的</p>
@@ -492,7 +491,7 @@
 </li>
 <li><p>发布订阅模式，类似消息队列MQ, dubbo发布者把数据数据存储到znode节点上，订阅者会读取这个数据</p>
 </li>
-<li><p>提供<em>分布式锁</em>，分布式环境中不同<strong>进程</strong>之间争夺资源，类似于多线程中的锁<br><img src="http://poporz7f8.bkt.clouddn.com/003.jpg" alt></p>
+<li><p>提供<em>分布式锁</em>，分布式环境中不同<strong>进程</strong>之间争夺资源，类似于多线程中的锁<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/zookeeper/003.jpg" alt></p>
 <blockquote>
 <p>当A处理完B、C、D</p>
 </blockquote>
@@ -524,7 +523,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月19日 01:04:44</p>
+  <p><span>最后更新:</span>2019年04月25日 15:04:58</p>
   <p><span>原始链接:</span><a href="/2019/04/17/zookeeper/zookeeper基本数据模型/" title="zookeeper基本数据模型">http://yoursite.com/2019/04/17/zookeeper/zookeeper基本数据模型/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -647,7 +646,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="http://poporz7f8.bkt.clouddn.com/panghu.png" alt="胖虎">
+              <img class="site-author-image" itemprop="image" src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png" alt="胖虎">
             
               <p class="site-author-name" itemprop="name">胖虎</p>
               <p class="site-description motion-element" itemprop="description">胖虎是个码农</p>
@@ -660,7 +659,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -729,7 +728,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -782,7 +781,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.3k</span>
+    <span title="Site words total count">39.2k</span>
   
 </div>
 

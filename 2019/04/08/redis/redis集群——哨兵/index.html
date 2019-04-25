@@ -89,17 +89,17 @@
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="主从复制问题引入当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与ma">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel1.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-client.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_1.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_2.jpg">
-<meta property="og:updated_time" content="2019-04-17T18:19:49.582Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/15.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/16.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/17.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/18.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/19.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/20.jpg">
+<meta property="og:updated_time" content="2019-04-25T08:32:46.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis集群——哨兵">
 <meta name="twitter:description" content="主从复制问题引入当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的 master故障如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与ma">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/15.jpg">
 
 
 
@@ -334,7 +334,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+      <meta itemprop="image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -465,10 +465,10 @@
 
       
         <h1 id="主从复制问题引入"><a href="#主从复制问题引入" class="headerlink" title="主从复制问题引入"></a>主从复制问题引入</h1><p>当master和slave节点出现故障时，我们需要如何处理呢？首先我们知道故障是不可避免的。我们希望可做到高可用的故障转移，也就是说如果有一个服务宕机了，希望有另一台服务可顶替。通俗的将就是将故障进行转移，保证redis整体服务是可运行的</p>
-<h2 id="master故障"><a href="#master故障" class="headerlink" title="master故障"></a>master故障</h2><p>如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与master的连接，此时客户端只可进行读的操作<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault.jpg" alt></p>
-<h2 id="master宕机处理"><a href="#master宕机处理" class="headerlink" title="master宕机处理"></a>master宕机处理</h2><p>首先我们要保证有写数据，可以将一台slave成为master，另外一台成为从节点<br><img src="http://poporz7f8.bkt.clouddn.com/redis-fault-success.jpg" alt></p>
+<h2 id="master故障"><a href="#master故障" class="headerlink" title="master故障"></a>master故障</h2><p>如果slave出现故障，问题并不是很大，因为可以从master进行读写操作。如果master故障了，那么其他从节点将会断开与master的连接，此时客户端只可进行读的操作<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/15.jpg" alt></p>
+<h2 id="master宕机处理"><a href="#master宕机处理" class="headerlink" title="master宕机处理"></a>master宕机处理</h2><p>首先我们要保证有写数据，可以将一台slave成为master，另外一台成为从节点<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/16.jpg" alt></p>
 <p>上述问题并没有解决自动故障转移的主要问题：自动让slave成为master，让其他slave同步master</p>
-<h1 id="redis-sentinel架构"><a href="#redis-sentinel架构" class="headerlink" title="redis sentinel架构"></a>redis sentinel架构</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-sentinel1.jpg" alt></p>
+<h1 id="redis-sentinel架构"><a href="#redis-sentinel架构" class="headerlink" title="redis sentinel架构"></a>redis sentinel架构</h1><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/17.jpg" alt></p>
 <p>Redis-Sentinel是Redis官方推荐的高可用性(HA)解决方案, Redis-sentinel本身也是一个独立运行的进程，它能监控多个master-slave集群，发现master宕机后能进行自动切换。它的主要功能有如下几点</p>
 <ol>
 <li><p>不时地监控redis是否按照预期良好地运行</p>
@@ -509,14 +509,14 @@
 <blockquote>
 <p>基本原理：</p>
 </blockquote>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-sentinel-client.jpg" alt></p>
+<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/18.jpg" alt></p>
 <h1 id="故障转移实验"><a href="#故障转移实验" class="headerlink" title="故障转移实验"></a>故障转移实验</h1><p>我们将实现从master-7000端口中不断的set值，然后将master进程kill看看sentinel会不会自动处理故障转移</p>
 <h2 id="mavean依赖"><a href="#mavean依赖" class="headerlink" title="mavean依赖"></a>mavean依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.25<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="ResisSentinelTest-java"><a href="#ResisSentinelTest-java" class="headerlink" title="ResisSentinelTest.java"></a>ResisSentinelTest.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResisSentinelTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(RedisPipelineTest.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String masterName = <span class="string">"mymaster"</span>;</span><br><span class="line">        Set&lt;String&gt; sentinels = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        sentinels.add(<span class="string">"192.168.211.134:26379"</span>);</span><br><span class="line">        sentinels.add(<span class="string">"192.168.211.134:26380"</span>);</span><br><span class="line">        sentinels.add(<span class="string">"192.168.211.134:26381"</span>);</span><br><span class="line">        JedisSentinelPool sentinelPool = <span class="keyword">new</span> JedisSentinelPool(masterName, sentinels);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            Jedis jedis = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 获取连接</span></span><br><span class="line">                jedis = sentinelPool.getResource();</span><br><span class="line">                <span class="comment">// 不断的set值</span></span><br><span class="line">                <span class="keyword">int</span> index = <span class="keyword">new</span> Random().nextInt(<span class="number">10000</span>);</span><br><span class="line">                String key = <span class="string">"k-"</span> + index;</span><br><span class="line">                String value = <span class="string">"v-"</span> + index;</span><br><span class="line">                jedis.set(key, value);</span><br><span class="line">                <span class="keyword">if</span> (count % <span class="number">100</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                    logger.info(<span class="string">"&#123;&#125; value is &#123;&#125; "</span>, key, jedis.get(key));</span><br><span class="line">                &#125;</span><br><span class="line">                TimeUnit.MICROSECONDS.sleep(<span class="number">100</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                logger.error(e.getMessage(), e);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (jedis != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    jedis.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>执行上述代码之后会不断的输出如下日志信息<br><img src="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_1.jpg" alt></p>
+<li><p>执行上述代码之后会不断的输出如下日志信息<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/19.jpg" alt></p>
 </li>
-<li><p>当我们在进行kill master之后控制台会输出如下日志信息<br><img src="http://poporz7f8.bkt.clouddn.com/redis-sentinel-log_2.jpg" alt></p>
+<li><p>当我们在进行kill master之后控制台会输出如下日志信息<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/20.jpg" alt></p>
 </li>
 </ul>
 <p><strong>当过了30秒之后sentinel会进行故障转移，恢复set的操作</strong></p>
@@ -595,7 +595,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 02:04:49</p>
+  <p><span>最后更新:</span>2019年04月25日 16:04:46</p>
   <p><span>原始链接:</span><a href="/2019/04/08/redis/redis集群——哨兵/" title="redis集群——哨兵">http://yoursite.com/2019/04/08/redis/redis集群——哨兵/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -716,7 +716,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="http://poporz7f8.bkt.clouddn.com/panghu.png" alt="胖虎">
+              <img class="site-author-image" itemprop="image" src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png" alt="胖虎">
             
               <p class="site-author-name" itemprop="name">胖虎</p>
               <p class="site-description motion-element" itemprop="description">胖虎是个码农</p>
@@ -729,7 +729,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -798,7 +798,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -851,7 +851,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.3k</span>
+    <span title="Site words total count">39.2k</span>
   
 </div>
 

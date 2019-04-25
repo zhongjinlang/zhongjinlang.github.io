@@ -89,26 +89,26 @@
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-sxufenbu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-hashfenbu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-fenquduibi.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiedianquyu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-yizhixhash.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-xunicao.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-trib.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/ztai.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-ruby-cluster.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-jiqungeshu.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/cluster-nodes.jpg">
-<meta property="og:updated_time" content="2019-04-17T18:19:20.462Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/21.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/22.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/23.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/24.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/25.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/26.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/27.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/28.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/29.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/30.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/31.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/32.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/33.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/34.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/35.jpg">
+<meta property="og:updated_time" content="2019-04-25T08:41:27.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redisCluster">
 <meta name="twitter:description" content="sentinel问题引入上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/21.jpg">
 
 
 
@@ -343,7 +343,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+      <meta itemprop="image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -475,29 +475,29 @@
       
         <h1 id="sentinel问题引入"><a href="#sentinel问题引入" class="headerlink" title="sentinel问题引入"></a>sentinel问题引入</h1><p>上一篇章中，我们讲述了redis sentinel实现高可用。我们发现使用哨兵，每个slave都是全量存储数据，每个redis存储的内容都是完整的数据，浪费内存且有木桶效应。我们希望最大化的利用内存，采用集群，分布式存储。即每台redis都存储不同的内容。redisCluster是redis3.0推出的功能，有效的解决了redis分布式方面的需求，当遇到单机内存、并发、流量等瓶颈时，可采用cluster架构达到均衡负载的目的。</p>
 <h2 id="sentinel和cluster"><a href="#sentinel和cluster" class="headerlink" title="sentinel和cluster"></a>sentinel和cluster</h2><p>sentinel与cluster是两个独立的功能，从特性来看sentinel可视为集群的子集，当不需要数据分片或已在客户端分片的场景下，sentinel足够使用了。如果需要进行水平扩容，那么cluster是一个很好的选择</p>
-<h1 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h1><p>集群首要解决把整个数据集按照分区规则映射到多个节点的问题，即把数据集划分到多个节点上，每个节点负责整个数据的一个子集<br><img src="http://poporz7f8.bkt.clouddn.com/redis-partition.jpg" alt></p>
+<h1 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h1><p>集群首要解决把整个数据集按照分区规则映射到多个节点的问题，即把数据集划分到多个节点上，每个节点负责整个数据的一个子集<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/21.jpg" alt></p>
 <h2 id="顺序分区-哈希分区"><a href="#顺序分区-哈希分区" class="headerlink" title="顺序分区 | 哈希分区"></a>顺序分区 | 哈希分区</h2><ul>
-<li><p>顺序分区保证每个节点的数据均衡<br><img src="http://poporz7f8.bkt.clouddn.com/redis-sxufenbu.jpg" alt></p>
+<li><p>顺序分区保证每个节点的数据均衡<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/22.jpg" alt></p>
 </li>
-<li><p>哈希分区 对每一个数字进行哈希函数，按照节点取余(实现之一)<br><img src="http://poporz7f8.bkt.clouddn.com/redis-hashfenbu.jpg" alt></p>
+<li><p>哈希分区 对每一个数字进行哈希函数，按照节点取余(实现之一)<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/23.jpg" alt></p>
 </li>
 </ul>
-<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-fenquduibi.jpg" alt></p>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/24.jpg" alt></p>
 <h1 id="哈希分区探究"><a href="#哈希分区探究" class="headerlink" title="哈希分区探究"></a>哈希分区探究</h1><p>redis-cluster采用哈希分区的方式进行数据分布，为此我们将进一步分析</p>
-<h2 id="节点取余分区"><a href="#节点取余分区" class="headerlink" title="节点取余分区"></a>节点取余分区</h2><p>对每一个key对3（节点个数）取余，如果余数为0则分布到第一个节点，余数为2则分布到第二个节点，余数为3则分布到第三个节点<br><img src="http://poporz7f8.bkt.clouddn.com/redis-jiedianquyu.jpg" alt></p>
+<h2 id="节点取余分区"><a href="#节点取余分区" class="headerlink" title="节点取余分区"></a>节点取余分区</h2><p>对每一个key对3（节点个数）取余，如果余数为0则分布到第一个节点，余数为2则分布到第二个节点，余数为3则分布到第三个节点<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/25.jpg" alt></p>
 <ul>
 <li>客户端分片: 哈希 + 取余</li>
 <li>节点伸缩： 节点变化，数据迁移量巨大</li>
 </ul>
 <h2 id="一致性哈希分区"><a href="#一致性哈希分区" class="headerlink" title="一致性哈希分区"></a>一致性哈希分区</h2><p>解决了节点取余的缺点<br>token表示一个数据范围，为每一个节点分配一个token，每一个节点负责一部分token数据。当对key进行hash计算后按照顺时针的规则寻找离它最近的节点</p>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-yizhixhash.jpg" alt></p>
+<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/26.jpg" alt></p>
 <ul>
 <li>客户端分片: 哈希 + 取余(优化取余)</li>
 <li>节点伸缩： 只影响临近节点，但还是有数据迁移</li>
 </ul>
-<h2 id="虚拟槽分区"><a href="#虚拟槽分区" class="headerlink" title="虚拟槽分区"></a>虚拟槽分区</h2><p>Redis Cluster中有一个16384长度的槽的概念, 每个槽映射一个数据子集, 按照一定的hash计算对16383取余, 如果它落在某个槽的范围内，那么就证明这个槽必须所管理的数据，它是由服务端管理接节点槽之间的关系<br><img src="http://poporz7f8.bkt.clouddn.com/redis-xunicao.jpg" alt></p>
+<h2 id="虚拟槽分区"><a href="#虚拟槽分区" class="headerlink" title="虚拟槽分区"></a>虚拟槽分区</h2><p>Redis Cluster中有一个16384长度的槽的概念, 每个槽映射一个数据子集, 按照一定的hash计算对16383取余, 如果它落在某个槽的范围内，那么就证明这个槽必须所管理的数据，它是由服务端管理接节点槽之间的关系<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/27.jpg" alt></p>
 <p>节点取余分区和一致性哈希分区当节点伸缩时，都会进行数据的迁移，而rediscluster并不会有这种情况，因为每个节点负责槽的范围都是固定的，每个节点与槽的分配都具备权力</p>
-<h1 id="redisCluster架构"><a href="#redisCluster架构" class="headerlink" title="redisCluster架构"></a>redisCluster架构</h1><p><img src="http://poporz7f8.bkt.clouddn.com/redis-cluster-jiagou.jpg" alt></p>
+<h1 id="redisCluster架构"><a href="#redisCluster架构" class="headerlink" title="redisCluster架构"></a>redisCluster架构</h1><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/28.jpg" alt></p>
 <p>服务端有多个节点，<strong>每个节点都负责读写，节点之间是彼此通信的</strong>。如果节点A覆盖0－5460、节点B覆盖5461－10922、节点C覆盖10923－16383。 如果存入一个值，按照redis cluster哈希槽的算法： CRC16(‘key’)384 = 6782。 那么就会把这个key 的存储分配到 B 上了。同样，当我连接(A,B,C)任何一个节点想获取’key’这个key时，也会这样的算法，然后内部跳转到B节点上获取数据</p>
 <h2 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h2><ul>
 <li><p>节点: 每个节点负责读写</p>
@@ -552,10 +552,10 @@
 <li><p>分别为7000、7001、7002三个从节点分配槽节点</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh add_slots.sh 0 5460 7000</span><br><span class="line">sh add_slots.sh 5461 10922 7001</span><br><span class="line">sh add_slots.sh 10923 16383 7002</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查看槽信息<br><img src="http://poporz7f8.bkt.clouddn.com/redis-16384.jpg" alt></p>
+<li><p>查看槽信息<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/29.jpg" alt></p>
 </li>
 </ul>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-cluster-slots.jpg" alt></p>
+<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/30.jpg" alt></p>
 <ul>
 <li>设置值<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c -p 7000</span><br><span class="line">127.0.0.1:7000&gt; set hello world</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 </li>
@@ -567,19 +567,19 @@
 <h1 id="Ruby搭建集群"><a href="#Ruby搭建集群" class="headerlink" title="Ruby搭建集群"></a>Ruby搭建集群</h1><p>ruby是官方推荐的搭建集群方式，自动分配槽和主从复制</p>
 <h2 id="安装ruby环境"><a href="#安装ruby环境" class="headerlink" title="安装ruby环境"></a>安装ruby环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ruby依赖</span></span><br><span class="line">yum install ruby rubygems -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> gem-redis安装  https://rubygems.org/gems/redis/versions/3.0.0</span></span><br><span class="line">gem install -l redis-3.0.0.gem  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时redis3.0.0/src目录有 redis.trib.rb文件，将它拷贝到/usr/lcoal/bin</span></span><br><span class="line">cp redis-trib.rb /usr/local/bin/redis-trib</span><br></pre></td></tr></table></figure>
 <ul>
-<li>redis-trib用于管理集群的命令<br><img src="http://poporz7f8.bkt.clouddn.com/redis-trib.jpg" alt></li>
+<li>redis-trib用于管理集群的命令<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/31.jpg" alt></li>
 </ul>
 <h2 id="配置6个节点并启动"><a href="#配置6个节点并启动" class="headerlink" title="配置6个节点并启动"></a>配置6个节点并启动</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">port</span> <span class="number">7001</span></span><br><span class="line"><span class="string">daemonize</span> <span class="literal">yes</span></span><br><span class="line"><span class="string">dir</span> <span class="string">./</span></span><br><span class="line"><span class="string">logfile</span> <span class="string">"7001.log"</span></span><br><span class="line"><span class="string">dbfilename</span> <span class="string">"dump-7001.rdb"</span></span><br><span class="line"><span class="string">cluster-enabled</span> <span class="literal">yes</span></span><br><span class="line"><span class="string">cluster-config-file</span> <span class="string">nodes-7001.conf</span></span><br><span class="line"><span class="string">cluster-require-full-coverage</span> <span class="literal">no</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>其他节点修改端口即可，分别启动：<br><img src="http://poporz7f8.bkt.clouddn.com/ztai.jpg" alt></p>
+<p>其他节点修改端口即可，分别启动：<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/32.jpg" alt></p>
 </blockquote>
 <h2 id="使用redis-trib搭建集群"><a href="#使用redis-trib搭建集群" class="headerlink" title="使用redis-trib搭建集群"></a>使用redis-trib搭建集群</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-trib create --replicas 1 192.168.211.136:7001 192.168.211.136:7002 192.168.211.136:7003 192.168.211.136:7004 192.168.211.136:7005 192.168.211.136:7006</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>启动状态如下<br><img src="http://poporz7f8.bkt.clouddn.com/redis-ruby-cluster.jpg" alt></p>
+<li><p>启动状态如下<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/33.jpg" alt></p>
 </li>
-<li><p>cluster info打印集群信息<br><img src="http://poporz7f8.bkt.clouddn.com/redis-jiqungeshu.jpg" alt></p>
+<li><p>cluster info打印集群信息<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/34.jpg" alt></p>
 </li>
-<li><p>cluster nodes列出集群已知节点<br><img src="http://poporz7f8.bkt.clouddn.com/cluster-nodes.jpg" alt></p>
+<li><p>cluster nodes列出集群已知节点<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/35.jpg" alt></p>
 </li>
 </ul>
 
@@ -600,7 +600,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 02:04:20</p>
+  <p><span>最后更新:</span>2019年04月25日 16:04:27</p>
   <p><span>原始链接:</span><a href="/2019/04/11/redis/redisCluster/" title="redisCluster">http://yoursite.com/2019/04/11/redis/redisCluster/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -721,7 +721,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="http://poporz7f8.bkt.clouddn.com/panghu.png" alt="胖虎">
+              <img class="site-author-image" itemprop="image" src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png" alt="胖虎">
             
               <p class="site-author-name" itemprop="name">胖虎</p>
               <p class="site-description motion-element" itemprop="description">胖虎是个码农</p>
@@ -734,7 +734,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -803,7 +803,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -856,7 +856,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.3k</span>
+    <span title="Site words total count">39.2k</span>
   
 </div>
 

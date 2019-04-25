@@ -81,21 +81,21 @@
 
 
 
-<meta name="description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB 该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令   文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子">
+<meta name="description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令  文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子进程">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis的持久化">
 <meta property="og:url" content="http://yoursite.com/2019/04/06/redis/redis的持久化/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB 该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令   文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子">
+<meta property="og:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令  文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子进程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/redis-rdb-aof.jpg">
-<meta property="og:updated_time" content="2019-04-17T18:19:39.329Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/08.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/09.jpg">
+<meta property="og:updated_time" content="2019-04-25T08:09:10.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis的持久化">
-<meta name="twitter:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB 该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令   文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg">
+<meta name="twitter:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令  文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子进程">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/08.jpg">
 
 
 
@@ -330,7 +330,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+      <meta itemprop="image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -461,9 +461,7 @@
 
       
         <h1 id="持久化的作用"><a href="#持久化的作用" class="headerlink" title="持久化的作用"></a>持久化的作用</h1><p>redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 <strong>Redis</strong> 提供了两种<strong>持久化</strong>的方案，将内存中的数据保存到磁盘中，避免数据的丢失</p>
-<h1 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h1><blockquote>
-<p>该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令</p>
-</blockquote>
+<h1 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h1><p>该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令</p>
 <ul>
 <li>文件策略：如果存在老的RDB文件，会进行替换</li>
 <li>优点：RBD作为一个备份文件容易恢复，性能好，通过子进程fork生成rdb，用于备份</li>
@@ -482,7 +480,7 @@
 <p>不容忽略的方式：主从复制、debug reload、shutdown可能会触发</p>
 </blockquote>
 <h1 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h1><p>RDB快照方式并不是很可靠，如果服务器宕机，那么最新的数据就会丢失。而AOF文件提供一种更为可靠的的持久化方式。当进行set操作时，会追加到AOF文件中。当redis重启之后，AOF中的命令会被重新执行一次，重建数据</p>
-<h2 id="AOF的三种策略"><a href="#AOF的三种策略" class="headerlink" title="AOF的三种策略"></a>AOF的三种策略</h2><p><img src="http://poporz7f8.bkt.clouddn.com/redis-aof.jpg" alt></p>
+<h2 id="AOF的三种策略"><a href="#AOF的三种策略" class="headerlink" title="AOF的三种策略"></a>AOF的三种策略</h2><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/08.jpg" alt></p>
 <ul>
 <li>always：每条命令都会持久化一次（执行写操作时，先进入缓冲区后写入到硬盘）</li>
 <li>everysec：每秒持久化一次</li>
@@ -509,7 +507,7 @@
 <h1 id="RDB和AOF的抉择"><a href="#RDB和AOF的抉择" class="headerlink" title="RDB和AOF的抉择"></a>RDB和AOF的抉择</h1><blockquote>
 <p>比较 </p>
 </blockquote>
-<p><img src="http://poporz7f8.bkt.clouddn.com/redis-rdb-aof.jpg" alt></p>
+<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/09.jpg" alt></p>
 <blockquote>
 <p>RDB最佳策略</p>
 </blockquote>
@@ -600,7 +598,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 02:04:39</p>
+  <p><span>最后更新:</span>2019年04月25日 16:04:10</p>
   <p><span>原始链接:</span><a href="/2019/04/06/redis/redis的持久化/" title="redis的持久化">http://yoursite.com/2019/04/06/redis/redis的持久化/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -721,7 +719,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="http://poporz7f8.bkt.clouddn.com/panghu.png" alt="胖虎">
+              <img class="site-author-image" itemprop="image" src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png" alt="胖虎">
             
               <p class="site-author-name" itemprop="name">胖虎</p>
               <p class="site-description motion-element" itemprop="description">胖虎是个码农</p>
@@ -734,7 +732,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -803,7 +801,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -856,7 +854,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.3k</span>
+    <span title="Site words total count">39.2k</span>
   
 </div>
 

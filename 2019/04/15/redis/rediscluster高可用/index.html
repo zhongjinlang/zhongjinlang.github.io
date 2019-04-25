@@ -89,18 +89,18 @@
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/keguanxiaxianmoshi.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest01.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest02.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest03.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest04.jpg">
-<meta property="og:image" content="http://poporz7f8.bkt.clouddn.com/clustertest05.jpg">
-<meta property="og:updated_time" content="2019-04-17T18:19:28.619Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/42.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/43.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest01.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest02.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest03.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest04.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest05.jpg">
+<meta property="og:updated_time" content="2019-04-25T08:47:46.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rediscluster高可用">
 <meta name="twitter:description" content="故障转移rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程 故障发现依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel 主观下线定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知流程：  当某个节点断开连接之后，超过node-timeout超时时间">
-<meta name="twitter:image" content="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/42.jpg">
 
 
 
@@ -335,7 +335,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="http://poporz7f8.bkt.clouddn.com/panghu.png">
+      <meta itemprop="image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -467,11 +467,11 @@
       
         <h1 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h1><p>rediscluster不需要到sentinel即可完成故障转移，实现高可用的集群特性。它与sentinel很相似，分为故障发现和故障恢复的过程</p>
 <h2 id="故障发现"><a href="#故障发现" class="headerlink" title="故障发现"></a>故障发现</h2><p>依赖节点之间的通信使用ping/pong消息实现故障的发现，不需要sentinel</p>
-<h2 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h2><p>定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知<br><br>流程：<br><img src="http://poporz7f8.bkt.clouddn.com/zhuguanxiaxian.jpg" alt></p>
+<h2 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h2><p>定义：某个节点认为另一个节点不可用，”偏见”，代表一个节点对另一个节点的认知<br><br>流程：<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/42.jpg" alt></p>
 <blockquote>
 <p>当某个节点断开连接之后，超过node-timeout超时时间，那么标记为pfaill</p>
 </blockquote>
-<h2 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h2><p>定义： 持有半数以上的槽的节点都标记某个节点时，就认为那个节点不可用<br><br>流程：<br><img src="http://poporz7f8.bkt.clouddn.com/keguanxiaxianmoshi.jpg" alt></p>
+<h2 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h2><p>定义： 持有半数以上的槽的节点都标记某个节点时，就认为那个节点不可用<br><br>流程：<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/43.jpg" alt></p>
 <blockquote>
 <p>记录每个节点的状态，如果状态不可用，会将信息添加到故障列表中，列表用于维护故障列表，后再尝试客观下线。之后通知集群内所有节点标记故障节点为客观下线，通知故障节点的从节点准备执行转移</p>
 </blockquote>
@@ -500,13 +500,13 @@
 <p><strong>application.yml</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    cluster:</span></span><br><span class="line"><span class="attr">      nodes:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7001</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7002</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7003</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7004</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7005</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span><span class="number">.211</span><span class="number">.136</span><span class="string">:7006</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootRedisApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(SpringbootRedisApplicationTests.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 不断的set值</span></span><br><span class="line">                <span class="keyword">int</span> index = <span class="keyword">new</span> Random().nextInt(<span class="number">10000</span>);</span><br><span class="line">                String key = <span class="string">"k-"</span> + index;</span><br><span class="line">                String value = <span class="string">"v-"</span> + index;</span><br><span class="line">                redisTemplate.boundValueOps(key).set(value);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 输出日志</span></span><br><span class="line">                logger.info(<span class="string">"&#123;&#125; value is &#123;&#125;"</span>, key, redisTemplate.boundValueOps(key).get());              </span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                logger.error(e.getMessage(), e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>此时节点状态：<br><img src="http://poporz7f8.bkt.clouddn.com/clustertest01.jpg" alt><br><img src="http://poporz7f8.bkt.clouddn.com/clustertest02.jpg" alt></p>
+<li><p>此时节点状态：<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest01.jpg" alt><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest02.jpg" alt></p>
 </li>
-<li><p>开始不断的set值，在进行kill主节点，观察日志输出：<br><img src="http://poporz7f8.bkt.clouddn.com/clustertest03.jpg" alt></p>
+<li><p>开始不断的set值，在进行kill主节点，观察日志输出：<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest03.jpg" alt></p>
 </li>
 </ul>
-<p><img src="http://poporz7f8.bkt.clouddn.com/clustertest04.jpg" alt></p>
-<p><img src="http://poporz7f8.bkt.clouddn.com/clustertest05.jpg" alt></p>
+<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest04.jpg" alt></p>
+<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/clustertest05.jpg" alt></p>
 
       
     </div>
@@ -525,7 +525,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月18日 02:04:28</p>
+  <p><span>最后更新:</span>2019年04月25日 16:04:46</p>
   <p><span>原始链接:</span><a href="/2019/04/15/redis/rediscluster高可用/" title="rediscluster高可用">http://yoursite.com/2019/04/15/redis/rediscluster高可用/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -646,7 +646,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="http://poporz7f8.bkt.clouddn.com/panghu.png" alt="胖虎">
+              <img class="site-author-image" itemprop="image" src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/head/panghu.png" alt="胖虎">
             
               <p class="site-author-name" itemprop="name">胖虎</p>
               <p class="site-description motion-element" itemprop="description">胖虎是个码农</p>
@@ -659,7 +659,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -728,7 +728,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logstash/">Logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乐观锁/">乐观锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/死锁/">死锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/活锁/">活锁</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -781,7 +781,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.3k</span>
+    <span title="Site words total count">39.2k</span>
   
 </div>
 
