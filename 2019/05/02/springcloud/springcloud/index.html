@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="redis,">
+  <meta name="keywords" content="eureka,">
 
 
 
@@ -81,21 +81,21 @@
 
 
 
-<meta name="description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令  文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子进程">
-<meta name="keywords" content="redis">
+<meta name="description" content="springcloud简介Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring B">
+<meta name="keywords" content="eureka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis的持久化">
-<meta property="og:url" content="http://yoursite.com/2019/04/06/redis/redis的持久化/index.html">
+<meta property="og:title" content="服务注册与发现(Eureka)">
+<meta property="og:url" content="http://yoursite.com/2019/05/02/springcloud/springcloud/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令  文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子进程">
+<meta property="og:description" content="springcloud简介Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring B">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/08.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/09.jpg">
-<meta property="og:updated_time" content="2019-04-25T08:09:10.863Z">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/01.jpg">
+<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/02.jpg">
+<meta property="og:updated_time" content="2019-05-02T15:50:11.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis的持久化">
-<meta name="twitter:description" content="持久化的作用redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 Redis 提供了两种持久化的方案，将内存中的数据保存到磁盘中，避免数据的丢失 RDB该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令  文件策略：如果存在老的RDB文件，会进行替换 优点：RBD作为一个备份文件容易恢复，性能好，通过子进程">
-<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/08.jpg">
+<meta name="twitter:title" content="服务注册与发现(Eureka)">
+<meta name="twitter:description" content="springcloud简介Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring B">
+<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/01.jpg">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/06/redis/redis的持久化/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/02/springcloud/springcloud/">
 
 
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -146,7 +146,7 @@
 
 
 
-  <title>redis的持久化 | 胖虎的博客</title>
+  <title>服务注册与发现(Eureka) | 胖虎的博客</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/redis/redis的持久化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/02/springcloud/springcloud/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis的持久化</h1>
+          <h1 class="post-title" itemprop="name headline">服务注册与发现(Eureka)</h1>
         
 
         <div class="post-meta">
@@ -354,8 +354,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-06T00:55:05+08:00">
-                2019-04-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-02T23:50:10+08:00">
+                2019-05-02
               </time>
             
 
@@ -377,8 +377,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
+                  <a href="/categories/springcloud系列文章/" itemprop="url" rel="index">
+                    <span itemprop="name">springcloud系列文章</span>
                   </a>
                 </span>
 
@@ -395,8 +395,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/06/redis/redis的持久化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/06/redis/redis的持久化/" itemprop="commentCount"></span>
+                <a href="/2019/05/02/springcloud/springcloud/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/02/springcloud/springcloud/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.3k
                 </span>
               
 
@@ -439,7 +439,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4m
+                  6m
                 </span>
               
             </div>
@@ -460,125 +460,70 @@
       
 
       
-        <h1 id="持久化的作用"><a href="#持久化的作用" class="headerlink" title="持久化的作用"></a>持久化的作用</h1><p>redis的所有数据存储到内存中，如果redis-server进程退出，那么数据将丢失。为了解决这个问题 <strong>Redis</strong> 提供了两种<strong>持久化</strong>的方案，将内存中的数据保存到磁盘中，避免数据的丢失</p>
-<h1 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h1><p>该机制使用快照方式，在指定的时间内将内存中的数据写入到硬盘（rdb文件），也可手动执行命令</p>
-<ul>
-<li>文件策略：如果存在老的RDB文件，会进行替换</li>
-<li>优点：RBD作为一个备份文件容易恢复，性能好，通过子进程fork生成rdb，用于备份</li>
-<li>缺点：容易造成数据丢失，如果fork花费时间大，那么将会阻塞redis服务、耗时耗性能</li>
+        <h1 id="springcloud简介"><a href="#springcloud简介" class="headerlink" title="springcloud简介"></a>springcloud简介</h1><p>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包<br></p>
+<p>Spring Boot可以离开Spring Cloud独立使用开发项目，但是Spring Cloud离不开Spring Boot，属于依赖的关系。</p>
+<h2 id="springcloud组件"><a href="#springcloud组件" class="headerlink" title="springcloud组件"></a>springcloud组件</h2><ul>
+<li>服务发现——Netflix Eureka</li>
+<li>服务调用——Netflix Feign</li>
+<li>熔断器——Netflix Hystrix</li>
+<li>服务网关——Netflix Zuul</li>
+<li>分布式配置——Spring Cloud Config</li>
+<li>消息总线   —— Spring Cloud Bus</li>
 </ul>
-<h2 id="触发机制"><a href="#触发机制" class="headerlink" title="触发机制"></a>触发机制</h2><ul>
-<li>save命令（同步 ） — 可能会产生阻塞</li>
-<li>bgsave命令（异步）— <strong>创建一个子进程fork() </strong>生成rdb文件（阻塞发生在<br>fork），创建完毕返回给主进程bgsave successfully</li>
-<li>自动 — 根据save配置自动生成，例如如果在60秒内改变了1w条数据则生成rdb、300-10、900-1满足任一个条件（底层使用fork）</li>
-</ul>
-<p>在redis.conf中节点为SNAPSHOTTING中有如下配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br><span class="line"><span class="meta">#</span><span class="bash"> bgsave发生错误是否停止写入</span></span><br><span class="line">stop-writes-on-bgsave-error yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> rdb是否采用压缩格式</span></span><br><span class="line">rdbcompression yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> rbd校验</span></span><br><span class="line">rdbchecksum yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认rbd文件名，在/bin目录</span></span><br><span class="line">dbfilename dump.rdb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 日志等文件存储位置</span></span><br><span class="line">dir ./</span><br></pre></td></tr></table></figure>
-<p>推荐配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 不采用自动生成</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> rbd文件名称采用+端口形式区分</span></span><br><span class="line">dbfilename dump-$&#123;port&#125;.rdb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 建议指定容量较大硬盘位置</span></span><br><span class="line">dir /bigdiskpath</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 其他默认</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>不容忽略的方式：主从复制、debug reload、shutdown可能会触发</p>
-</blockquote>
-<h1 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h1><p>RDB快照方式并不是很可靠，如果服务器宕机，那么最新的数据就会丢失。而AOF文件提供一种更为可靠的的持久化方式。当进行set操作时，会追加到AOF文件中。当redis重启之后，AOF中的命令会被重新执行一次，重建数据</p>
-<h2 id="AOF的三种策略"><a href="#AOF的三种策略" class="headerlink" title="AOF的三种策略"></a>AOF的三种策略</h2><p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/08.jpg" alt></p>
-<ul>
-<li>always：每条命令都会持久化一次（执行写操作时，先进入缓冲区后写入到硬盘）</li>
-<li>everysec：每秒持久化一次</li>
-<li>no：缓冲区的刷新策略根据OS决定</li>
-</ul>
-<h2 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h2><p>由于每条命令都会追加到AOF文件中，随着时间的推移，AOF文件必然逐渐变大。AOF重写解决了这一问题</p>
-<ul>
-<li>例 ：命令优化、过期数据</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set hello one</span><br><span class="line">set hello two</span><br><span class="line">set hello three</span><br></pre></td></tr></table></figure>
-<p>当连续执行上诉命令最终的结果为three，而AOF并不会写入三次命令，而只会追加有效的命令set hello three</p>
-<ul>
-<li><p>AOF重写实现的两种方式</p>
-<blockquote>
-<p>bgrewriteaof命令：（类似RDB的bgsave）开启子线程完成AOF重写</p>
-</blockquote>
-<blockquote>
-<p>AOF重写配置</p>
-</blockquote>
+<h2 id="springcloud版本"><a href="#springcloud版本" class="headerlink" title="springcloud版本"></a>springcloud版本</h2><table>
+<thead>
+<tr>
+<th>Spring Boot</th>
+<th>Spring Cloud</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.2.x</td>
+<td>Angel版本</td>
+</tr>
+<tr>
+<td>1.3.x</td>
+<td>Brixton版本</td>
+</tr>
+<tr>
+<td>1.4.x</td>
+<td>Camden版本</td>
+</tr>
+<tr>
+<td>1.5.x</td>
+<td>Dalston版本、Edgware版本</td>
+</tr>
+<tr>
+<td>2.0.x</td>
+<td>Finchley版本</td>
+</tr>
+</tbody>
+</table>
+<h1 id="注册中心Eureka"><a href="#注册中心Eureka" class="headerlink" title="注册中心Eureka"></a>注册中心Eureka</h1><ul>
+<li><p>Eureka Server提供服务注册服务，各个节点启动后，会在Eureka Server中进行注册，这样EurekaServer中的服务注册表中将会存储所有可用服务节点的信息，服务节点的信息可以在界面中直观的看到</p>
+</li>
+<li><p>Eureka Client是一个java客户端，用于简化与Eureka Server的交互，客户端同时也就别一个内置的、使用轮询(round-robin)负载算法的负载均衡器。在应用启动后，将会向Eureka Server发送心跳,默认周期为30秒，如果Eureka Server在多个心跳周期内没有接收到某个节点的心跳，Eureka Server将会从服务注册表中把这个服务节点移除(默认90秒)</p>
+</li>
+<li><p>Eureka Server之间通过复制的方式完成数据的同步，Eureka还提供了客户端缓存机制，即使所有的Eureka Server都挂掉，客户端依然可以利用缓存中的信息消费其他服务的API。综上，Eureka通过心跳检查、客户端缓存等机制，确保了系统的高可用性、灵活性和可伸缩性</p>
 </li>
 </ul>
-<p>在/redis.conf配置文件有APPEND ONLY MODE节点</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 要完成aof功能开启为yes</span></span><br><span class="line">appendonly no</span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件名</span></span><br><span class="line">appendfilename "appendonly.aof"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 三种同步策略</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> appendfsync always</span></span><br><span class="line">appendfsync everysec -- 每秒写入（默认）</span><br><span class="line"><span class="meta">#</span><span class="bash"> appendfsync no</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 写入aof文件，不等待磁盘同步（安全，但可能阻塞）</span></span><br><span class="line">no-appendfsync-on-rewrite no</span><br></pre></td></tr></table></figure>
-<h1 id="RDB和AOF的抉择"><a href="#RDB和AOF的抉择" class="headerlink" title="RDB和AOF的抉择"></a>RDB和AOF的抉择</h1><blockquote>
-<p>比较 </p>
-</blockquote>
-<p><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/redis/09.jpg" alt></p>
-<blockquote>
-<p>RDB最佳策略</p>
-</blockquote>
-<ul>
-<li>“关闭”rdb</li>
-<li>集中管理，指定时间内进行大量的数据备份</li>
-<li>从节点开启</li>
-<li>分片</li>
-</ul>
-<blockquote>
-<p>AOF最佳策略</p>
-</blockquote>
-<ul>
-<li>“开启” ： 缓存和存储</li>
-<li>AOF重写集中管理</li>
-<li>everysec策略</li>
-<li>分片</li>
-</ul>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h2><p>当进行 RDB的<strong>bgsave</strong>操作和AOF的<strong>bgrewriteaof</strong>会产生子线程进行持久化的相关操作，如果fork操作执行慢，此时会将redis主线程阻塞。 </p>
-<ul>
-<li>查看fork持久化的时间</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">latest_fork_usec</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>改善</p>
-<blockquote>
-<p>物理机或支持fork操作的虚拟化技术</p>
-</blockquote>
-<blockquote>
-<p>控制redis实例最大可用内存：maxmemory</p>
-</blockquote>
-<blockquote>
-<p>合理配置Linux内存分配策略：vm.overcommit_memory=1（默认0）</p>
-</blockquote>
-<blockquote>
-<p>放宽AOF重写自动触发机制，不必全量复制</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="进程外开销"><a href="#进程外开销" class="headerlink" title="进程外开销"></a>进程外开销</h2><blockquote>
-<p>bgsave和bgrewriteaof是将内存中的数据写入到硬盘，此时会集中消耗CPU、rork内存开销、硬盘</p>
-</blockquote>
-<ul>
-<li><p>优化</p>
-<blockquote>
-<p>不做CPU绑定，不和CPU密集部署，单机部署不要大量的AOF和RDB持久化的过程</p>
-</blockquote>
-<blockquote>
-<p>echo never &gt; 追加配置文件</p>
-</blockquote>
-<blockquote>
-<p>不要和高硬盘负载服务部署在一起：存储服务、消息队列等</p>
-</blockquote>
-<blockquote>
-<p>配置no-appendfsync-on-rewrite yes </p>
-</blockquote>
-<blockquote>
-<p>ssd介质</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="AOF追加阻塞"><a href="#AOF追加阻塞" class="headerlink" title="AOF追加阻塞"></a>AOF追加阻塞</h2><p>如果我们使用了AOF的每秒刷盘策略，如果fork执行大于2秒，那么主线程阻塞</p>
-<ul>
-<li><p>阻塞定位</p>
-<blockquote>
-<p>redis日志</p>
-</blockquote>
-<blockquote>
-<p>info persistence收集记录</p>
-</blockquote>
-</li>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>spring Boot版本为2.0.3.RELEASE，Spring Cloud版本为Finchley.RELEASE<br>父工程POM文件依赖如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- spring-boot起步依赖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 版本锁定 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">spring-cloud.version</span>&gt;</span>Finchley.RELEASE<span class="tag">&lt;/<span class="name">spring-cloud.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 测试 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 锁定springcloud版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring-cloud.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="搭建eureka-serve工程"><a href="#搭建eureka-serve工程" class="headerlink" title="搭建eureka-serve工程"></a>搭建eureka-serve工程</h2><p>此工程作为注册中心，依赖文件如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 注册中心服务依赖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>启动类</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(EurekaApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>@EnableEurekaServer简单的理解为启动注册中心服务</p>
+<p><strong>配置</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8761</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">localhost</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    registerWithEureka:</span> <span class="literal">false</span> <span class="comment"># 不注册自己</span></span><br><span class="line"><span class="attr">    fetchRegistry:</span> <span class="literal">false</span> <span class="comment"># 不检索自己</span></span><br><span class="line"><span class="attr">    serviceUrl:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">eureka-server</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>eureka界面管理信息</strong><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/01.jpg" alt></p>
+<p>此时因为还没有服务进行注册呢</p>
+<h1 id="服务提供者eureka-client"><a href="#服务提供者eureka-client" class="headerlink" title="服务提供者eureka client"></a>服务提供者eureka client</h1><p>当client向server注册时，它会提供一些元数据，例如主机和端口，URL，主页等。Eureka server 从每个client实例接收心跳消息。 如果心跳超时，则通常将该实例从注册server中删除</p>
+<p><strong>依赖如下</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 服务提供者client--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- web--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>启动类</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HiApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(HiApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;server.port&#125;"</span>)</span><br><span class="line">    String port;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/hi"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">home</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>, defaultValue = <span class="string">"forezp"</span>)</span> String name) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hi "</span> + name + <span class="string">" ,i am from port:"</span> + port;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>配置</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8762</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">service-hi</span> <span class="comment"># 指定服务名，用于服务之间相互调用</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    serviceUrl:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:8761/eureka/</span> <span class="comment"># 注册中心地址</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>eureka界面管理信息</strong><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/02.jpg" alt></p>
+<p>此时服务SERVICE-HI 已被注册了</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>@EnableEurekaServer启动注册中心服务</li>
+<li>@EnableDiscoveryClient表明该服务需要注册到注册中心</li>
 </ul>
 
       
@@ -598,8 +543,8 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年04月25日 16:04:10</p>
-  <p><span>原始链接:</span><a href="/2019/04/06/redis/redis的持久化/" title="redis的持久化">http://yoursite.com/2019/04/06/redis/redis的持久化/</a></p>
+  <p><span>最后更新:</span>2019年05月02日 23:05:11</p>
+  <p><span>原始链接:</span><a href="/2019/05/02/springcloud/springcloud/" title="服务注册与发现(Eureka)">http://yoursite.com/2019/05/02/springcloud/springcloud/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
 
@@ -616,7 +561,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/" rel="tag"><i class="fa fa-tag"></i>redis</a>
+            <a href="/tags/eureka/" rel="tag"><i class="fa fa-tag"></i>eureka</a>
           
         </div>
       
@@ -629,8 +574,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/05/redis/瑞士军刀redis/" rel="next" title="瑞士军刀redis">
-                <i class="fa fa-chevron-left"></i> 瑞士军刀redis
+              <a href="/2019/05/02/mq/阿里短信服务/" rel="next" title="阿里短信服务">
+                <i class="fa fa-chevron-left"></i> 阿里短信服务
               </a>
             
           </div>
@@ -638,10 +583,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/06/elasticsearch/ELK日志收集/" rel="prev" title="elasticsearch+filebeat+kibana日志收集">
-                elasticsearch+filebeat+kibana日志收集 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -819,7 +760,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久化的作用"><span class="nav-number">1.</span> <span class="nav-text">持久化的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RDB"><span class="nav-number">2.</span> <span class="nav-text">RDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#触发机制"><span class="nav-number">2.1.</span> <span class="nav-text">触发机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOF"><span class="nav-number">3.</span> <span class="nav-text">AOF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF的三种策略"><span class="nav-number">3.1.</span> <span class="nav-text">AOF的三种策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF重写"><span class="nav-number">3.2.</span> <span class="nav-text">AOF重写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RDB和AOF的抉择"><span class="nav-number">4.</span> <span class="nav-text">RDB和AOF的抉择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">5.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fork"><span class="nav-number">5.1.</span> <span class="nav-text">fork</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程外开销"><span class="nav-number">5.2.</span> <span class="nav-text">进程外开销</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF追加阻塞"><span class="nav-number">5.3.</span> <span class="nav-text">AOF追加阻塞</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springcloud简介"><span class="nav-number">1.</span> <span class="nav-text">springcloud简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#springcloud组件"><span class="nav-number">1.1.</span> <span class="nav-text">springcloud组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springcloud版本"><span class="nav-number">1.2.</span> <span class="nav-text">springcloud版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册中心Eureka"><span class="nav-number">2.</span> <span class="nav-text">注册中心Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建eureka-serve工程"><span class="nav-number">2.2.</span> <span class="nav-text">搭建eureka-serve工程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务提供者eureka-client"><span class="nav-number">3.</span> <span class="nav-text">服务提供者eureka client</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1032,9 +973,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/04/06/redis/redis的持久化/';
-          this.page.identifier = '2019/04/06/redis/redis的持久化/';
-          this.page.title = 'redis的持久化';
+          this.page.url = 'http://yoursite.com/2019/05/02/springcloud/springcloud/';
+          this.page.identifier = '2019/05/02/springcloud/springcloud/';
+          this.page.title = '服务注册与发现(Eureka)';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
