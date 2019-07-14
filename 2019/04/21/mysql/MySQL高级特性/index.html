@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hystrix,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -81,24 +81,17 @@
 
 
 
-<meta name="description" content="为什么需要熔断器在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应。服务雪崩效应是一种因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程如果下图所示：A作为服务提供者，B为A的服务消费者，C和D是B的服务消费者。A不可用引起了B的不可用，并将不可用像滚雪球一样放大到C和D时，雪崩效应就形成了 H">
-<meta name="keywords" content="hystrix">
+<meta name="description" content="前言本章节来自 高性能MySQL 第七章 MySQL高级特性本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器 分区表对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个物理子表组成。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：  表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第三篇:熔断器(Hystrix)">
-<meta property="og:url" content="http://yoursite.com/2019/05/03/springcloud/熔断器(Hystrix)/index.html">
+<meta property="og:title" content="MySQL高级特性">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/mysql/MySQL高级特性/index.html">
 <meta property="og:site_name" content="胖虎的博客">
-<meta property="og:description" content="为什么需要熔断器在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应。服务雪崩效应是一种因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程如果下图所示：A作为服务提供者，B为A的服务消费者，C和D是B的服务消费者。A不可用引起了B的不可用，并将不可用像滚雪球一样放大到C和D时，雪崩效应就形成了 H">
+<meta property="og:description" content="前言本章节来自 高性能MySQL 第七章 MySQL高级特性本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器 分区表对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个物理子表组成。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：  表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/06.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/07.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/08.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/09.jpg">
-<meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/10.jpg">
-<meta property="og:updated_time" content="2019-05-03T12:28:57.821Z">
+<meta property="og:updated_time" content="2019-04-21T08:36:30.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第三篇:熔断器(Hystrix)">
-<meta name="twitter:description" content="为什么需要熔断器在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应。服务雪崩效应是一种因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程如果下图所示：A作为服务提供者，B为A的服务消费者，C和D是B的服务消费者。A不可用引起了B的不可用，并将不可用像滚雪球一样放大到C和D时，雪崩效应就形成了 H">
-<meta name="twitter:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/06.jpg">
+<meta name="twitter:title" content="MySQL高级特性">
+<meta name="twitter:description" content="前言本章节来自 高性能MySQL 第七章 MySQL高级特性本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器 分区表对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个物理子表组成。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：  表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据">
 
 
 
@@ -128,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/03/springcloud/熔断器(Hystrix)/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/21/mysql/MySQL高级特性/">
 
 
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -149,7 +142,7 @@
 
 
 
-  <title>第三篇:熔断器(Hystrix) | 胖虎的博客</title>
+  <title>MySQL高级特性 | 胖虎的博客</title>
   
 
 
@@ -328,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/03/springcloud/熔断器(Hystrix)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/mysql/MySQL高级特性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="胖虎">
@@ -345,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">第三篇:熔断器(Hystrix)</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL高级特性</h1>
         
 
         <div class="post-meta">
@@ -357,8 +350,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T14:50:05+08:00">
-                2019-05-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T14:07:49+08:00">
+                2019-04-21
               </time>
             
 
@@ -380,8 +373,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springcloud/" itemprop="url" rel="index">
-                    <span itemprop="name">springcloud</span>
+                  <a href="/categories/高性能MySQL读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">高性能MySQL读书笔记</span>
                   </a>
                 </span>
 
@@ -398,8 +391,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/03/springcloud/熔断器(Hystrix)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/03/springcloud/熔断器(Hystrix)/" itemprop="commentCount"></span>
+                <a href="/2019/04/21/mysql/MySQL高级特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/mysql/MySQL高级特性/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,7 +419,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  934
+                  815
                 </span>
               
 
@@ -442,7 +435,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3m
+                  2m
                 </span>
               
             </div>
@@ -463,33 +456,32 @@
       
 
       
-        <h1 id="为什么需要熔断器"><a href="#为什么需要熔断器" class="headerlink" title="为什么需要熔断器"></a>为什么需要熔断器</h1><p>在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况，这种现象被称为服务<strong>雪崩效应</strong>。服务雪崩效应是一种因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程<br><br>如果下图所示：A作为服务提供者，B为A的服务消费者，C和D是B的服务消费者。A不可用引起了B的不可用，并将不可用像滚雪球一样放大到C和D时，雪崩效应就形成了<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/06.jpg" alt></p>
-<h1 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h1><p>Netflix开源了Hystrix组件，实现了断路器模式，SpringCloud对这一组件进行了整合<br><br>Hystrix 能使你的系统在出现依赖服务失效的时候，通过隔离系统所依赖的服务，防止服务级联失败，同时提供失败回退机制，更优雅地应对失效，并使你的系统能更快地从异常中恢复</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>启动上一篇章的注册中心，以及service-hi:8762工程</p>
-<h1 id="在ribbon中使用熔断器"><a href="#在ribbon中使用熔断器" class="headerlink" title="在ribbon中使用熔断器"></a>在ribbon中使用熔断器</h1><ol>
-<li><p>改造上一篇章的service-ribbon工程，加入如下依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><em>本章节来自 <strong>高性能MySQL</strong> 第七章 MySQL高级特性</em><br>本章节介绍MySQL5.0开始引入的高级特性，例如分区、触发器</p>
+<h1 id="分区表"><a href="#分区表" class="headerlink" title="分区表"></a>分区表</h1><p>对于用户来说，分区表是一个独立的逻辑表，用户无法访问底层的各个分区。但是底层由多个<em>物理子表组成</em>。分区的主要目的就是将数据按照一个较粗的粒度分在不同的表中。如下场景分区可起到非常大的作用：</p>
+<ul>
+<li>表非常大以至于无法全部都放在内存中，或者只在表的最后有热点数据，其他均是热点数据</li>
+<li>分区表的数据容易维护</li>
+<li>分区表的的数据可分布在不同的物理设备上</li>
+<li>如果需要，还可以备份和恢复符独立的分区，在大的数据集场景效率非常好</li>
+</ul>
+<p><em>分区别的一些限制</em></p>
+<ul>
+<li>一个表最多有1024个分区</li>
+<li>分区字段中有主键或者唯一索引的列，必须包含进行来</li>
+<li>分区表中无法使用外键约束</li>
+</ul>
+<h2 id="分区表的原理"><a href="#分区表的原理" class="headerlink" title="分区表的原理"></a>分区表的原理</h2><p>从存储引擎的角度看，底层表和一个普通表没有任何不同，存储引擎也无需知道这是一个普通表还是一个分区表的一部分。<br><em>将每一年的销售额存放在不同的分区中</em><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> sales(</span><br><span class="line">  order_date datetime <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (<span class="keyword">year</span>(order_date))(</span><br><span class="line">  <span class="keyword">PARTITION</span> P_2010 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2010</span>),</span><br><span class="line">  <span class="keyword">PARTITION</span> P_2011 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2011</span>),</span><br><span class="line">  <span class="keyword">PARTITION</span> P_2012 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2012</span>),</span><br><span class="line">  <span class="keyword">PARTITION</span> p_catchall <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> MAXVALUE</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h2 id="如何使用分区表"><a href="#如何使用分区表" class="headerlink" title="如何使用分区表"></a>如何使用分区表</h2><p>如果表数据巨大（10TB），那么这个时候B-Tree索引就无法起作用了，如infobright放弃B-Tree，选择了一些更粗颗粒度的但消耗更少的方式检索数。分区以代价非常小的方式定位到需要的数据在哪一片区域。在这片区域中，可以顺序扫描，可以建立索引，还可将数据缓存到内存等操作。为了保证大数据量的可扩展性，有如下策略</p>
+<ul>
+<li><p>全量扫描数据，不需要索引<br>使用简单的分区方式存放表，不要任何索引，根据分区的规则大致定位需要的数据位置</p>
 </li>
-<li><p><strong>启动类加上@EnableHystrix</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaClient</span> <span class="comment">// 发布服务【ribon】</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span> <span class="comment">// 服务发现【启动消费服务】</span></span><br><span class="line"><span class="meta">@EnableHystrix</span>  <span class="comment">// 开启熔断器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RibbonApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(RibbonApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>索引数据，分离热点<br>可将热点数据单独方在一个分区中。例如希望从一个非常大的表中查询出一段时间内的记录（热点）。而这个表中包含了很多年的历史记录</p>
 </li>
-<li><p><strong>改造HelloService</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对该方法创建熔断器的功能</span></span><br><span class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"hiError"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiService</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(<span class="string">"http://SERVICE-HI/hi?name="</span> + name, String.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 熔断器返回的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiError</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hi,"</span> + name + <span class="string">",sorry,error!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>@HystrixCommand注解对方法启动熔断功能<br><br>启动工程，浏览器访问 <a href="http://localhost:8764/hi?name=zhangsan，如图所示" target="_blank" rel="noopener">http://localhost:8764/hi?name=zhangsan，如图所示</a><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/07.jpg" alt></p>
-<p>此时我们将服务提供者service-hi服务关闭，再访问该路径，如图所示<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/08.jpg" alt></p>
-<p>当service-hi工程不可用时，service-ribbon调用service-hi时，会执行快速失败，直接返回一组字符串，而不是等待响应时间，很好的控制了servlet容器的线程阻塞</p>
-<h1 id="Feign中使用熔断器"><a href="#Feign中使用熔断器" class="headerlink" title="Feign中使用熔断器"></a>Feign中使用熔断器</h1><p>Feign是自带断路器的，在D版本的Spring Cloud之后，它没有默认打开。需要在配置文件中配置打开它，在配置文件加以下代码<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line"><span class="attr">  hystrix:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>改造service-feign(消费方)，修改远程服务接口</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"service-hi"</span>, fallback = ClientServiceHiHystric.class)  <span class="comment">// 远程服务名称 | 熔断处理</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ClientServiceHi</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/hi"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="function">String <span class="title">sayHiFromClientOne</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String name)</span>; <span class="comment">// 如果PathVariable注解也需要加上别名</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在@FeignClient注解中加上，fallback = ClientServiceHiHystric.class表示服务错误时执行该类的处理方法</p>
-<p><strong>ClientServiceHiHystric错误处理方法</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientServiceHiHystric</span> <span class="keyword">implements</span> <span class="title">ClientServiceHi</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 服务错误处理方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHiFromClientOne</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"sory"</span> + name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>首先，实现接口，重写方法，并返回字符串<br></p>
-<p>启动service-feign，浏览器中访问 <a href="http://localhost:8765/test.do，如图所示" target="_blank" rel="noopener">http://localhost:8765/test.do，如图所示</a><br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/09.jpg" alt></p>
-<p>此时我们将服务提供者service-hi服务关闭，再访问该URL，如图所示<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/springcloud/10.jpg" alt><br>证明熔断器起作用了</p>
+</ul>
+<h2 id="合并表"><a href="#合并表" class="headerlink" title="合并表"></a>合并表</h2><p>合并表是一种早期的、简单的分区实现，和分区别相比有一些不同的限制，并且缺乏优化。分区别对于用户来说是透明的、不可访问的。单合并表允许用户访问，分区表是一种被淘汰的技术，在未来的版本中可能被删除</p>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>视图本身是一个虚拟表，不存在任何数据。在使用SQL语句访问视图时，它返回的数据是MySQL从其他表中生成的</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>熔断机制：服务提供者如果挂了，服务消费者可能也会导致挂掉，防止级联失败。如果服务提供则挂了，消费者调用的时候返回指定的错误信息即可</li>
-<li>feign自带Hystrix不需额外依赖：(消费方)配置开启、在@FeignClient注解加上fallback的指定类，该类处理服务错误的时执行的方法</li>
+<li>分区表对于用户来说是不能访问底层的各个分区，使用场景：将热点数据单独放在一个分区中</li>
 </ul>
 
       
@@ -509,8 +501,8 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年05月03日 20:05:57</p>
-  <p><span>原始链接:</span><a href="/2019/05/03/springcloud/熔断器(Hystrix)/" title="第三篇:熔断器(Hystrix)">http://yoursite.com/2019/05/03/springcloud/熔断器(Hystrix)/</a></p>
+  <p><span>最后更新:</span>2019年04月21日 16:04:30</p>
+  <p><span>原始链接:</span><a href="/2019/04/21/mysql/MySQL高级特性/" title="MySQL高级特性">http://yoursite.com/2019/04/21/mysql/MySQL高级特性/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
 
@@ -525,12 +517,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/hystrix/" rel="tag"><i class="fa fa-tag"></i>hystrix</a>
-          
-        </div>
-      
 
       
       
@@ -540,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/03/springcloud/服务消费(Ribbon—Feign)/" rel="next" title="第二篇:服务消费(Ribbon—Feign)">
-                <i class="fa fa-chevron-left"></i> 第二篇:服务消费(Ribbon—Feign)
+              <a href="/2019/04/21/concurrence/并发压力测试/" rel="next" title="并发压力测试">
+                <i class="fa fa-chevron-left"></i> 并发压力测试
               </a>
             
           </div>
@@ -550,8 +536,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/03/springcloud/网关(Zuul)/" rel="prev" title="第四篇:网关(Zuul)">
-                第四篇:网关(Zuul) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/22/concurrence/线程安全性/" rel="prev" title="线程安全性">
+                线程安全性 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -730,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么需要熔断器"><span class="nav-number">1.</span> <span class="nav-text">为什么需要熔断器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hystrix"><span class="nav-number">2.</span> <span class="nav-text">Hystrix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.1.</span> <span class="nav-text">准备工作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在ribbon中使用熔断器"><span class="nav-number">3.</span> <span class="nav-text">在ribbon中使用熔断器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feign中使用熔断器"><span class="nav-number">4.</span> <span class="nav-text">Feign中使用熔断器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分区表"><span class="nav-number">2.</span> <span class="nav-text">分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分区表的原理"><span class="nav-number">2.1.</span> <span class="nav-text">分区表的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用分区表"><span class="nav-number">2.2.</span> <span class="nav-text">如何使用分区表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并表"><span class="nav-number">2.3.</span> <span class="nav-text">合并表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图"><span class="nav-number">3.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -943,9 +929,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/05/03/springcloud/熔断器(Hystrix)/';
-          this.page.identifier = '2019/05/03/springcloud/熔断器(Hystrix)/';
-          this.page.title = '第三篇:熔断器(Hystrix)';
+          this.page.url = 'http://yoursite.com/2019/04/21/mysql/MySQL高级特性/';
+          this.page.identifier = '2019/04/21/mysql/MySQL高级特性/';
+          this.page.title = 'MySQL高级特性';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
