@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/suibi/03.png">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/suibi/04.png">
 <meta property="og:image" content="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/suibi/05.png">
-<meta property="og:updated_time" content="2019-07-28T10:56:25.989Z">
+<meta property="og:updated_time" content="2019-08-08T14:57:53.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信支付(JSAPI)">
 <meta name="twitter:description" content="准备工作 开发文档阅读: https://pay.weixin.qq.com/wiki/doc/api/index.html 业务流程阅读: https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_4 API列表阅读:  https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9">
@@ -493,7 +493,7 @@
 <p>例如有如下redirect_uri<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//zjl888.natapp1.cc/sell/weixin/auth</span></span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p><a href="http://zjl888.natapp1.cc/为购买的域名且映射到本地" target="_blank" rel="noopener">http://zjl888.natapp1.cc/为购买的域名且映射到本地</a>, sell/weixin/auth为访问的接口，将完整的URL在微信客户端访问，此时获取CODE结果如图<br><img src="https://hexo-1258491682.cos.ap-guangzhou.myqcloud.com/suibi/05.png" alt></p>
-<h2 id="通过code换取网页授权access-token"><a href="#通过code换取网页授权access-token" class="headerlink" title="通过code换取网页授权access_token**"></a>通过code换取网页授权access_token**</h2><blockquote>
+<h2 id="通过code换取网页授权access-token"><a href="#通过code换取网页授权access-token" class="headerlink" title="通过code换取网页授权access_token"></a>通过code换取网页授权access_token</h2><blockquote>
 <p>请求</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&amp;secret=SECRET&amp;code=CODE&amp;grant_type=authorization_code</span></span><br></pre></td></tr></table></figure>
@@ -520,7 +520,7 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2019年07月28日 18:07:25</p>
+  <p><span>最后更新:</span>2019年08月08日 22:08:53</p>
   <p><span>原始链接:</span><a href="/2019/07/28/随笔/微信支付/" title="微信支付(JSAPI)">http://yoursite.com/2019/07/28/随笔/微信支付/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
@@ -737,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#微信授权-获取OPENID"><span class="nav-number">2.</span> <span class="nav-text">微信授权(获取OPENID)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置域名与调试"><span class="nav-number">2.1.</span> <span class="nav-text">设置域名与调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取code"><span class="nav-number">2.2.</span> <span class="nav-text">获取code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过code换取网页授权access-token"><span class="nav-number">2.3.</span> <span class="nav-text">通过code换取网页授权access_token**</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#微信授权-获取OPENID"><span class="nav-number">2.</span> <span class="nav-text">微信授权(获取OPENID)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置域名与调试"><span class="nav-number">2.1.</span> <span class="nav-text">设置域名与调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取code"><span class="nav-number">2.2.</span> <span class="nav-text">获取code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过code换取网页授权access-token"><span class="nav-number">2.3.</span> <span class="nav-text">通过code换取网页授权access_token</span></a></li></ol></li></ol></div>
             
 
           </div>
