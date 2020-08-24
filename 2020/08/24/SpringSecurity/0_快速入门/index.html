@@ -84,16 +84,16 @@
 <meta name="description" content="基于spring-boot构建项目，引入如下依赖  12345678&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;de">
 <meta name="keywords" content="security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0：快速入门">
+<meta property="og:title" content="SpringSecurity 快速入门">
 <meta property="og:url" content="http://yoursite.com/2020/08/24/SpringSecurity/0_快速入门/index.html">
 <meta property="og:site_name" content="胖虎的博客">
 <meta property="og:description" content="基于spring-boot构建项目，引入如下依赖  12345678&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;de">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2020/05/23/J9ZfwmSltagbB3Y.png">
 <meta property="og:image" content="https://i.loli.net/2020/05/23/ordTt3bl1F8ievV.png">
-<meta property="og:updated_time" content="2020-08-24T07:16:29.192Z">
+<meta property="og:updated_time" content="2020-08-24T07:22:23.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="0：快速入门">
+<meta name="twitter:title" content="SpringSecurity 快速入门">
 <meta name="twitter:description" content="基于spring-boot构建项目，引入如下依赖  12345678&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;de">
 <meta name="twitter:image" content="https://i.loli.net/2020/05/23/J9ZfwmSltagbB3Y.png">
 
@@ -146,7 +146,7 @@
 
 
 
-  <title>0：快速入门 | 胖虎的博客</title>
+  <title>SpringSecurity 快速入门 | 胖虎的博客</title>
   
 
 
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">0：快速入门</h1>
+          <h1 class="post-title" itemprop="name headline">SpringSecurity 快速入门</h1>
         
 
         <div class="post-meta">
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  258
+                  257
                 </span>
               
 
@@ -468,7 +468,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/simple"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleSecurityController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello spring security"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>启动默认8080端口，接着打开浏览器访问localhost:8080，会出现如下登入页面，以及控制台的日志</p>
 <p> <img src="https://i.loli.net/2020/05/23/J9ZfwmSltagbB3Y.png" alt="image-20200429234821617"><img src="https://i.loli.net/2020/05/23/ordTt3bl1F8ievV.png" alt="image-20200429234656854"></p>
-<p>当引入security包之后，没有进行任何的配置与编码，但spring-security有一个默认的运行状态 WebSecurityConfigurerAdapter ，该抽象类由spring-boot自动配置生效。</p>
+<p>当引入security包之后，没有进行任何的配置与编码，但spring-security有一个默认的运行状态<em>WebSecurityConfigurerAdapter</em>，该抽象类由spring-boot自动配置生效。</p>
 <p>上述表单登入用户名与密码，可也通过如下配置进行修改</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  security:</span><br><span class="line">    user:</span><br><span class="line">      name: user</span><br><span class="line">      password: <span class="number">123</span></span><br></pre></td></tr></table></figure>
 <p>在4.x的版本中，spring-boot默认为spring-security配置的登入方式为HTTP基本认证，即弹窗的方式。由于安全性等因素，后来的spring-boot版本中把HTTP基本认证给移除了</p>
@@ -490,8 +490,8 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
   <p><span>文章作者:</span><a href="/" title="访问 胖虎 的个人博客">胖虎</a></p>
-  <p><span>最后更新:</span>2020年08月24日 15:08:29</p>
-  <p><span>原始链接:</span><a href="/2020/08/24/SpringSecurity/0_快速入门/" title="0：快速入门">http://yoursite.com/2020/08/24/SpringSecurity/0_快速入门/</a></p>
+  <p><span>最后更新:</span>2020年08月24日 15:08:23</p>
+  <p><span>原始链接:</span><a href="/2020/08/24/SpringSecurity/0_快速入门/" title="SpringSecurity 快速入门">http://yoursite.com/2020/08/24/SpringSecurity/0_快速入门/</a></p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！</p>  
 </div>
 
@@ -897,7 +897,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2020/08/24/SpringSecurity/0_快速入门/';
           this.page.identifier = '2020/08/24/SpringSecurity/0_快速入门/';
-          this.page.title = '0：快速入门';
+          this.page.title = 'SpringSecurity 快速入门';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
